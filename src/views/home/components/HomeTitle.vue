@@ -7,7 +7,7 @@
 				<use xlink:href="#icon-scan"></use>
 			</svg>
 			<span v-if="!isVip" class="flow-ctn" @click="stepTo('internet')">
-				{{((userData.Flow.Flow-userData.Flow.Used)/1024) + 'GB' || '0GB'}}
+				{{flowLable}}
 			</span>
 			<span v-else class="flow-ctn" @click="stepTo('internet')">
 				VIP
@@ -39,8 +39,12 @@
 		}
 	})
 	export default class HomeTitle extends Vue{
-		private userData: any = {}
+		// private userData: any = {}
 		private isVip: boolean = true
+		
+		private flowLable = '0Mb';
+		
+		private timer:any = null;
 		@Prop() private showRed!: boolean;
 		@Watch('showRed', { immediate: true })
 		showRedWatch(newVal: boolean, oldVal: boolean) {
@@ -49,18 +53,41 @@
 		public stepTo(page:any):void{
 			this.$emit('stepTo',page);
 		}
+		
 		public created() {
 			this.getUserMe();
+			this.startTimer();
 		}
+		
+		private beforeDestroy(){
+			window.clearInterval(this.timer);
+		}
+		
+		private startTimer(){
+			let timePeriod = 5000;
+			
+			this.timer = window.setInterval(()=>{
+				this. getUserMe();
+			},timePeriod);
+		}
+		
 		public getUserMe(){
 			LoginService.getUserMe().then((res:any) => {
 				if(res.code == 200){
-					this.userData = res.data;
+					let userData = res.data;
 					if(res.data.Vip == 1 || res.data.Flow.Flow == -1){
 						this.isVip = true;
 					}else{
 						this.isVip = false;
+						let remaingFlow = userData.Flow.Flow-userData.Flow.Used;
+						if(remaingFlow <= 1024){
+							this.flowLable = remaingFlow + 'MB';
+						}else{
+							this.flowLable = (remaingFlow/1024).toFixed(1) + 'GB';
+						}
 					}
+					
+						//{{((userData.Flow.Flow-userData.Flow.Used)/1024) + 'GB' || '0GB';}}
 					this.$store.commit('setSeatNumber', res.data.Seat.Name);
 					
 				}else{
@@ -68,14 +95,11 @@
 				}
 			});
 		}
+		
 		public stepToScan(){
 			this.$router.push({
 				name:'scan'
 			});
-			/* let proHref = window.location.href
-			window.location.href = `https://kf.vpclub.cn/scan/?name=`+proHref; */
-			
-			
 		}
 	}
 </script>
