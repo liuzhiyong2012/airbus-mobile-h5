@@ -7,11 +7,27 @@
 		</van-sticky>
 		<section class="content-ctn">
 			<div class="content-top-ctn">
-				<van-swipe :autoplay="3000" class="music-recomend-ctn">
+				<shopping-item></shopping-item>
+				<!-- <div class="abus-scroller-box">
+				 <scroller>
+				   <div slot="list" v-for="(item, index) of recomendList" :key="index">
+				     <div class="s-box s-box-right"   >
+				       <div class="img-box">
+				         <div class="img">
+				           <img :src="item.ImgPath | addBaseUrl" :alt="item.Name" width="100%" />
+				         </div>
+				       </div>
+				       <div class="name">{{ item.Name }}</div>
+				     </div>
+				   </div>
+				 </scroller>
+				</div> -->
+				
+				<!-- <van-swipe :autoplay="3000" class="music-recomend-ctn">
 					<van-swipe-item class="music-recomend-item" v-for="(item, index) in recomendList" :key="index">
 						<div class="music-recomend-img" :style="{ backgroundImage: `url(${item.ImgPath})` }"></div>
 					</van-swipe-item>
-				</van-swipe>
+				</van-swipe> -->
 				
 				<div class="function-ctn">
 					<div class="function-item favourites" @click="stepTo('favourites')">
@@ -103,11 +119,14 @@
 	import MusicService from '../../service/music';
 	import MusicPlayer from './components/MusicPlayer.vue';
 	
+	import ShoppingItem from './components/ShoppingItem.vue';
+	
 	@Component({
 		name:'MusicIndex',
 		components:{
 			AbusTitle,
-			MusicPlayer
+			MusicPlayer,
+			ShoppingItem
 		}
 	})
 	export default class MusicIndex extends Vue {
@@ -128,22 +147,43 @@
 			 this.getPlayList();
 			if (localStorage.getItem('lang') == 'en') {
 			this.$i18n.locale = 'en';
-			this.nomore = 'no more'
+			this.nomore = 'no more';
 			} else {
 			this.$i18n.locale = 'zh';
-			this.nomore = '没有更多了'
+			this.nomore = '没有更多了';
 			}
 		 }
 		 
 		 private getMusicBanners(){
-			 MusicService.getMusicBanners({}).then((res:any)=>{
+			/*Music/Playlist/Hot*/
+			/* MusicService.getMusicBanners({}).then((res:any)=>{
 				 if(res.code == '200'){
 					 this.recomendList = res.data.Banners;  
 					 this.recomendList.forEach((item,index)=>{
 						 item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.ImgPath));
 					 });
 				 }
-			 });
+			 }); */
+			 
+			   MusicService.getMusicPlaylistHot({
+			     take: 10,
+			     skip: 0,
+			   }).then((resData: any) => {
+			     if (resData.code == 200) {
+			       //this.isHaveData = true;
+			      // this.musicList = resData.data.Playlists;
+				   
+				   this.recomendList = resData.data.Playlists;
+				   this.recomendList.forEach((item,index)=>{
+					   	item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.CoverImgUrl));
+				   						// item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.ImgPath));
+				   });
+				   
+				   /* resData.data.Playlists.forEach((item,index)=>{
+				   	item.CoverImgUrl = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.CoverImgUrl));
+				   }); */
+			     }
+			   });
 		 }
 		 
 		 private stepTo(pageType){
@@ -258,6 +298,86 @@
 				padding:0.40rem 0.30rem 0.34rem;
 				background:#ffffff;
 				
+				.abus-scroller-box{
+					
+					.s-box {
+					  float: left;
+					  // height: 1.6rem;
+					  margin: 0 0 0 0.28rem;
+					  border-radius: 0.08rem;
+					  width: 1.6rem;
+					
+					  .img-box {
+					    display: flex;
+					    align-items: center;
+					    width: 1.6rem;
+					    height: 1.6rem;
+					    text-align: center;
+					    box-shadow: 0 0 0.08rem #efefef;
+					    overflow: hidden;
+					    .img {
+					      width: 100%;
+					      border-radius: 0.1rem;
+					    }
+					  }
+					  .name {
+					    line-height: 0.5rem;
+					    overflow: hidden;
+					    white-space: nowrap;
+					    text-overflow: ellipsis;
+					    width: 100%;
+					    height: 0.5rem;
+					    color: rgb(51, 51, 51);
+					  }
+					  .price {
+					    color: rgb(228, 0, 43);
+					    font-size: 0.24rem;
+					    font-weight: bold;
+					    overflow: hidden;
+					    white-space: nowrap;
+					    text-overflow: ellipsis;
+					    span {
+					      // display: inline-block;
+					      margin-left: 0.1rem;
+					      color: #ccc;
+					      text-decoration: line-through;
+					      font-size: 0.19rem;
+					      font-weight: normal;
+					    }
+					  }
+					}
+					.s-box-right {
+					  margin-right: 0.82rem;
+					}
+					/* .img-box{
+						display: -webkit-box;
+						    display: -webkit-flex;
+						    display: flex;
+						    -webkit-box-align: center;
+						    -webkit-align-items: center;
+						    align-items: center;
+						    width: 1.6rem;
+						    height: 1.6rem;
+						    text-align: center;
+						    box-shadow: 0 0 0.08rem #efefef;
+						    overflow: hidden;
+						.img{
+							width: 100%;
+							    border-radius: 0.1rem;
+						}
+					}
+					.name{
+						line-height: 0.5rem;
+						    overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						    width: 100%;
+						    height: 0.5rem;
+						    color: #333333;
+					} */
+					
+				}
+				
 				.music-recomend-ctn{
 					border-radius:8px;
 					margin-bottom: 0.40rem;
@@ -270,7 +390,7 @@
 							height: 100%;
 							background-position: center center;
 							background-repeat: no-repeat;
-							background-size: cover;
+							background-size: 100%;
 						}
 					}
 				}
@@ -299,6 +419,7 @@
 				} */
 				
 				.function-ctn{
+					padding-top:0.20rem;
 					display: flex;
 					justify-content: space-around;
 					.function-item{

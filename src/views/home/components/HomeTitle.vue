@@ -26,8 +26,21 @@
 		</div>
 		
 	</section>
-	
 </template>
+
+
+<i18n>
+	{
+	"en":{
+	  "waringMsg":"You need to purchase netflow for using the app ",
+	  "lessWarning":"netflow is going to be used up"
+	},
+	"zh":{
+	  "waringMsg":"非VIP用户需购买流量套餐",
+	  "lessWarning":"流量即将用尽,请及时购买流量"
+	}
+	}
+</i18n>
 
 <script lang="ts">
 	import {Vue,Prop,Component, Watch} from 'vue-property-decorator';
@@ -44,7 +57,14 @@
 		
 		private flowLable = '0Mb';
 		
+		private warningTime:any = 2 * 60 * 1000;
+		
 		private timer:any = null;
+		
+		private get lastNetFlowWaringTime():string{
+			return this.$store.state.login.lastNetFlowWaringTime;
+		}
+		
 		@Prop() private showRed!: boolean;
 		@Watch('showRed', { immediate: true })
 		showRedWatch(newVal: boolean, oldVal: boolean) {
@@ -55,6 +75,12 @@
 		}
 		
 		public created() {
+			if (localStorage.getItem('lang') == 'en') {
+			  this.$i18n.locale = 'en';
+			} else {
+			  this.$i18n.locale = 'zh';
+			}
+			
 			this.getUserMe();
 			this.startTimer();
 		}
@@ -79,16 +105,51 @@
 						this.isVip = true;
 					}else{
 						this.isVip = false;
-						let remaingFlow = userData.Flow.Flow-userData.Flow.Used;
-						if(remaingFlow <= 1024){
-							this.flowLable = remaingFlow + 'MB';
+						let overTime:boolean = false;
+						let remaingFlow = 0;;
+						
+						/* if(this.lastWarningTime){
+							
+						} */
+						let nowTime:any = new Date(); 
+						/* debugger; */
+						if(this.lastNetFlowWaringTime){
+						  let interTime = 	nowTime.getTime() - Number(this.lastNetFlowWaringTime);
+							if(interTime > warningTime){
+								overTime = true;
+							}
 						}else{
-							this.flowLable = (remaingFlow/1024).toFixed(1) + 'GB';
+							overTime = true;
 						}
+						/* "waringMsg":"非VIP用户需购买流量套餐",
+						"lessWarning":"流量即将用尽,请及时购买流量" */
+						
+						
+						
+						if(userData.Flow.Flow === null || userData.Flow.Flow === undefined){
+							this.flowLable = '-- MB';
+							this.$toast(this.$i18n.t('waringMsg'));
+							this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
+						}else{
+							remaingFlow = userData.Flow.Flow - userData.Flow.Used;
+							if(remaingFlow <= 1024){
+								this.flowLable = remaingFlow + 'MB';
+							}else{
+								this.flowLable = (remaingFlow/1024).toFixed(1) + 'GB';
+							}
+							//系统用户购买流量
+							if(remaingFlow <= 5){
+								this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
+								this.$toast(this.$i18n.t('lessWarning'));
+							}
+						}
+						//private lastWarningTime:any = null;
+						//private warningTime:any = 2 * 60 * 1000;
 					}
 					
-						//{{((userData.Flow.Flow-userData.Flow.Used)/1024) + 'GB' || '0GB';}}
+					//setLastNetFlowWaringTime
 					this.$store.commit('setSeatNumber', res.data.Seat.Name);
+					
 					
 				}else{
 					this.$toast(res.message);

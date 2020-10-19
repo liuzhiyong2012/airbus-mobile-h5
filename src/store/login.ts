@@ -17,9 +17,13 @@ export default {
     phone: '',
     token: '',
     airbusId: '',
-	isDemo:''
+	isDemo:'',
+	lastNetFlowWaringTime:null
   },
   mutations: {
+	setLastNetFlowWaringTime(state: any, lastNetFlowWaringTime: any) {
+	    state.lastNetFlowWaringTime = lastNetFlowWaringTime;
+	},
     setName(state: any, name: any) {
       state.name = name
       state.userInfo.nickname = name
