@@ -43,6 +43,12 @@
         </svg>
       </div>
     </van-notify>
+    <div class="listen">
+      <audio id="audio" ref="audio" controls autoplay hidden>
+        <source src="./audio/ding.mp3" >
+      </audio>
+    </div>
+    
     <div :class="[isShowSetting ? 'set-proup active' : 'set-proup']">
       <div class="set-box">
         <div class="set-title">{{ $t("Setting") }}</div>
@@ -179,6 +185,7 @@ export default class CrewLayoutCtn extends Vue {
   private isRouterAlive: boolean = true;
 
   private timer: any = null;
+  private sound: any;
 
   public flightResData: any = {};
 
@@ -401,6 +408,16 @@ export default class CrewLayoutCtn extends Vue {
   }
 
   public showNotify() {
+    this.sound = document.getElementById('audio');
+    this.sound.play();
+
+    // _this.sound = new Audio();
+    // _this.sound.src = './audio/ding.mp3';
+    // _this.sound.play();
+    
+    // this.$refs.audio.currentTime = 0; //从头开始播放提示音
+    // this.$refs.audio.play(); //播放
+
     let time = 50000;
     if (this.show) {
       this.show = false;
@@ -447,7 +464,7 @@ export default class CrewLayoutCtn extends Vue {
   top: auto;
   left: auto;
   width: 4.8rem;
-  height: 1.82rem;
+  // height: 1.82rem;
   border-radius: 0.3rem;
   border: 0.04rem solid #afd5fd;
   z-index: 1000;
