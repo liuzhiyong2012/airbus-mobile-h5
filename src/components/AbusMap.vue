@@ -354,7 +354,8 @@ div.olControlZoom {
         color: #666;
         padding: .01rem;
         background-color: rgba(255, 255, 255, .3);
-		z-index: 99;
+		// z-index: 99;
+		z-index: 50;
         .map-tag-color{
           color: royalblue;
           // font-weight: 600;
