@@ -39,5 +39,17 @@ export default {
   		  hour:hour.toFixed(0),
   		  mimute:mimute.toFixed(0)
   	  };
+  },
+  calcRemaingTimeByRtppd(Rtppd){
+      
+  	  let remaingTime:number = Number(Rtppd);
+	  
+  	  let hour:number = Rtppd/60;
+  	  let mimute:number = (Rtppd%60) % 60;
+  	  
+  	  return {
+  		  hour:hour.toFixed(0),
+  		  mimute:mimute.toFixed(0)
+  	  };
   }
 }

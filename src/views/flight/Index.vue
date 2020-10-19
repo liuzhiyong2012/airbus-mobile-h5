@@ -260,7 +260,7 @@ export default class FlightIndex extends Vue {
 	  console.log('startBottomDistance:' + startBottomDistance);
 	  console.log('endY:' + endY);
 	  if(this.bottomDistance > 0){
-		  this.bottomDistance = 10;
+		  this.bottomDistance = 0;
 	  }
 	  if(this.bottomDistance < (- this.hideDistance)){
 		  this.bottomDistance = - this.hideDistance;
@@ -271,11 +271,11 @@ export default class FlightIndex extends Vue {
     this.touchEndHandle = (event: any) => {
 		this.isAnimate = true;
       //100是给定触上下方向摸起始的坐标差
-      if (endY > 100) {
+      if (endY > 25) {
         console.log('向上滑动');
        // this.isCollapsed = false; 
-	     this.bottomDistance = 10;
-      } else if (endY < -100) {
+	     this.bottomDistance = 0;
+      } else if (endY < -25) {
 		  console.log('向下滑动');
 		  this.bottomDistance = - this.hideDistance;
 		  
