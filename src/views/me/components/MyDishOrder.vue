@@ -1,5 +1,5 @@
 <template>
-  <div class="abus-height" v-if="isSHow">
+  <div class="abus-height" v-if="isShow">
     <div class="cell-group" v-for="(item,index) in orderList" :key="index">
       <div class="header">
         <div class="top">
@@ -94,6 +94,7 @@ export default class MyDishOrder extends Vue {
     MeServer.getDishOrder().then((res: any) => {
       if(res.code == 200) {
         this.orderList = res.data.Orders
+        console.log(this.orderList)
         if(this.orderList.length > 0){
           this.isShow = true
         } else {

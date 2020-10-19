@@ -27,7 +27,7 @@
           {{$t('exchange')}}
           <div class="icon-box">
             <span class="i-icon"></span>
-            {{userInfo.points|| '--'}}
+            {{userInfo.points|| '0'}}
           </div>
         </div>
       </router-link>
@@ -155,7 +155,7 @@ declare function require(type: string): string;
 export default class meIndex extends Vue {
   private userInfo: Object = {}
   private address: string = ''
-  private airbusIcon = require("../../assets/airbus_icon.png");
+  private airbusIcon = require('../../assets/airbus_icon.png');
   private created() {
     this.getUserInfo();
     this.postAddress();

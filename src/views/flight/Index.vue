@@ -260,7 +260,7 @@ export default class FlightIndex extends Vue {
 	  console.log('startBottomDistance:' + startBottomDistance);
 	  console.log('endY:' + endY);
 	  if(this.bottomDistance > 0){
-		  this.bottomDistance = 10;
+		  this.bottomDistance = 0;
 	  }
 	  if(this.bottomDistance < (- this.hideDistance)){
 		  this.bottomDistance = - this.hideDistance;
@@ -271,11 +271,11 @@ export default class FlightIndex extends Vue {
     this.touchEndHandle = (event: any) => {
 		this.isAnimate = true;
       //100是给定触上下方向摸起始的坐标差
-      if (endY > 100) {
+      if (endY > 25) {
         console.log('向上滑动');
        // this.isCollapsed = false; 
-	     this.bottomDistance = 10;
-      } else if (endY < -100) {
+	     this.bottomDistance = 0;
+      } else if (endY < -25) {
 		  console.log('向下滑动');
 		  this.bottomDistance = - this.hideDistance;
 		  
@@ -442,8 +442,11 @@ export default class FlightIndex extends Vue {
 
     const optionData = {
       grid: {
-        left: '13.5%',
-        right: '12%',
+        /* left: '13.5%',
+        right: '12%', */
+		
+		left: '15%',
+		right: '15%',
         top: '18%',
         bottom: '25%',
       },
@@ -465,7 +468,10 @@ export default class FlightIndex extends Vue {
         data: timesData,
         axisTick: {
           show: false,
-        },
+        }
+		/* axisLine: {
+		  show: false,
+		} */
       },
       yAxis: [
         {
@@ -474,7 +480,7 @@ export default class FlightIndex extends Vue {
             padding: [0, 0, -7, -40], // 四个数字分别为上右下左与原位置距离
           },
           type: 'value',
-          max: 12000,
+        /*  max: 12000, */
           axisLine: {
             show: false,
           },
@@ -484,14 +490,19 @@ export default class FlightIndex extends Vue {
           axisLabel: {
             show: true,
           },
+		  
+		   splitLine:{show: true},//去除网格线
+		//    splitArea : {show : true}//保留网格区域
         },
         {
+			splitLine:{show: false},//去除网格线
+		//	 splitArea : {show : true},//保留网格区域
           name: 'Speed',
           nameTextStyle: {
             padding: [0, 0, -7, 40], // 四个数字分别为上右下左与原位置距离
           },
           type: 'value',
-          max: 1200,
+          /* max: 1200, */
           axisLine: {
             show: false,
           },

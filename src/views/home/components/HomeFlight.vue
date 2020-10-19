@@ -14,7 +14,7 @@
         </span>
         <span class="flight-duration-time">
           <span>Remaining:</span>
-          <span>{{remainingTime.hour}} hours {{remainingTime.mimute}}min</span>
+          <span>{{remainingTime.hour}} hours {{remainingTime.mimute}} min</span>
         </span>
         <span class="home-flight-c">{{weather.Temper +' '+ weather.Desc}}</span>
       </div>
@@ -23,7 +23,7 @@
         <div class="place place-l">
           <div class="time">
             <span>{{ baseInfo.Departure }}</span>
-            <span>{{ baseInfo.DepartureTerminal }}</span>
+            <span v-show="baseInfo.Departure != baseInfo.DepartureTerminal">{{ baseInfo.DepartureTerminal }}</span>
           </div>
           <div class="address">{{ baseInfo.DeparturePlanTimestamp | dateFormate('hh:mm') }}</div>
         </div>
@@ -41,7 +41,7 @@
         <div class="place place-r">
           <div class="time">
             <span>{{ baseInfo.Arrival }}</span>
-            <span>{{ baseInfo.ArrivalTerminal }}</span>
+            <span v-show="baseInfo.Arrival != baseInfo.ArrivalTerminal">{{ baseInfo.ArrivalTerminal }}</span>
           </div>
           <div class="address">{{ baseInfo.ArrivalPlanTimestamp | dateFormate('hh:mm') }}</div>
         </div>
@@ -86,6 +86,11 @@ export default class HomeFlight extends Vue {
   public weather: any = {};
   private currentTime: any = null;
   private updateFlightHandler: any = null;
+  
+  private get isDemo():string{
+  	return this.$store.state.login.isDemo;
+  }
+  
   private remainingTime :any = {
 	  hour:'--',
 	  mimute:'--'
@@ -150,8 +155,12 @@ export default class HomeFlight extends Vue {
 		}else{
 			this.currentTime = null;
 		}
-    // this.remainingTime = DateUtils.calcRemaingTime(this.flightResData.DepartureTime,this.flightResData.ArrivalTime,this.currentTime);
-    this.remainingTime = DateUtils.calcRemaingTime(this.baseInfo.DeparturePlanTimestamp,this.baseInfo.ArrivalPlanTimestamp,this.currentTime);
+    //this.remainingTime = DateUtils.calcRemaingTime(this.baseInfo.DeparturePlanTimestamp,this.baseInfo.ArrivalPlanTimestamp,this.currentTime);
+    if(this.isDemo){
+      	this.remainingTime = DateUtils.calcRemaingTime(this.baseInfo.DeparturePlanTimestamp,this.baseInfo.ArrivalPlanTimestamp,this.currentTime);
+    }else{
+      	this.remainingTime = DateUtils.calcRemaingTimeByRtppd(this.baseInfo.rtppd);
+    }
   }
   
 }
@@ -194,6 +203,7 @@ export default class HomeFlight extends Vue {
       margin-bottom: 0.26rem;
 
       .home-flight-seat {
+		  white-space: nowrap;
         display: flex;
         align-items: center;
         padding: 0 0.04rem 0 0.1rem;
@@ -260,6 +270,7 @@ export default class HomeFlight extends Vue {
       }
 
       .home-flight-c {
+		  white-space: nowrap;
         border-radius: 0.16rem;
         border: 2px solid rgba(0, 174, 199, 1);
         height: 0.3rem;

@@ -1,5 +1,5 @@
 <template>
-  <div class="crew-footer" v-if="flightResData">
+  <div class="crew-footer" v-if="flightResData&&flightResData.Flight">
     <div class="info-ctn first">
       <i class="icon icon-crew-flight"></i>
       <span class="seat-number">
@@ -34,7 +34,7 @@
       <div class="progress-ctn">
         <div
           class="progress"
-          :style="{ width: flightResData.Flight.BaseInfo.OntimeRate }"
+          :style="{ width: '78%'||flightResData.Flight.BaseInfo.OntimeRate }"
         ></div>
       </div>
       <span class="end-time">{{
@@ -69,10 +69,10 @@
 </i18n>
 
 <script lang = "ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({
-  name: "crew-footer",
+  name: 'crew-footer',
   components: {},
 })
 export default class CrewFooter extends Vue {
@@ -81,19 +81,20 @@ export default class CrewFooter extends Vue {
       return null;
     },
   })
-  flightResData: any = null;
+  flightResData;
+  
 public created() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   private mounted() {}
 
   public getFlightInfo(): void {}
   public showSetWindow(){
-	  this.$emit('showSetWindow')
+	  this.$emit('showSetWindow');
   }
 }
 </script>
@@ -143,14 +144,25 @@ public created() {
     }
     &.third {
       .progress-ctn {
-        position: relative;
+       /* position: relative;
         margin: 0 rem(4px);
         width: rem(200px);
         height: rem(16px);
         background: rgba(255, 255, 255, 1);
         border-radius: rem(8px);
         opacity: 0.2;
-        overflow: hidden;
+        overflow: hidden;*/
+		
+		position: relative;
+		    margin: 0 0.12rem;
+		    width: 2rem;
+		    height: 0.16rem;
+		    background: white;
+		    border-radius: 0.08rem;
+		    opacity: 0.2;
+		    overflow: hidden;
+		    box-sizing: border-box;
+			
 
         .progress {
           overflow: hidden;

@@ -31,6 +31,10 @@
               :src="item.FilePath | addBaseUrl"
               :poster="item.CoverImgPath | addBaseUrl"
               class="video-box"
+              x5-playsinline
+              playsinline
+              webkit-playsinline
+              x5-video-player-type="h5"
             ></video>
             <!-- 右侧栏 -->
             <div class="right-box">
@@ -109,9 +113,7 @@
             </div>
             <!-- 下侧栏 -->
             <div class="bottom-box">
-              <div
-                :class="[isShowAd ? 'ad active' : 'ad']"
-              >
+              <div :class="[isShowAd ? 'ad active' : 'ad']">
                 <div class="img-box1" @click="stepToDetail(adData)">
                   <img
                     class="img"
@@ -190,7 +192,7 @@ export default class VideoPlay extends Vue {
   private Comment: string = "";
 
   private mounted() {
-    this.$store.dispatch('deleteSongList');
+    this.$store.dispatch("deleteSongList");
     if (localStorage.getItem("lang") == "en") {
       this.$i18n.locale = "en";
     } else {
@@ -316,7 +318,7 @@ export default class VideoPlay extends Vue {
       name: "shoppingDetails",
       query: {
         shoppingInfo: item,
-        id: item.Id
+        id: item.Id,
       },
     });
   }
