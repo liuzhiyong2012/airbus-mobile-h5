@@ -115,7 +115,7 @@
 						/* debugger; */
 						if(this.lastNetFlowWaringTime){
 						  let interTime = 	nowTime.getTime() - Number(this.lastNetFlowWaringTime);
-							if(interTime > warningTime){
+							if(interTime > this.warningTime){
 								overTime = true;
 							}
 						}else{
@@ -138,7 +138,7 @@
 								this.flowLable = (remaingFlow/1024).toFixed(1) + 'GB';
 							}
 							//系统用户购买流量
-							if(remaingFlow <= 5){
+							if(remaingFlow <= 5&&overTime){
 								this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
 								this.$toast(this.$i18n.t('lessWarning'));
 							}
