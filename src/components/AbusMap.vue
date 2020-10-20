@@ -115,7 +115,7 @@ export default class AbusMap extends Vue {
 	}
 	
 	public startFlightTimer() {
-		let time = 5 * 200;
+		let time = 5 * 1000;
 		let len = this.flightPaths.length;
 		this.flightPositionIndex = 0;
 		this.drawLines(this.flightPositionIndex);
