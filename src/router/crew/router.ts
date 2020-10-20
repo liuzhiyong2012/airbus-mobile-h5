@@ -31,7 +31,7 @@ const routes: Array<RouteConfig> = [
 		name: 'crewIndex',
 		component: CrewIndex,
 		children: [{
-			path:'/crew/catering',
+			path:'/cater',
 			name:'crewCatering',
 			component:CrewCatering
 		},
