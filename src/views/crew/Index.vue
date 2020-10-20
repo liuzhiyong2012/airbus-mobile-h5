@@ -292,6 +292,7 @@ export default class CrewLayoutCtn extends Vue {
     this.isLanguageShow = false;
   }
   private clickSubmit() {
+	  // debugger;
     if (this.language == 'English') {
       localStorage.setItem('lang', 'en');
 	  this.$i18n.locale = 'en';
@@ -299,6 +300,7 @@ export default class CrewLayoutCtn extends Vue {
       localStorage.setItem('lang', 'zh');
 	  this.$i18n.locale = 'zh';
     }
+	
     /* if(this.runDemo){
 		localStorage.setItem('runDemo', 'true');
 	}else{
@@ -312,7 +314,7 @@ export default class CrewLayoutCtn extends Vue {
       if (res.code == '200') {
         this.$toast(this.$i18n.t('toast2'));
         this.isShowSetting = false;
-        /* this.$router.go(0); */
+        this.$router.go(0);
       } else {
         this.$toast(this.$i18n.t('toast3'));
       }
@@ -381,6 +383,7 @@ export default class CrewLayoutCtn extends Vue {
     this.socket = io(process.env.VUE_APP_SOCKET_HOST, opt);
     // socket连接后以uid登录
     this.socket.on('connect', () => {
+		console.log('crew:connect');
       this.socket.emit('login', airbusId);
     });
 
