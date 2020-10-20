@@ -181,7 +181,7 @@ export default class HomeFlight extends Vue {
     border-radius: 0.12rem;
     margin: 0 0.3rem;
     padding: 0.32rem 0.3rem;
-    height: 5.64rem;
+    height: 6.1rem;
     background: rgba(255, 255, 255, 1);
     box-sizing: border-box;
     .home-flight-t {
@@ -203,7 +203,7 @@ export default class HomeFlight extends Vue {
       margin-bottom: 0.26rem;
 
       .home-flight-seat {
-		  white-space: nowrap;
+		    white-space: nowrap;
         display: flex;
         align-items: center;
         padding: 0 0.04rem 0 0.1rem;
@@ -270,7 +270,7 @@ export default class HomeFlight extends Vue {
       }
 
       .home-flight-c {
-		  white-space: nowrap;
+		    white-space: nowrap;
         border-radius: 0.16rem;
         border: 2px solid rgba(0, 174, 199, 1);
         height: 0.3rem;
@@ -288,13 +288,12 @@ export default class HomeFlight extends Vue {
 
     .home-flight-place {
       display: flex;
-      // align-items: f;
       justify-content: center;
-      height: 1.3rem;
       background: #fafafa;
       border-radius: 4px;
       margin-bottom: 0.26rem;
-      padding-top: 0.28rem;
+      padding-top: 0.1rem;
+      padding-bottom: 0.1rem;
       box-sizing: border-box;
 
       .place {
@@ -306,7 +305,7 @@ export default class HomeFlight extends Vue {
 
         .time {
           text-align: center;
-          margin-bottom: 0.16rem;
+          margin-bottom: 0.1rem;
           > span {
             &:nth-child(1) {
               margin-right: 0.16rem;
@@ -365,7 +364,7 @@ export default class HomeFlight extends Vue {
     }
     .map-box {
       position: relative;
-      height: 2.2rem;
+      height: 3.2rem;
       .map-tag{
         position: absolute;
         right: .05rem;

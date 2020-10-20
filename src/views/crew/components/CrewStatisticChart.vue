@@ -165,7 +165,7 @@ export default class CrewStatisticChart extends Vue {
       graphic: [
         {
           type: "text",
-          top: "40%",
+          top: "44%",
           left: "center",
           style: {
             text: total.toFixed(2),
@@ -179,7 +179,8 @@ export default class CrewStatisticChart extends Vue {
           top: "53%",
           left: "center",
           style: {
-            text: "Total Revenuea",
+            // text: "Total Revenue",
+            text: "",
             fill: "#A6A8B6",
             fontSize: 30,
             fontWeight: "normal",

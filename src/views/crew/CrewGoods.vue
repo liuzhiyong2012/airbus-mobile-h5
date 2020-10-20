@@ -48,7 +48,7 @@
 			"toast1":"获取列表失败"
 		},
 		"en":{
-			"noMore":"There is no more",
+			"noMore":"no more",
 			"toast1":"Failed to get list"
 		}
 	}

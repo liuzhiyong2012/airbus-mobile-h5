@@ -48,7 +48,7 @@
 			"toast1":"获取列表失败"
 		},
 		"en":{
-			"noMore":"There is no more",
+			"noMore":"no more",
 			"toast1":"Failed to get list"
 		}
 	}
@@ -186,6 +186,7 @@ export default class CrewCatering extends Vue {
   width: 100% !important;
   font-size: 0.28rem !important;
   text-align: center;
+  margin-left: 0.7rem;
   line-height: 1rem;
   color: #fff;
   text-indent: 1em;
