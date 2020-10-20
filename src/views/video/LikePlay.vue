@@ -29,6 +29,10 @@
               :src="item.FilePath | addBaseUrl"
               :poster="item.CoverImgPath | addBaseUrl"
               class="video-box"
+              x5-playsinline
+              playsinline
+              webkit-playsinline
+              x5-video-player-type="h5"
             ></video>
             <!-- 右侧栏 -->
             <div class="right-box">

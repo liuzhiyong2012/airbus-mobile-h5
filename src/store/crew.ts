@@ -5,7 +5,8 @@ export default {
       seatNumber: '12',
       seatClass:'Y',
       seatType: 2,
-      seatName:'3D',  
+      seatName:'3D', 
+      isHaveOrder: false 
     },
     userInfo: {
 		
@@ -17,6 +18,9 @@ export default {
       state.airbusId = id
       localStore.set('airbusId',id)
     },
+    setOrderStatus(state:any,bool: boolean){
+      state.isHaveOrder = bool
+    }
   },
   actions: {
     setUserLoginInfo(context: any,state:any){

@@ -178,7 +178,7 @@ export default class CrewCatering extends Vue {
           //非最后一页
           this.finished = false;
         }
-
+// debugger
         resData.data.data.forEach((item, index) => {
           item.SampleImgPath = UrlUtils.addBaseUrl(
             UrlUtils.delBaseUrl(item.SampleImgPath)
