@@ -294,8 +294,10 @@ export default class CrewLayoutCtn extends Vue {
   private clickSubmit() {
     if (this.language == 'English') {
       localStorage.setItem('lang', 'en');
+	  this.$i18n.locale = 'en';
     } else {
       localStorage.setItem('lang', 'zh');
+	  this.$i18n.locale = 'zh';
     }
     /* if(this.runDemo){
 		localStorage.setItem('runDemo', 'true');
