@@ -58,6 +58,7 @@
 		private flowLable = '0Mb';
 		
 		private warningTime:any = 2 * 60 * 1000;
+		//private warningTime:any = 20*1000;
 		
 		private timer:any = null;
 		
@@ -126,10 +127,14 @@
 						
 						
 						
-						if(userData.Flow.Flow === null || userData.Flow.Flow === undefined){
+						if(userData.Flow.Flow === null){
 							this.flowLable = '-- MB';
-							this.$toast(this.$i18n.t('waringMsg'));
-							this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
+							
+							if(overTime){
+								this.$toast(this.$i18n.t('waringMsg'));
+								this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
+							}
+							
 						}else{
 							remaingFlow = userData.Flow.Flow - userData.Flow.Used;
 							if(remaingFlow <= 1024){

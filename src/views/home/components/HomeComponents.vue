@@ -74,6 +74,9 @@ export default class HomeComponents extends Vue{
 	font-size: .5rem !important;
 }
 .icon-more{
-	color: #323233;
+	    color: #818181;
+	    font-size: 0.32rem;
+	    padding-left: 0.30rem;
+	    padding-right: 0.10rem;
 }
 </style>
