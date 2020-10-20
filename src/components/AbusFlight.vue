@@ -3,7 +3,7 @@
 		<div class="home-flight-box">
 			<div class="home-flight-t">
 				<span classs="flight-model">{{ airplane.AirplaneModels }} </span>
-				<span classs="flight-number">{{baseInfo.AirlinesName}}{{ baseInfo.FlightNumber }}</span>
+				<span classs="flight-number">{{baseInfo.AirlinesName + ' '+ baseInfo.FlightNumber }}</span>
 			</div>
 
 			<div class="home-flight-info">

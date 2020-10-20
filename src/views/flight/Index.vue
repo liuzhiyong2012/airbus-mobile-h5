@@ -128,7 +128,7 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import VoyageInfo from './components/VoyageInfo.vue';
 import AbusMap from '../../components/AbusMap.vue';
 import AbusTitle from '../../components/AbusTitle.vue';
@@ -151,7 +151,6 @@ export default class FlightIndex extends Vue {
 
   private active: string = 'map'; //"camera,map"
   private dataList: any = [];
-  
 
   private activeCamera: string = 'frontCamera'; //header,body,footer
 
@@ -203,33 +202,29 @@ export default class FlightIndex extends Vue {
 	 });
 	  
     this.listenScroll();
+    this.getFlightInfo();
 
     this.updateFlightHandler = (e) => {
       this.getFlightInfo();
     };
-    (this as any).$globalEvent.$on(
-      'updateFlightInfo',
-      this.updateFlightHandler
-    );
-    this.getFlightInfo();
+    (this as any).$globalEvent.$on('updateFlightInfo', this.updateFlightHandler);
 
     if (localStorage.getItem('lang') == 'en') {
       this.$i18n.locale = 'en';
     } else {
       this.$i18n.locale = 'zh';
     }
+    this.renderCharts(this.demoIndex);
   }
  
   private demoIndexChange(index){
 	  console.log('demoIndexChange:' + index);
-	  this.demoIndex = index;
+    this.demoIndex = index;
+    this.renderCharts(this.demoIndex);
   }
   
   private beforeDestroy() {
-    (this as any).$globalEvent.$off(
-      'updateFlightInfo',
-      this.updateFlightHandler
-    );
+    (this as any).$globalEvent.$off('updateFlightInfo', this.updateFlightHandler);
 	
     (this as any).$refs.infoContentCtn.removeEventListener('touchstart', this.touchStartHandle);
     (this as any).$refs.infoContentCtn.removeEventListener('touchmove', this.touchMoveHandle);
@@ -305,8 +300,6 @@ export default class FlightIndex extends Vue {
         ? this.flightInfo.Flight.BaseInfo.RearLink
         : this.flightInfo.Flight.BaseInfo.RearVideo,
     };
-
-    this.renderCharts();
   }
 
   public calcStyle(page: string) {
@@ -348,26 +341,24 @@ export default class FlightIndex extends Vue {
     }
   }
 
-  public renderCharts() {
-	 /* private get isDemo():string{
-	  	return this.$store.state.login.isDemo;
-	  } */
+  public renderCharts(demoIndex:number) {
     let timesData: Array<any> = [];
     let speedsData: Array<any> = [];
     let altitudesData: Array<any> = [];
-	
+
+    if(this.flightInfo.FlightAltitudes.length==0){
+      return;
+    }
+
     this.flightInfo.FlightAltitudes.forEach((item: any, index: number) => {
       let time = DateUtils.formate(item.TimePoint, 'hh:mm');
       timesData.push(time);
       speedsData.push(this.flightInfo.FlightSpeeds[index].Speed);
       altitudesData.push(item.Altitude);
     });
-	
 
     let FlightFirst = this.flightInfo.FlightSpeeds[0].TimePoint;
-    let FlightEnd = this.flightInfo.FlightSpeeds[
-      this.flightInfo.FlightSpeeds.length - 1
-    ].TimePoint;
+    let FlightEnd = this.flightInfo.FlightSpeeds[this.flightInfo.FlightSpeeds.length - 1].TimePoint;
 
     let headTimeArr = [];
     let headSpeedArr = [];
@@ -377,61 +368,46 @@ export default class FlightIndex extends Vue {
     let tailSpeedArr = [];
     let tailAltitudeArr = [];
 
-    let headEnpty =
-      FlightFirst - this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp;
+    let headEnpty = FlightFirst - this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp;
     if (headEnpty > 0) {
-      headTimeArr.push(
-        DateUtils.formate(
-          this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp,
-          'hh:mm'
-        )
-      );
+      headTimeArr.push(DateUtils.formate(this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp, 'hh:mm'));
       headSpeedArr.push('-');
       headAltitudeArr.push('-');
       let len = Math.floor(headEnpty / (5 * 60 * 1000));
       for (let i = 1; i <= len; i++) {
-        headTimeArr.push(
-          DateUtils.formate(
-            this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp +
-              i * 5 * 60 * 1000,
-            'hh:mm'
-          )
-        );
+        headTimeArr.push(DateUtils.formate( this.flightInfo.Flight.BaseInfo.DeparturePlanTimestamp + i * 5 * 60 * 1000,'hh:mm'));
         headSpeedArr.push('-');
         headAltitudeArr.push('-');
       }
     }
 
-    let tailEnpty =
-    this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp - FlightEnd;
+    let tailEnpty = this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp - FlightEnd;
     if (tailEnpty > 0) {
       let len = Math.floor(tailEnpty / (5 * 60 * 1000));
       for (let i = 1; i <= len; i++) {
-        tailTimeArr.push(
-          DateUtils.formate(FlightEnd + i * 5 * 60 * 1000, 'hh:mm')
-        );
+        tailTimeArr.push(DateUtils.formate(FlightEnd + i * 5 * 60 * 1000, 'hh:mm'));
         tailSpeedArr.push('-');
         tailAltitudeArr.push('-');
       }
-      tailTimeArr.push(
-        DateUtils.formate(
-          this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp,
-          'hh:mm'
-        )
-      );
+      tailTimeArr.push(DateUtils.formate(this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp,'hh:mm'));
       tailSpeedArr.push('-');
       tailAltitudeArr.push('-');
+    }
+
+    if(this.isDemo){
+      let demoFlightAltitude = this.flightInfo.FlightAltitudes.slice(0,demoIndex+1);
+      speedsData=[];
+      altitudesData=[];
+      demoFlightAltitude.forEach((item: any, index: number) => {
+        speedsData.push(this.flightInfo.FlightSpeeds[index].Speed);
+        altitudesData.push(item.Altitude);
+      });
     }
 
     if (headEnpty > 0 && tailEnpty > 0) {
       timesData = [...headTimeArr, ...timesData, ...tailTimeArr];
       speedsData = [...headSpeedArr, ...speedsData, ...tailSpeedArr];
-	  
-      altitudesData = [
-        ...headAltitudeArr,
-        ...altitudesData,
-        ...tailAltitudeArr,
-      ];
+      altitudesData = [ ...headAltitudeArr, ...altitudesData, ...tailAltitudeArr];
     } else if (headEnpty <= 0 && tailEnpty > 0) {
       timesData = [...timesData, ...tailTimeArr];
       speedsData = [...speedsData, ...tailSpeedArr];
@@ -449,9 +425,8 @@ export default class FlightIndex extends Vue {
       grid: {
         /* left: '13.5%',
         right: '12%', */
-		
-		left: '15%',
-		right: '15%',
+		    left: '15%',
+		    right: '15%',
         top: '18%',
         bottom: '25%',
       },
@@ -474,9 +449,9 @@ export default class FlightIndex extends Vue {
         axisTick: {
           show: false,
         }
-		/* axisLine: {
-		  show: false,
-		} */
+        /* axisLine: {
+          show: false,
+        } */
       },
       yAxis: [
         {
