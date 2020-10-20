@@ -8,7 +8,7 @@
       ></crew-tab>
     </section>
     <section class="body-ctn">
-      <router-view class="crew-route-view-ctn" />
+      <router-view  v-if="isRouterAlive" class="crew-route-view-ctn" />
     </section>
     <section class="footer-ctn">
       <crew-footer
@@ -110,7 +110,10 @@
 			"demo":"演示",
 			"Setting":"设置",
 			"CloudAddressText":"请输入云端地址",
-			"toast1":"飞机航班已经切换,请重新登录!"
+      "toast1":"飞机航班已经切换!",
+      "toast2":"提交配置成功",
+      "toast3":"提交配置失败",
+      "toast4":"获取配置失败"
 		},
 		"en":{
 			"newMessage": "You got a new message",
@@ -121,7 +124,10 @@
 			"demo":"demo",
 			"Setting":"Setting",
 			"CloudAddressText":"Please enter cloud address",
-			"toast1":"Flight has been switched. Please log in again!"
+      "toast1":"Flight has been switched!",
+      "toast2":"Configuration submitted successfully",
+      "toast3":"Failed to submit configuration",
+      "toast4":"Failed to get configuration"
 		}
 	}
 </i18n>
@@ -145,6 +151,7 @@ declare let io: any;
   },
 })
 export default class CrewLayoutCtn extends Vue {
+  
   private tabList: Array<any> = [
     {
       name: 'Catering',
@@ -192,17 +199,15 @@ export default class CrewLayoutCtn extends Vue {
 
   public flightResData: any = {};
 
+
+
   private messageContent: any = {
     seatNumber: '--',
     userName: '',
     itemImgUrl: '--',
     content: '',
   };
-  private provide() {
-    return {
-      reload: this.reload,
-    };
-  }
+  
   public created() {
     if (localStorage.getItem('lang') == 'en') {
       this.$i18n.locale = 'en';
@@ -211,6 +216,7 @@ export default class CrewLayoutCtn extends Vue {
       this.$i18n.locale = 'zh';
       this.language = '简体中文';
     }
+
 
     /* if(localStorage.getItem('checked') == 'true'){
 		this.checked = true;
@@ -226,7 +232,7 @@ export default class CrewLayoutCtn extends Vue {
         this.runDemo = res.data.RunDemo;
         this.cloudLink = res.data.CloudLink;
       } else {
-        this.$toast('获取配置失败!');
+        this.$toast(this.$i18n.t('toast4'));
       }
 
       /* RunDemo: "true", CloudLink: "http://kf.vpclub.cn/airbusife/"}
@@ -247,12 +253,19 @@ export default class CrewLayoutCtn extends Vue {
     this.getFlightInfo();
     this.startTimer();
   }
+  // private provide() {
+  //   return {
+  //     reload: this.reload,
+  //   };
+  // }
+
   private reload() {
-    this.isRouterAlive = false;
-    this.$nextTick(() => {
-      this.isRouterAlive = true;
+	this.isRouterAlive = false; //先关闭，
+    this.$nextTick(function () {
+      this.isRouterAlive = true; //再打开
     });
   }
+  
   private showSetting() {
     this.isShowSetting = true;
   }
@@ -288,11 +301,11 @@ export default class CrewLayoutCtn extends Vue {
       RunDemo: this.runDemo,
     }).then((res: any) => {
       if (res.code == '200') {
-        this.$toast('提交配置成功!');
+        this.$toast(this.$i18n.t('toast2'));
         this.isShowSetting = false;
         /* this.$router.go(0); */
       } else {
-        this.$toast('提交配置失败!');
+        this.$toast(this.$i18n.t('toast3'));
       }
     });
     // this.reload();
@@ -337,9 +350,9 @@ export default class CrewLayoutCtn extends Vue {
               this.flightResData.Flight.BaseInfo.Id
             );
             this.startWebScoket(this.flightResData.Flight.BaseInfo.Id);
-            if (this.$route.path.indexOf('/crew/login') < 0) {
+            if (this.$route.path.indexOf('/cater') < 0) {
               this.$router.push({
-                path: '/crew/login',
+                path: '/cater',
               });
             }
           }
@@ -351,6 +364,7 @@ export default class CrewLayoutCtn extends Vue {
     this.isLanguageShow = true;
   }
   private startWebScoket(airbusId) {
+    var _this = this
     const opt = {
       path: process.env.VUE_APP_SOCKET_URL,
     };
@@ -383,8 +397,10 @@ export default class CrewLayoutCtn extends Vue {
 						this.messageContent.content = newMessageObj.notice.Title;
 					}else if(newMessageObj.itemType == 'shopping'){//商品
 					}else if(newMessageObj.itemType == 'dish'){//菜品
-					}*/
+          }*/
+        // this.reload();
         this.showNotify();
+        this.reload();
       }
     });
   }
@@ -420,7 +436,8 @@ export default class CrewLayoutCtn extends Vue {
     
     // this.$refs.audio.currentTime = 0; //从头开始播放提示音
     // this.$refs.audio.play(); //播放
-
+    // this.$router.go(0);
+    // debugger
     let time = 50000;
     if (this.show) {
       this.show = false;
