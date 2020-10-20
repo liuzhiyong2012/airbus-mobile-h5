@@ -6,7 +6,6 @@
 
 		<div class="bottom-ctn">
 			<div  class="chart-ctn" ref="chartCtn"></div>
-			
 		</div>
 	</section>
 </template>

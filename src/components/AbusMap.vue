@@ -36,28 +36,11 @@ import { transform, fromLonLat, toLonLat } from 'ol/proj';
 import ImageStyle from 'ol/style/Image';
 import Icon from 'ol/style/Icon';
 import Circle from 'ol/style/Circle';
-
 import OverlayPositioning from 'ol/OverlayPositioning';
-
-
 import ZoomToExtent from 'ol/control/ZoomToExtent';
-// import {defaults} from 'ol/control/defaults';
 import { defaults } from 'ol/control';
-
 import { buffer } from 'ol/extent';
 import DateUtils from '../utils/date-utils';
-
-// import { buffer }  from 'ol/layer';
-/* import 'ol/ol.css';
-import Feature from 'ol/Feature';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import LineString from 'ol/geom/LineString';
-import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
-import Stamen from 'ol/source/Stamen';
-import VectorSource from 'ol/source/Vector';
-import {Stroke, Style} from 'ol/style'; */
-// import {getVectorContext} from 'ol/render';
 
 @Component({
 	name: 'AbusMap',
@@ -74,16 +57,12 @@ export default class AbusMap extends Vue {
 	private chart: any;
 	private map: any;
 	private flightInfo: any;
-	
 	private timeFlag?:any = null;
 	private marker:any = null;
-	
+	private trackLine:any = [];
 	private flightPaths:Array<any> = [];
-	
 	private updateFlightHandler: any = null;
-	
 	private flightPositionIndex: number = 0;
-	
 	
 	private get isDemo():string{
 		return this.$store.state.login.isDemo;
@@ -98,11 +77,8 @@ export default class AbusMap extends Vue {
 	}
 	
 
-	created() {
-	}
 
 	mounted() {
-		
 		this.getFlightInfo();
 		
 		//根据是否是demo进行飞机航线绘制
@@ -110,12 +86,19 @@ export default class AbusMap extends Vue {
 			this.startFlightTimer();
 		}else{
 			this.updateFlightHandler = (e)=>{
+				this.drawLines();
 				this.updateMarkPosition();
 			};
+			this.drawLines();
 			this.updateMarkPosition();
-			(this as any).$globalEvent.$on('updateFlightInfo',this.updateFlightHandler);
 			
+			(this as any).$globalEvent.$on('updateFlightInfo',this.updateFlightHandler);
 		}
+	}
+	
+	private beforeDestroy() {
+		window.clearInterval(this.timeFlag);  
+		(this as any).$globalEvent.$off('updateFlightInfo',this.updateFlightHandler);
 	}
 	
 	public updateMarkPosition(index?){
@@ -131,38 +114,29 @@ export default class AbusMap extends Vue {
 		}
 	}
 	
-	
-	destroyed() {
-		
-	} 
-	
 	public startFlightTimer() {
-		let time = 1 * 1000;
+		let time = 1 * 200;
 		let len = this.flightPaths.length;
 		this.flightPositionIndex = 0;
+		this.drawLines(this.flightPositionIndex);
 		this.updateMarkPosition(this.flightPositionIndex);
+		
 		this.timeFlag = window.setInterval(()=>{
 			this.flightPositionIndex++;
 			if(this.flightPositionIndex >= len){
 				this.flightPositionIndex = 0;
 			}
+			this.$emit('demoIndexChange',this.flightPositionIndex);
+			this.drawLines(this.flightPositionIndex);
 			this.updateMarkPosition(this.flightPositionIndex);
+			
 		},time);
 	}
-		
-	
-	private beforeDestroy() {
-		window.clearInterval(this.timeFlag);  
-		(this as any).$globalEvent.$off('updateFlightInfo',this.updateFlightHandler);
-	}
-	
-	
 	
 	public getFlightInfo(): void {
 		this.flightInfo = this.flightResData;
-		// this.isDemo = this.flightInfo.Flight.BaseInfo.IsDemo;
+		this.flightPaths = this.flightInfo.FlightPaths;
 		this.renderMap();
-		
 	}
 
 	public renderMap(): void {
@@ -176,6 +150,7 @@ export default class AbusMap extends Vue {
 		
 		//创建轨迹线
 		let trackLine = new LineString([]);
+		this.trackLine = trackLine;
 		//矢量图层层
 		let aircfaftLayer = new VectorLayer({
 			source: new VectorSource()
@@ -228,59 +203,55 @@ export default class AbusMap extends Vue {
 			offset: [0, 0],
 			element: markerEl
 		});
+		
 		this.marker = marker;
 		this.map.addOverlay(marker);
         
-
 		//设置地图中心
 		this.drawLines();
-
-		let coords: Array<any> = [],
-			intervalId,
-			interval = 1000,
-			i = 0;
+			
 		let theAirplane = new Feature([]);
-		this.flightInfo.FlightPaths.forEach((item:any, index:number) => {
-			coords.push([Number(item.Lng), Number(item.Lat)]);
-		});
-        
-		this.flightPaths = this.flightInfo.FlightPaths;
+		
 		
 		theAirplane.setId('123123');
 		theAirplane.set('speed', 323);
 		theAirplane.setStyle(this.createGoodStyle());
-		// theAirplane.getStyle().getImage().setRotation(130);
 		aircfaftLayer.getSource().addFeature(theAirplane);
-		
-		coords.forEach((item, index) => {
-			let point = coords[index] || transform(coords[index], 'EPSG:4326', 'EPSG:3857');
-			trackLine.appendCoordinate(point);
-		});
-		
-		//this.updateMarkPosition();
 	}
 	
+	//重新绘制线条
+	public drawLines(index?){
+		console.log('index:' + index);
+		let coords: Array<any> = [];
+		let len = null;
+		let flightPaths = [];
+		
+		if(index === null||index === undefined){
+			len = this.flightInfo.FlightPaths.length;
+		}else{
+			len = index + 1;
+		}
+		flightPaths = this.flightInfo.FlightPaths.slice(0,len);
+		flightPaths.forEach((item:any, index:number) => {
+			coords.push([Number(item.Lng), Number(item.Lat)]);
+		});
+		
+		let points:any = [];
+		coords.forEach((item, corIndex) => {
+			let point = coords[corIndex] || transform(coords[corIndex], 'EPSG:4326', 'EPSG:3857');
+			points.push(point);
+		});
+		
+		this.trackLine.setCoordinates(points);
+		
+	}
 	
 	public centerMark(position:any){
 		this.map.getView().setCenter(position);
 	}
  
 
-    public updateMarkPosition1(){
-		console.log('更新飞机坐标位置');
-		let flightAltitudes:any = this.flightResData.FlightPaths;
-		
-		if(flightAltitudes&&flightAltitudes.length > 0){
-			let position = flightAltitudes[flightAltitudes.length - 1];
-			let cord = [position.Lng,position.Lat];
-			
-			this.marker.setPosition(cord);
-			this.marker.getElement().style.transform = `rotate(${position.Course - 90}deg)`;
-			this.centerMark(cord);
-		}
-		
-		
-	}
+
 
 	
 	createGoodStyle() {
@@ -299,10 +270,6 @@ export default class AbusMap extends Vue {
 		});
 	}
 
-	//绘制航线
-	public drawLines() {
-		
-	}
 
     
 	
@@ -323,7 +290,6 @@ div.olControlZoom {
 }
 
 #geo-marker {
-	// border: 1px solid #ffffff;
 	border-radius: 50%;
 	width: 0.36rem;
 	height: 0.36rem;
@@ -357,7 +323,6 @@ div.olControlZoom {
 		z-index: 1;
         .map-tag-color{
           color: royalblue;
-          // font-weight: 600;
         }
       }
 	}

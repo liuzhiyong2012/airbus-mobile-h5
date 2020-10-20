@@ -24,6 +24,8 @@ import FlightService from '../../service/flight';
 export default class LayoutIndex extends Vue {
   @Prop() private msg!: string;
   
+  
+  
   private socket:any = null;
   
   private timer: any = null;
@@ -60,6 +62,8 @@ export default class LayoutIndex extends Vue {
 	   
 	   if(xhr.status===200){//200状态码表示正常
 			let res = JSON.parse(xhr.responseText);
+			//@fixme:
+			//res.data.Flight.BaseInfo.IsDemo = 0;
 			this.$store.dispatch('setFlightInfo',res.data);
 	   }else{
 	  		this.$toast('获取航班信息失败!');
@@ -67,12 +71,14 @@ export default class LayoutIndex extends Vue {
   }
   
   private startTimer(){
-  	let timePeriod = 5000;
+  	let timePeriod = 10000;
   	
   	this.timer = window.setInterval(()=>{
   		FlightService.getFlightInfo().then((res: any) => {
   			if(res.code == 200){
+				//@fixme:
   				//如果飞机航班改变了，则跳转登录页面，并且重新开始实时推送。
+				//res.data.Flight.BaseInfo.IsDemo = 0;
   				if((this.airbusId&&(this.airbusId != res.data.Flight.BaseInfo.Id))||(this.airbusId&&(this.isDemo != res.data.Flight.BaseInfo.IsDemo))){
 					this.$store.dispatch('setFlightInfo',res.data);
 					// this.$store.dispatch('logout');
@@ -83,7 +89,6 @@ export default class LayoutIndex extends Vue {
 							path:'/login'
 						});
 					}
-					
   				}else{
 					this.$store.dispatch('setFlightInfo',res.data);
 					(this as any).$globalEvent.$emit('updateFlightInfo',res.data);

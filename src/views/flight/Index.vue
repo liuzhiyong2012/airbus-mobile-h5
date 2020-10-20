@@ -5,7 +5,7 @@
     </abus-title>
 
     <section class="flight-content-ctn">
-      <abus-map class="map-ctn" :style="calcStyle('map')"></abus-map>
+      <abus-map class="map-ctn" :style="calcStyle('map')" @demoIndexChange = "demoIndexChange"></abus-map>
       <section class="camera-ctn" :style="calcStyle('camera')">
         <div class="camera-switch-ctn">
           <div class="camera-switch-item">
@@ -128,14 +128,12 @@
 	}
 </i18n>
 <script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import VoyageInfo from './components/VoyageInfo.vue';
 import AbusMap from '../../components/AbusMap.vue';
 import AbusTitle from '../../components/AbusTitle.vue';
 import AbusFlight from '../../components/AbusFlight.vue';
-
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import echarts from 'echarts';
-
 import FlightService from '../../service/flight';
 import DateUtils from '../../utils/date-utils';
 
@@ -153,6 +151,7 @@ export default class FlightIndex extends Vue {
 
   private active: string = 'map'; //"camera,map"
   private dataList: any = [];
+  
 
   private activeCamera: string = 'frontCamera'; //header,body,footer
 
@@ -189,24 +188,19 @@ export default class FlightIndex extends Vue {
   private get flightResData(): string {
     return this.$store.state.login.flightInfo;
   }
+  
+  private demoIndex: number = 0; 
+  
+  private get isDemo():string{
+  	return this.$store.state.login.isDemo;
+  }
 
   private created() {}
 
   private mounted() {
-	  
-	  /* infoContentCtn
-	  topCtn
-	  switchCtn */
-	  //@doing
-	  //private bottomDistance: number = 0;
-	  //隐藏状态下的距离
-	 // private hideDistance: number = 0;
-	 
 	 this.$nextTick(()=>{
 		 this.hideDistance = (this as any).$refs.infoContentCtn.clientHeight - (this as any).$refs.switchCtn.clientHeight - (this as any).$refs.topCtn.clientHeight;
 	 });
-	 
-	 
 	  
     this.listenScroll();
 
@@ -225,7 +219,12 @@ export default class FlightIndex extends Vue {
       this.$i18n.locale = 'zh';
     }
   }
-
+ 
+  private demoIndexChange(index){
+	  console.log('demoIndexChange:' + index);
+	  this.demoIndex = index;
+  }
+  
   private beforeDestroy() {
     (this as any).$globalEvent.$off(
       'updateFlightInfo',
@@ -350,15 +349,20 @@ export default class FlightIndex extends Vue {
   }
 
   public renderCharts() {
+	 /* private get isDemo():string{
+	  	return this.$store.state.login.isDemo;
+	  } */
     let timesData: Array<any> = [];
     let speedsData: Array<any> = [];
     let altitudesData: Array<any> = [];
+	
     this.flightInfo.FlightAltitudes.forEach((item: any, index: number) => {
       let time = DateUtils.formate(item.TimePoint, 'hh:mm');
       timesData.push(time);
       speedsData.push(this.flightInfo.FlightSpeeds[index].Speed);
       altitudesData.push(item.Altitude);
     });
+	
 
     let FlightFirst = this.flightInfo.FlightSpeeds[0].TimePoint;
     let FlightEnd = this.flightInfo.FlightSpeeds[
@@ -399,7 +403,7 @@ export default class FlightIndex extends Vue {
     }
 
     let tailEnpty =
-      this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp - FlightEnd;
+    this.flightInfo.Flight.BaseInfo.ArrivalPlanTimestamp - FlightEnd;
     if (tailEnpty > 0) {
       let len = Math.floor(tailEnpty / (5 * 60 * 1000));
       for (let i = 1; i <= len; i++) {
@@ -422,6 +426,7 @@ export default class FlightIndex extends Vue {
     if (headEnpty > 0 && tailEnpty > 0) {
       timesData = [...headTimeArr, ...timesData, ...tailTimeArr];
       speedsData = [...headSpeedArr, ...speedsData, ...tailSpeedArr];
+	  
       altitudesData = [
         ...headAltitudeArr,
         ...altitudesData,
