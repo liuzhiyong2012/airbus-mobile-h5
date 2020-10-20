@@ -352,6 +352,7 @@ export default class CrewLayoutCtn extends Vue {
   }
   private startWebScoket(airbusId) {
     const opt = {
+      forceNew: true,
       path: process.env.VUE_APP_SOCKET_URL,
     };
     this.socket = io(process.env.VUE_APP_SOCKET_HOST, opt);

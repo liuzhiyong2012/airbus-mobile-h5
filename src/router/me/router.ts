@@ -72,6 +72,7 @@ const routes: Array<RouteConfig> = [
 		path: '/me/privacypolicy',
 		name: 'privacyPolicy',
 		meta: {
+			noRequireAuth:true,
 			keepAlive: false
 		},
 		component: PrivacyPolicy
@@ -79,6 +80,10 @@ const routes: Array<RouteConfig> = [
 	{
 		path: '/me/termOfService',
 		name: 'termsOfService',
+		meta: {
+			noRequireAuth:true,
+			keepAlive: false
+		},
 		component: TermsOfService
 	},
 	{

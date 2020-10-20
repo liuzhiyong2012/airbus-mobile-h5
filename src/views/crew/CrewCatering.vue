@@ -49,7 +49,7 @@
 			"toast2":"操作成功！"
 		},
 		"en":{
-			"noMore":"There is no more!",
+			"noMore":"no more",
 			"toast1":"Failed to get list",
 			"toast2":"Operation successful!"
 		}
