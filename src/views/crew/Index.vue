@@ -32,7 +32,10 @@
           <!--<div class="head-img" v-if="messageContent.itemType!='netFlow'" :style="{backgroundImage:`url(${messageContent.itemImgUrl})`}">
 					</div>-->
           <div class="content-ctn">
-            <div class="seat-ctn">{{ messageContent.seatNumber }}</div>
+            <div class="seat-ctn">
+              {{ messageContent.seatNumber }} 
+              <van-button type="info" class="vant-btn" @click="goto(messageContent)">goto</van-button>
+            </div>
             <div class="msg-ctn">{{ messageContent.content }}</div>
           </div>
         </div>
@@ -434,6 +437,32 @@ export default class CrewLayoutCtn extends Vue {
       }, time);
     }
   }
+
+  public goto(item){
+    this.show = false
+    if(item.itemType=='dish'){
+      this.$router.push({
+        name:'crewCatering',
+        query:{
+
+        }
+      })
+    }else if(item.itemType=='netFlow'){
+      this.$router.push({
+        name:'crewDataPackage',
+        query:{
+
+        }
+      })
+    }else if(item.itemType=='shopping'){
+      this.$router.push({
+        name:'crewGoods',
+        query:{
+
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -501,16 +530,22 @@ export default class CrewLayoutCtn extends Vue {
         margin-left: rem(108px);
         .seat-ctn {
           width: rem(68px);
-          height: rem(36px);
+          height: rem(43px);
           background: #00aec7;
           border-radius: rem(6px);
           text-align: center;
-          line-height: rem(36px);
+          line-height: rem(43px);
           font-size: rem(22px);
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
           color: #ffffff;
           margin-bottom: rem(12px);
+          display: flex;
+          align-items: center;
+          .vant-btn{
+            margin-left: 1.7rem;
+            font-size: rem(22px);
+          }
         }
         .msg-ctn {
           text-align: left;
