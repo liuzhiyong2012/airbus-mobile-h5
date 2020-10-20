@@ -60,7 +60,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import AbusTitle from '../../components/AbusTitle.vue';
 import DishService from '../../service/dish';
-import { localStore } from "../../utils/data-management";
+import { localStore } from '../../utils/data-management';
 import UrlUtils from '../../utils/url-utils';
 
 @Component({
@@ -79,17 +79,21 @@ export default class DishIndex extends Vue {
 		this.getDishesRecommendedList();
 		this.getDishesList();
 	}
+	
 	private mounted() {
-		if (localStorage.getItem("lang") == "en") {
-		this.lang = "en";
+		if (localStorage.getItem('lang') == 'en') {
+		this.lang = 'en';
 		} else {
-		this.lang = "zh";
+		this.lang = 'zh';
 		}
 	}
 
 
 	private getDishesRecommendedList() {
-		DishService.getDishesRecommendedList({}).then((res: any) => {
+		DishService.getDishesRecommendedList({
+			skip:0,
+			take:10000
+		}).then((res: any) => {
 			if (res.code == 200) {
 				this.recomendList = res.data.RecommendedDishes;
 				
@@ -115,12 +119,12 @@ export default class DishIndex extends Vue {
 
 	private stepToDetail(item: any) {
 		if(item.Stocking==0){
-			if (localStorage.getItem("lang") == "en") {
-				this.$toast('Out of stock!')
+			if (localStorage.getItem('lang') == 'en') {
+				this.$toast('Out of stock!');
 			} else {
-				this.$toast('暂时缺货')
+				this.$toast('暂时缺货');
 			}
-			return
+			return;
 		}else{
 			this.$router.push({
 				name: 'dishDetail',
@@ -131,12 +135,12 @@ export default class DishIndex extends Vue {
 		}
 	}
 	private showToast(){
-		if (localStorage.getItem("lang") == "en") {
+		if (localStorage.getItem('lang') == 'en') {
 		
-		this.$toast('Stockout!')
+		this.$toast('Stockout!');
 
 		} else {
-		this.$toast('暂时缺货')
+		this.$toast('暂时缺货');
 		}
 	}
 }

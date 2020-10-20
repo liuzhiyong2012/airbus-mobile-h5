@@ -34,7 +34,12 @@
           <div class="content-ctn">
             <div class="seat-ctn">
               {{ messageContent.seatNumber }} 
-              <van-button type="info" class="vant-btn" @click="goto(messageContent)">goto</van-button>
+			
+				 
+				
+				  <span  class="read-btn" @click="goto(messageContent)">{{$t("readBtn")}}</span>
+             <!-- <van-button type="info" class="vant-btn" @click="goto(messageContent)">go</van-button> -->
+			 
             </div>
             <div class="msg-ctn">{{ messageContent.content }}</div>
           </div>
@@ -102,6 +107,7 @@
 <i18n>
 	{
 		"zh":{
+			"readBtn":"前往",
 			"newMessage": "你收到一条信息",
 			"Cancel":"取消",
 			"Submit":"提交",
@@ -116,6 +122,7 @@
       "toast4":"获取配置失败"
 		},
 		"en":{
+			"readBtn":"go",
 			"newMessage": "You got a new message",
 			"Cancel":"Cancel",
 			"Submit":"Submit",
@@ -189,6 +196,7 @@ export default class CrewLayoutCtn extends Vue {
   private unloadHandler: any = null;
 
   private language: string = 'English';
+  private locale: string = '';
   private isLanguageShow: boolean = false;
   private show: boolean = false;
   private isShowSetting: boolean = false;
@@ -198,8 +206,6 @@ export default class CrewLayoutCtn extends Vue {
   private sound: any;
 
   public flightResData: any = {};
-
-
 
   private messageContent: any = {
     seatNumber: '--',
@@ -211,12 +217,13 @@ export default class CrewLayoutCtn extends Vue {
   public created() {
     if (localStorage.getItem('lang') == 'en') {
       this.$i18n.locale = 'en';
+	  this.locale = 'en';
       this.language = 'English';
     } else {
+	  this.locale = 'zh';
       this.$i18n.locale = 'zh';
       this.language = '简体中文';
     }
-
 
     /* if(localStorage.getItem('checked') == 'true'){
 		this.checked = true;
@@ -364,7 +371,7 @@ export default class CrewLayoutCtn extends Vue {
     this.isLanguageShow = true;
   }
   private startWebScoket(airbusId) {
-    var _this = this
+    var _this = this;
     const opt = {
       forceNew: true,
       path: process.env.VUE_APP_SOCKET_URL,
@@ -383,15 +390,18 @@ export default class CrewLayoutCtn extends Vue {
       (this as any).$globalEvent.$emit('new_msg', newMessageObj);
 
       if (newMessageObj.type == 'crew') {
-        /*let messageContent:any = {
-						 seatNumber:'--',
-						 itemImgUrl:'--',
-						 content:''
-					};*/
+					 
         this.messageContent.seatNumber = newMessageObj.seatNumber;
         this.messageContent.itemType = newMessageObj.itemType;
         this.messageContent.userName = newMessageObj.user.NickName;
-        this.messageContent.content = newMessageObj.notice.Title;
+		
+		
+		 if( this.$i18n.locale == 'zh'){
+			 this.messageContent.content = newMessageObj.notice.Mark;
+		 }else{
+			 this.messageContent.content = newMessageObj.notice.Title;
+		 }
+        
         /*if(newMessageObj.itemType == 'netFlow'){//流量
 						this.messageContent.itemName = newMessageObj.netFlow.Name;
 						this.messageContent.itemImgUrl = '';//Name
@@ -439,46 +449,47 @@ export default class CrewLayoutCtn extends Vue {
     // this.$refs.audio.play(); //播放
     // this.$router.go(0);
     // debugger
+	
     let time = 50000;
     if (this.show) {
       this.show = false;
       setTimeout(() => {
         this.show = true;
         setTimeout(() => {
-          this.show = false;
+          //this.show = false;
         }, time);
       }, 1000);
     } else {
       this.show = true;
       setTimeout(() => {
-        this.show = false;
+        //this.show = false;
       }, time);
     }
   }
 
   public goto(item){
-    this.show = false
+    this.show = false;
     if(item.itemType=='dish'){
       this.$router.push({
         name:'crewCatering',
         query:{
 
         }
-      })
+      });
     }else if(item.itemType=='netFlow'){
       this.$router.push({
         name:'crewDataPackage',
         query:{
 
         }
-      })
+      });
     }else if(item.itemType=='shopping'){
       this.$router.push({
         name:'crewGoods',
         query:{
 
         }
-      })
+      });
     }
   }
 }
@@ -545,6 +556,7 @@ export default class CrewLayoutCtn extends Vue {
         font-size: rem(18px);
       }
       .content-ctn {
+		  position: relative;
         margin-left: rem(108px);
         .seat-ctn {
           width: rem(68px);
@@ -560,6 +572,21 @@ export default class CrewLayoutCtn extends Vue {
           margin-bottom: rem(12px);
           display: flex;
           align-items: center;
+		  
+		  .read-btn{
+		  					     position: absolute;
+		  					     top: 0.06rem;
+		  					     right: 0;
+		  					     width: 0.56rem;
+		  					     height: 0.30rem;
+		  					     box-shadow: 0 0.13rem 0.14rem 0 rgba(0, 0, 0, 0.13);
+		  					     border-radius: 0.06rem;
+		  					     border: 0.01rem solid #afd5fd;
+		  					     text-align: center;
+		  					     line-height: 0.26rem;
+		  					     font-size: 0.2rem;
+		  					     color: #afd5fd;
+		  }
           .vant-btn{
             margin-left: 1.7rem;
             font-size: rem(22px);

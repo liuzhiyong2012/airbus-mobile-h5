@@ -128,7 +128,7 @@
     <crew-chat
       v-if="curUserId"
       :curUserId="curUserId"
-      @close="curUserId = ''"
+      @close="closeChatModal"
     ></crew-chat>
   </section>
 </template>
@@ -148,13 +148,13 @@
 </i18n>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import CabinLayoutService from "../../service/crew/cabin-layout";
-import FlightSeatMatrix from "./model/flight-seat-matrix";
-import CrewChat from "./CrewChat.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import CabinLayoutService from '../../service/crew/cabin-layout';
+import FlightSeatMatrix from './model/flight-seat-matrix';
+import CrewChat from './CrewChat.vue';
 
 @Component({
-  name: "CrewCatering",
+  name: 'CrewCatering',
   components: {
     CrewChat,
   },
@@ -162,21 +162,21 @@ import CrewChat from "./CrewChat.vue";
 export default class CrewCatering extends Vue {
   private layoutList: Array<any> = [];
 
-  private active: string = "firstClass";
+  private active: string = 'firstClass';
   private tabList: Array<any> = [];
 
-  private seatHeadLabelArr: Array<any> = ["A", "B", "C", "D", "E", "F", "G"];
+  private seatHeadLabelArr: Array<any> = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
   private seatMessageMap: any = {};
 
-  private showTipUserId = "";
+  private showTipUserId = '';
 
   private docClickHandle: any = null;
 
   //展示聊天弹窗
   private showChatModal: boolean = false;
 
-  private curUserId: string = "";
+  private curUserId: string = '';
 
   private layoutInfo = null;
 
@@ -196,56 +196,66 @@ export default class CrewCatering extends Vue {
 
   private messageCount: any = {};
   public created() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   async mounted() {
     this.docClickHandle = (e) => {
-      this.showTipUserId = "";
+      this.showTipUserId = '';
     };
-    document.addEventListener("click", this.docClickHandle);
+    document.addEventListener('click', this.docClickHandle);
     this.startWebScoket();
     await this.getFlightSeatInfo();
     await this.getSeatMessageInfo();
   }
 
   private beforeDestroy() {
-    document.removeEventListener("click", this.docClickHandle);
-    (this as any).$globalEvent.$off("new_msg", this.msgListener);
+    document.removeEventListener('click', this.docClickHandle);
+    (this as any).$globalEvent.$off('new_msg', this.msgListener);
   }
 
   //计算座舱布局的宽度
   private calcContentStyle(layoutInfo) {
     let unitWidth = 84 + 32;
     return {
-      width: (unitWidth * layoutInfo.maxSeatLen) / 100 + "rem",
+      width: (unitWidth * layoutInfo.maxSeatLen) / 100 + 'rem',
     };
   }
-
+  
+  //关闭消息弹窗
+  private closeChatModal(){
+	  Object.keys(this.messageCount).forEach((seatType, index) => {
+	    this.messageCount[seatType] = 0;
+	  });
+	  this.getSeatMessageInfo();
+	  this.curUserId = '';
+  }
+  
   private stepBack() {
+	  (this as any).$globalEvent.$emit('updateMessageCount');
     this.$router.push({
-      name: "crewCatering",
+      name: 'crewCatering',
     });
   }
 
   private startWebScoket() {
     this.msgListener = (msg) => {
-      console.log("layout:msg");
+      console.log('layout:msg');
       Object.keys(this.messageCount).forEach((seatType, index) => {
         this.messageCount[seatType] = 0;
       });
       this.getSeatMessageInfo();
     };
-    (this as any).$globalEvent.$on("new_msg", this.msgListener);
+    (this as any).$globalEvent.$on('new_msg', this.msgListener);
   }
 
   private scrollToSection(seatType) {
     this.active = seatType;
     this.$nextTick(() => {
-      let scrollTop = this.$refs["section" + seatType][0].offsetTop;
+      let scrollTop = this.$refs['section' + seatType][0].offsetTop;
       (this.$refs.contentCtn as any).scrollTop = scrollTop;
     });
   }
@@ -253,7 +263,7 @@ export default class CrewCatering extends Vue {
   private clickSeatItem(seatItem) {
     if (!seatItem.UserId) {
       //座位上没有用户
-      this.showTipUserId = "";
+      this.showTipUserId = '';
     } else if (!this.seatMessageMap[seatItem.UserId]) {
       //有用户但是没有新消息
       this.goToChat(seatItem);
@@ -262,7 +272,7 @@ export default class CrewCatering extends Vue {
       seatItem.UserId == this.showTipUserId
     ) {
       //有用户并且消息tip处于展示状态
-      this.showTipUserId = "";
+      this.showTipUserId = '';
     } else if (
       this.seatMessageMap[seatItem.UserId] &&
       seatItem.UserId != this.showTipUserId
@@ -270,19 +280,19 @@ export default class CrewCatering extends Vue {
       //有用户并且消息tip处于关闭状态
       this.showTipUserId = seatItem.UserId;
     } else {
-      this.$toast(this.$i18n.t("error"));
+      this.$toast(this.$i18n.t('error'));
     }
   }
 
   private goToChat(seatItem) {
-    this.showTipUserId = "";
+    this.showTipUserId = '';
     this.curUserId = seatItem.UserId;
   }
 
   //获得航班的座位布局信息
   public getFlightSeatInfo(): void {
     CabinLayoutService.getFlightSeatInfo().then((resData: any) => {
-      if (resData.code == "200") {
+      if (resData.code == '200') {
         let flightObj = new FlightSeatMatrix(resData.data);
         let tabList = [];
         this.layoutInfo = flightObj.getLayoutInfo();
@@ -307,7 +317,7 @@ export default class CrewCatering extends Vue {
   public getSeatMessageInfo(): void {
     CabinLayoutService.getSeatMessageInfo().then((resData: any) => {
       let seatMessageMap: any = {};
-      if (resData.code == "200") {
+      if (resData.code == '200') {
         resData.data.forEach((item, index) => {
           seatMessageMap[item.UserId] = item;
           // this.messageCount[seatType] = 0;
