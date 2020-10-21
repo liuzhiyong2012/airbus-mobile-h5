@@ -321,6 +321,12 @@ export default class CrewCatering extends Vue {
         resData.data.forEach((item, index) => {
           seatMessageMap[item.UserId] = item;
           // this.messageCount[seatType] = 0;
+		  if(!this.layoutInfo){
+			  console.log('布局出错了');
+			  // debugger;
+			  this.messageCount = {};
+			  return; 
+		  }
           let seatType = this.layoutInfo.userSeatTypeMap[item.UserId];
           this.messageCount[seatType] =
             this.messageCount[seatType] + item.total;

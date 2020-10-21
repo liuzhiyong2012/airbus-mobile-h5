@@ -89,9 +89,14 @@ export default class AbusMap extends Vue {
 		}else{
 			
 			this.updateFlightHandler = (e)=>{
+				console.log('更新');
+				this.flightInfo = this.flightResData;
+				this.flightPaths = this.flightInfo.FlightPaths;
 				this.drawLines();
 				this.updateMarkPosition();
 			};
+			this.flightInfo = this.flightResData;
+			this.flightPaths = this.flightInfo.FlightPaths;
 			this.drawLines();
 			this.updateMarkPosition();
 			
@@ -129,7 +134,7 @@ export default class AbusMap extends Vue {
 			if(this.flightPositionIndex >= len){
 				this.flightPositionIndex = 0;
 			}
-			localStore.set('flightIndex',this.flightPositionIndex)
+			localStore.set('flightIndex',this.flightPositionIndex);
 			this.$emit('demoIndexChange',this.flightPositionIndex);
 			this.drawLines(this.flightPositionIndex);
 			this.updateMarkPosition(this.flightPositionIndex);
@@ -236,7 +241,9 @@ export default class AbusMap extends Vue {
 		}else{
 			len = index + 1;
 		}
+		
 		flightPaths = this.flightInfo.FlightPaths.slice(0,len);
+		
 		flightPaths.forEach((item:any, index:number) => {
 			coords.push([Number(item.Lng), Number(item.Lat)]);
 		});

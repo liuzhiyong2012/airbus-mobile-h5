@@ -38,7 +38,7 @@ module.exports = {
     // publicPath: '/', //开发
 	publicPath: process.env.VUE_APP_PUBLIC_PATH, //打包
     devServer: {
-		https:true,
+		// https:true,
         port: process.env.VUE_APP_PORT,
         proxy: {
 			//项目图片映射  
