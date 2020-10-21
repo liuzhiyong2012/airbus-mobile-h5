@@ -28,12 +28,11 @@
 	</section>
 </template>
 
-
 <i18n>
 	{
 	"en":{
-	  "waringMsg":"You need to purchase netflow for using the app ",
-	  "lessWarning":"netflow is going to be used up"
+	  "waringMsg":"You need to purchase internet data package for using the app ",
+	  "lessWarning":"Internet data package is going to be used up"
 	},
 	"zh":{
 	  "waringMsg":"非VIP用户需购买流量套餐",
@@ -128,10 +127,10 @@
 						
 						
 						if(userData.Flow.Flow === null){
-							this.flowLable = '-- MB';
+							this.flowLable = '0 MB';
 							
 							if(overTime){
-								this.$toast(this.$i18n.t('waringMsg'));
+								//this.$toast(this.$i18n.t('waringMsg'));
 								this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
 							}
 							
@@ -145,7 +144,7 @@
 							//系统用户购买流量
 							if(remaingFlow <= 5&&overTime){
 								this.$store.commit('setLastNetFlowWaringTime', nowTime.getTime());
-								this.$toast(this.$i18n.t('lessWarning'));
+								//this.$toast(this.$i18n.t('lessWarning'));
 							}
 						}
 						//private lastWarningTime:any = null;
