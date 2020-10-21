@@ -106,6 +106,8 @@ export default class SelectSeat extends Vue {
         this.columns.forEach((item: any, index: any) => {
           this.columnsName.push(item.Name);
         });
+      }else{
+        this.$toast(res.data)
       }
     });
   }

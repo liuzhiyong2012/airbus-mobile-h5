@@ -41,6 +41,7 @@ import ZoomToExtent from 'ol/control/ZoomToExtent';
 import { defaults } from 'ol/control';
 import { buffer } from 'ol/extent';
 import DateUtils from '../utils/date-utils';
+import { localStore } from '@/utils/data-management';
 
 @Component({
 	name: 'AbusMap',
@@ -79,12 +80,14 @@ export default class AbusMap extends Vue {
 
 
 	mounted() {
+		
 		this.getFlightInfo();
 		
 		//根据是否是demo进行飞机航线绘制
 		if(this.isDemo){
 			this.startFlightTimer();
 		}else{
+			
 			this.updateFlightHandler = (e)=>{
 				this.drawLines();
 				this.updateMarkPosition();
@@ -117,12 +120,13 @@ export default class AbusMap extends Vue {
 	public startFlightTimer() {
 		let time = 4 * 1000;
 		let len = this.flightPaths.length;
-		this.flightPositionIndex = 0;
+		this.flightPositionIndex = localStore.get('flightIndex');
 		this.drawLines(this.flightPositionIndex);
 		this.updateMarkPosition(this.flightPositionIndex);
 		
 		this.timeFlag = window.setInterval(()=>{
 			this.flightPositionIndex++;
+			localStore.set('flightIndex',this.flightPositionIndex)
 			if(this.flightPositionIndex >= len){
 				this.flightPositionIndex = 0;
 			}
@@ -134,6 +138,7 @@ export default class AbusMap extends Vue {
 	}
 	
 	public getFlightInfo(): void {
+		
 		this.flightInfo = this.flightResData;
 		this.flightPaths = this.flightInfo.FlightPaths;
 		this.renderMap();
