@@ -520,6 +520,7 @@ export default class CrewLayoutCtn extends Vue {
   text-align: center;
   line-height: 1rem;
 }
+
 .message-ctn {
   position: absolute;
   right: 40px;

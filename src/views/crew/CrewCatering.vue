@@ -210,8 +210,10 @@ export default class CrewCatering extends Vue {
   private finishDish(item, index) {
     CateringService.finishDishes({ id: item.id }).then((resData: any) => {
       if (resData.code == "200") {
+        
         this.$toast(this.$i18n.t("toast2"));
         this.dataList[index].status = "2";
+        this.resetList()
       }
     });
   }
@@ -270,7 +272,9 @@ export default class CrewCatering extends Vue {
     box-sizing: border-box;
     justify-content: space-between;
     flex-wrap: wrap;
-
+.item-ctt{
+  width: 100%;
+}
     .catering-item-ctn {
       display: flex;
       justify-content: space-between;

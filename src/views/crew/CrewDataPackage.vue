@@ -218,7 +218,9 @@ export default class CrewCatering extends Vue {
     box-sizing: border-box;
     justify-content: space-between;
     flex-wrap: wrap;
-
+.item-ctt{
+  width: 100%;
+}
     .catering-item-ctn {
       display: flex;
       justify-content: space-between;
