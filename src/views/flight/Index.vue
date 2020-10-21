@@ -136,6 +136,7 @@ import AbusFlight from '../../components/AbusFlight.vue';
 import echarts from 'echarts';
 import FlightService from '../../service/flight';
 import DateUtils from '../../utils/date-utils';
+import { localStore } from '@/utils/data-management';
 
 @Component({
   name: 'FlightIndex',
@@ -148,7 +149,7 @@ import DateUtils from '../../utils/date-utils';
 })
 export default class FlightIndex extends Vue {
   @Prop() private msg!: string;
-
+  
   private active: string = 'map'; //"camera,map"
   private dataList: any = [];
 
@@ -194,7 +195,9 @@ export default class FlightIndex extends Vue {
   	return this.$store.state.login.isDemo;
   }
 
-  private created() {}
+  private created() {
+	  this.demoIndex = localStore.get('flightIndex') || 0;
+  }
 
   private mounted() {
 	 this.$nextTick(()=>{
@@ -206,7 +209,13 @@ export default class FlightIndex extends Vue {
 
     this.updateFlightHandler = (e) => {
       this.getFlightInfo();
+	  
+	  if(!this.isDemo){
+		  this.renderCharts();
+	  }
+	  
     };
+	
     (this as any).$globalEvent.$on('updateFlightInfo', this.updateFlightHandler);
 
     if (localStorage.getItem('lang') == 'en') {
@@ -214,7 +223,13 @@ export default class FlightIndex extends Vue {
     } else {
       this.$i18n.locale = 'zh';
     }
-    this.renderCharts(this.demoIndex);
+	
+	if(this.isDemo){
+		this.renderCharts(this.demoIndex);
+	}else{
+		this.renderCharts();
+	}
+    
   }
  
   private demoIndexChange(index){
@@ -341,7 +356,7 @@ export default class FlightIndex extends Vue {
     }
   }
 
-  public renderCharts(demoIndex:number) {
+  public renderCharts(demoIndex?:number) {
     let timesData: Array<any> = [];
     let speedsData: Array<any> = [];
     let altitudesData: Array<any> = [];
