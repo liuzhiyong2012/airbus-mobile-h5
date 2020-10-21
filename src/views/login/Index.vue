@@ -159,15 +159,15 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import AdModel from "./components/ADModel.vue";
-import LoginService from "../../service/login";
-import { localStore } from "../../utils/data-management";
-import {AreaCode} from "../../utils/area-code"
-import ArrayUtils from "../../utils/array-utils"
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import AdModel from './components/ADModel.vue';
+import LoginService from '../../service/login';
+import { localStore } from '../../utils/data-management';
+import {AreaCode} from '../../utils/area-code';
+import ArrayUtils from '../../utils/array-utils';
 
 @Component({
-  name: "Login",
+  name: 'Login',
   components: {
     AdModel,
   },
@@ -176,34 +176,34 @@ export default class Login extends Vue {
   private isActive: boolean = true;
   private isShowLang: boolean = false;
   private showAreaCode: boolean = false;
-  private lang: string = "";
-  private areaCode: string = "86";
-  private userPhone: string = "";
-  private userPassword: string = "";
+  private lang: string = '';
+  private areaCode: string = '86';
+  private userPhone: string = '13580415609';
+  private userPassword: string = '123456';
   private columns: Array<any> = [];
   private columnsList: Array<any> = [];
 
   private created() {
-    this.columnsList =  ArrayUtils.sortByKey(AreaCode,'tel',true)
+    this.columnsList = ArrayUtils.sortByKey(AreaCode,'tel',true);
     this.columnsList.forEach(item => {
-      this.columns.push(item.tel)
-    })
-    this.columns.unshift('86')
+      this.columns.push(item.tel);
+    });
+    this.columns.unshift('86');
     clearTimeout();
     setTimeout(() => {
       this.isActive = false;
     }, 1000);
     // console.log(navigator.language)
-    if (navigator.language == "zh-CN") {
-      this.lang = "简体中文";
-      this.$i18n.locale = "zh";
-      localStorage.setItem("lang", "zh");
-      this.$store.commit("changeLanguage", "zh");
+    if (navigator.language == 'zh-CN') {
+      this.lang = '简体中文';
+      this.$i18n.locale = 'zh';
+      localStorage.setItem('lang', 'zh');
+      this.$store.commit('changeLanguage', 'zh');
     } else {
-      this.lang = "English";
-      this.$i18n.locale = "en";
-      localStorage.setItem("lang", "en");
-      this.$store.commit("changeLanguage", "en");
+      this.lang = 'English';
+      this.$i18n.locale = 'en';
+      localStorage.setItem('lang', 'en');
+      this.$store.commit('changeLanguage', 'en');
     }
 
     // if(localStorage.getItem('lang') == 'en'){
@@ -229,12 +229,12 @@ export default class Login extends Vue {
     if (navigator.onLine) {
       this.postUserLoginMethod();
     } else {
-      this.$toast(this.$i18n.t("toast3"));
+      this.$toast(this.$i18n.t('toast3'));
     }
   }
   public getUserPhoneLength(e: any) {
     if (e.target.value.length >= 11 && e.keyCode != 8) {
-      this.$toast(this.$i18n.t("toast1"));
+      this.$toast(this.$i18n.t('toast1'));
       this.userPhone = e.target.value.substring(0, 10);
     }
   }
@@ -256,14 +256,14 @@ export default class Login extends Vue {
     this.isShowLang = !this.isShowLang;
   }
   public changeEn() {
-    this.lang = "English";
-    this.$i18n.locale = "en";
-    localStorage.setItem("lang", "en");
+    this.lang = 'English';
+    this.$i18n.locale = 'en';
+    localStorage.setItem('lang', 'en');
   }
   public changeZh() {
-    this.lang = "简体中文";
-    this.$i18n.locale = "zh";
-    localStorage.setItem("lang", "zh");
+    this.lang = '简体中文';
+    this.$i18n.locale = 'zh';
+    localStorage.setItem('lang', 'zh');
   }
   public postUserLogin() {
     // console.log(this.$store.state.login.name)
@@ -275,19 +275,19 @@ export default class Login extends Vue {
     // } else if (this.userPhone != "" && this.userPassword != "") {
     //   this.getOnLineDetails();
     // }
-    if (this.userPhone== "") {
-      this.$toast(this.$i18n.t("showError"));
+    if (this.userPhone== '') {
+      this.$toast(this.$i18n.t('showError'));
       // return false;
-    } else if (this.userPassword == "") {
-      this.$toast(this.$i18n.t("noPassword"));
-    } else if (this.userPhone != "" && this.userPassword != "") {
+    } else if (this.userPassword == '') {
+      this.$toast(this.$i18n.t('noPassword'));
+    } else if (this.userPhone != '' && this.userPassword != '') {
       this.getOnLineDetails();
     }
   }
   public postUserLoginMethod() {
     var data = {
       // username: "86_" + this.userPhone, // 默认86
-      username: this.areaCode+ "_" + this.userPhone, // 默认86
+      username: this.areaCode+ '_' + this.userPhone, // 默认86
       password: this.userPassword,
     };
     LoginService.postUserLogin(data)
@@ -296,24 +296,24 @@ export default class Login extends Vue {
         if (res.code == 200) {
           // 写入成功后，判断是否有座位
           this.$store
-            .dispatch("setUserInfo", {
+            .dispatch('setUserInfo', {
               name: res.data.userName,
               token: res.data.access_token,
               id: res.data.id,
             })
             .then((res: any) => {
-              console.log("token:" + localStore.get("token"));
+              console.log('token:' + localStore.get('token'));
               LoginService.getUserMe().then((res: any) => {
                 if (res.code == 200 && res.data.Seat == null) {
                   this.$router.push({
-                    name: "selectSeat",
+                    name: 'selectSeat',
                   });
                 } else if (res.code == 200 && res.data.Seat.Name) {
-                  this.$store.commit("setSeatNumber", res.data.Seat.Name);
-                  this.$store.commit("setSeatName", res.data.Seat.Name);
-                  this.$store.commit("setSeatType", res.data.Seat.SeatType);
+                  this.$store.commit('setSeatNumber', res.data.Seat.Name);
+                  this.$store.commit('setSeatName', res.data.Seat.Name);
+                  this.$store.commit('setSeatType', res.data.Seat.SeatType);
                   this.$router.push({
-                    name: "home",
+                    name: 'home',
                   });
                 } else {
                   this.$toast(res.message);
@@ -332,9 +332,9 @@ export default class Login extends Vue {
         if (error.code == 500 || error.code == 502) {
           this.$toast(error.message);
         } else if (error.code == 400) {
-          this.$toast(this.$i18n.t("toast4"));
+          this.$toast(this.$i18n.t('toast4'));
         } else {
-          this.$toast(this.$i18n.t("toast2"));
+          this.$toast(this.$i18n.t('toast2'));
         }
       });
   }
