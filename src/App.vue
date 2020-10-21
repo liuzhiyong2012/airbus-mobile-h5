@@ -106,7 +106,7 @@ svg.icon {
   font-size: .32rem !important;
 }
 .van-picker-column__item{
-  height: .87rem !important;
+  height: 44PX  !important;
 }
 .van-uploader__upload-icon{
   font-size: .4rem !important;
