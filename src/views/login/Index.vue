@@ -178,8 +178,8 @@ export default class Login extends Vue {
   private showAreaCode: boolean = false;
   private lang: string = '';
   private areaCode: string = '86';
-  private userPhone: string = '13580415609';
-  private userPassword: string = '123456';
+  private userPhone: string = '16666666666';
+  private userPassword: string = '666666';
   private columns: Array<any> = [];
   private columnsList: Array<any> = [];
 
