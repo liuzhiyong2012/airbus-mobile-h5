@@ -4,6 +4,10 @@ export default {
   formate:function(input:any,formate:string = 'YYYY-MM-DD hh:mm:ss' ){
   	input = input+'';
   	input = input.length==10?input*1000:input;
+	
+	//设置时区
+	input = input  - new Date().getTimezoneOffset() * 60 * 1000;
+	
   	var date:any = new Date(input);
   	var y:any = date.getFullYear();  
   	var m:any= date.getMonth() + 1;  
