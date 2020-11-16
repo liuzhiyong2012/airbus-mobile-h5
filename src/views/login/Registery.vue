@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <abus-title :title="$t('Registery')" @stepTo="setUserDataNull()" />
+  <div class="registery-ctn">
+	  <div class="title-ctn">
+		  <abus-title :title="$t('Registery')" @stepTo="setUserDataNull()" />
+	  </div>
+   
+	
     <div class="registery">
       <div class="con">
+		  
         <div class="main-item">
           <div class="title line-h">{{ $t("Name") }}</div>
           <input
@@ -18,8 +23,9 @@
         <div class="title line-h">{{$t('Portrait')}}</div>
         <van-uploader v-model="fileList" multiple :max-count="1" />
         </div>-->
-        <div class="main-item">
+        <div class="main-item left">
           <div class="title line-h">{{ $t("Gender") }}</div>
+		  
           <van-radio-group
             v-model="radio"
             direction="horizontal"
@@ -34,6 +40,7 @@
                   <use v-else xlink:href="#icon-unselected" />
                 </svg>
                 <span
+				class = "radio-text"
                   :class="[props.checked ? 'text-selected' : 'text-unselected']"
                   >{{ $t("Female") }}</span
                 >
@@ -65,7 +72,7 @@
             :placeholder="$t('PhoneTips')"
           />
         </div> -->
-        <div class="main-item">
+        <div class="main-item right">
           <div class="title line-h">{{ $t("Phone") }}</div>
           <!-- 限制11位数 -->
           <!-- <input
@@ -108,7 +115,7 @@
             />
           </van-popup>
         </div>
-        <div class="main-item">
+        <div class="main-item left">
           <div class="title line-h">{{ $t("IDCard") }}</div>
           <input
             v-model="idCard"
@@ -119,7 +126,7 @@
             :placeholder="$t('IDCardTips')"
           />
         </div>
-        <div class="main-item">
+        <div class="main-item right">
           <div class="title line-h">{{ $t("Password") }}</div>
           <input
             v-model="password"
@@ -130,7 +137,7 @@
             @blur="checkUserPassword"
           />
         </div>
-        <div class="main-item">
+        <div class="main-item left">
           <div class="title">{{ $t("Confirm-password") }}</div>
           <input
             v-model="confirmPassword"
@@ -141,7 +148,7 @@
             :placeholder="$t('ConfirmPasswordTips')"
           />
         </div>
-        <div class="main-item location">
+        <div class="main-item location right">
           <div class="title line-h">{{ $t("Date") }}</div>
           <input
             class="main-item-con"
@@ -175,7 +182,7 @@
             />
           </van-popup>
         </div>
-        <div class="main-item">
+        <div class="main-item left">
           <div class="title">{{ $t("Security-issues") }}</div>
           <input
             @click="showQuestion"
@@ -201,7 +208,7 @@
             />
           </van-popup>
         </div>
-        <div class="main-item">
+        <div class="main-item right">
           <div class="title">{{ $t("Security-answer") }}</div>
           <input
             v-model="answer"
@@ -309,26 +316,26 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import LoginService from "../../service/login";
-import AbusTitle from "../../components/AbusTitle.vue";
-import { localStore } from "../../utils/data-management";
-import { AreaCode } from "../../utils/area-code";
-import ArrayUtils from "../../utils/array-utils";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import LoginService from '../../service/login';
+import AbusTitle from '../../components/AbusTitle.vue';
+import { localStore } from '../../utils/data-management';
+import { AreaCode } from '../../utils/area-code';
+import ArrayUtils from '../../utils/array-utils';
 @Component({
-  name: "Registery",
+  name: 'Registery',
   components: {
     AbusTitle,
   },
 })
 export default class Register extends Vue {
   private fileList: Array<any> = [];
-  private radio: string = "0";
+  private radio: string = '0';
   private show: boolean = false;
   private showIssues: boolean = false;
   private isReaded: boolean = false;
   //国际区号
-  private areaCode: string = "86";
+  private areaCode: string = '86';
   private showAreaCode: boolean = false;
   private areaCodeColumns: Array<any> = [];
   private areaCodeColumnsList: Array<any> = [];
@@ -336,39 +343,39 @@ export default class Register extends Vue {
   private minDate: Date = new Date(1930, 1, 1);
   private maxDate: Date = new Date(2020, 7, 1);
   private currentDate: Date = new Date(2000, 1, 15);
-  private datetime: string = "";
+  private datetime: string = '';
   private columns: Array<any> = [
-    "My father's name?",
-    "My mother's name?",
-    "My favorite singer?",
-    "My favorite animal?",
+    'My father\'s name?',
+    'My mother\'s name?',
+    'My favorite singer?',
+    'My favorite animal?',
   ];
   // 校验密码是否一致
   private isCheckPassword: boolean = false;
   // 用户输入信息
-  private nickname: string = "";
-  private phone: string = "";
-  private idCard: string = "";
-  private birthday: string = "";
-  private password: string = "";
-  private confirmPassword: string = "";
-  private question: string = "";
-  private answer: string = "";
+  private nickname: string = '';
+  private phone: string = '';
+  private idCard: string = '';
+  private birthday: string = '';
+  private password: string = '';
+  private confirmPassword: string = '';
+  private question: string = '';
+  private answer: string = '';
   private mounted() {
-    this.areaCodeColumnsList = ArrayUtils.sortByKey(AreaCode, "tel", true);
+    this.areaCodeColumnsList = ArrayUtils.sortByKey(AreaCode, 'tel', true);
     this.areaCodeColumnsList.forEach((item) => {
       this.areaCodeColumns.push(item.tel);
     });
-    this.areaCodeColumns.unshift("86");
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    this.areaCodeColumns.unshift('86');
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
       this.columns = [
-        "我爸爸的名字?",
-        "我妈妈的名字?",
-        "我最喜欢的歌手?",
-        "我最喜欢的动物?",
+        '我爸爸的名字?',
+        '我妈妈的名字?',
+        '我最喜欢的歌手?',
+        '我最喜欢的动物?',
       ];
     }
     this.getUserChangeData();
@@ -389,110 +396,110 @@ export default class Register extends Vue {
     this.getCheckPassword();
   }
   public setUserDataNull() {
-    localStore.set("nickName", "");
-    localStore.set("radio", "0");
-    localStore.set("uPhone", "");
-    localStore.set("idCard", "");
-    localStore.set("uPassword", "");
-    localStore.set("confirmPassword", "");
-    localStore.set("birthday", "");
-    localStore.set("question", "");
-    localStore.set("answer", "");
-    localStore.set("getCheckPassword", "");
+    localStore.set('nickName', '');
+    localStore.set('radio', '0');
+    localStore.set('uPhone', '');
+    localStore.set('idCard', '');
+    localStore.set('uPassword', '');
+    localStore.set('confirmPassword', '');
+    localStore.set('birthday', '');
+    localStore.set('question', '');
+    localStore.set('answer', '');
+    localStore.set('getCheckPassword', '');
   }
   public setNickName(e) {
     this.nickname = e.target.value;
-    localStore.set("nickName", e.target.value);
+    localStore.set('nickName', e.target.value);
   }
   public getNickName() {
-    if (localStore.get("nickName") != "") {
-      this.nickname = localStore.get("nickName");
+    if (localStore.get('nickName') != '') {
+      this.nickname = localStore.get('nickName');
     }
   }
   public setRadio(e) {
     this.radio = e;
-    localStore.set("radio", e);
+    localStore.set('radio', e);
   }
   public getRadio() {
-    if (localStore.get("radio") != "" && localStore.get("radio") != null) {
-      this.radio = localStore.get("radio");
+    if (localStore.get('radio') != '' && localStore.get('radio') != null) {
+      this.radio = localStore.get('radio');
     } else {
-      this.radio = "0";
+      this.radio = '0';
     }
   }
   public setPhone(e) {
     this.phone = e.target.value;
-    localStore.set("uPhone", e.target.value);
+    localStore.set('uPhone', e.target.value);
   }
   public getPhone() {
-    if (localStore.get("uPhone") != "") {
-      this.phone = localStore.get("uPhone");
+    if (localStore.get('uPhone') != '') {
+      this.phone = localStore.get('uPhone');
     }
   }
   public setIdCard(e) {
     this.idCard = e.target.value;
-    localStore.set("idCard", e.target.value);
+    localStore.set('idCard', e.target.value);
   }
   public getIdCard() {
-    if (localStore.get("idCard") != "") {
-      this.idCard = localStore.get("idCard");
+    if (localStore.get('idCard') != '') {
+      this.idCard = localStore.get('idCard');
     }
   }
   public setPassword(e) {
     this.password = e.target.value;
-    localStore.set("uPassword", e.target.value);
+    localStore.set('uPassword', e.target.value);
   }
   public getPassword() {
-    if (localStore.get("uPassword") != "") {
-      this.password = localStore.get("uPassword");
+    if (localStore.get('uPassword') != '') {
+      this.password = localStore.get('uPassword');
     }
   }
   public setConfirmPassword(e) {
     this.confirmPassword = e.target.value;
-    localStore.set("confirmPassword", e.target.value);
+    localStore.set('confirmPassword', e.target.value);
   }
   public getConfirmPassword() {
-    if (localStore.get("confirmPassword") != "") {
-      this.confirmPassword = localStore.get("confirmPassword");
+    if (localStore.get('confirmPassword') != '') {
+      this.confirmPassword = localStore.get('confirmPassword');
     }
   }
 
   public setBirthday(e) {
-    localStore.set("birthday",e);
+    localStore.set('birthday',e);
   }
   public getBirthday() {
-    if (localStore.get("birthday") != "") {
-      this.birthday = localStore.get("birthday");
+    if (localStore.get('birthday') != '') {
+      this.birthday = localStore.get('birthday');
     }
   }
   public setQuestion(e) {
     this.question = e;
-    localStore.set("question", this.question);
+    localStore.set('question', this.question);
   }
   public getQuestion() {
-    if (localStore.get("question") != "") {
-      this.question = localStore.get("question");
+    if (localStore.get('question') != '') {
+      this.question = localStore.get('question');
     }
   }
   public setAnswer(e) {
     this.answer = e.target.value;
-    localStore.set("answer", e.target.value);
+    localStore.set('answer', e.target.value);
   }
   public getAnswer() {
-    if (localStore.get("answer") != "") {
-      this.answer = localStore.get("answer");
+    if (localStore.get('answer') != '') {
+      this.answer = localStore.get('answer');
     }
   }
   public getCheckPassword() {
-    if (localStore.get("getCheckPassword") != "") {
-      this.isCheckPassword = localStore.get("getCheckPassword");
+    if (localStore.get('getCheckPassword') != '') {
+      this.isCheckPassword = localStore.get('getCheckPassword');
     }
   }
 
 
   public getUserPhoneLength(e: any) {
     if (e.target.value.length >= 11 && e.keyCode != 8) {
-      this.$toast(this.$i18n.t("toast1"));
+      this.$toast(this.$i18n.t('toast1'));
       this.phone = e.target.value.substring(0, 10);
     }
   }
@@ -508,7 +515,7 @@ export default class Register extends Vue {
     if (this.isCheckPassword) {
       this.show = true;
     } else {
-      this.$toast(this.$i18n.t("toast2"));
+      this.$toast(this.$i18n.t('toast2'));
     }
   }
 
@@ -527,7 +534,7 @@ export default class Register extends Vue {
     this.show = false;
     this.currentDate = val;
     this.datetime =
-      val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate();
+      val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate();
     // this.birthday =
     //   this.datetime +
     //   " " +
@@ -536,33 +543,33 @@ export default class Register extends Vue {
     //   val.getMinutes() +
     //   ":" +
     //   val.getSeconds();
-    this.birthday = this.datetime
-    this.setBirthday(this.birthday)
+    this.birthday = this.datetime;
+    this.setBirthday(this.birthday);
     return val;
   }
   public checkUserPassword(e: any) {
     if (e.target.value.length < 6) {
-      this.$toast(this.$i18n.t("toast3"));
+      this.$toast(this.$i18n.t('toast3'));
     }
   }
   public checkPassword() {
     if (this.password != this.confirmPassword) {
       this.isCheckPassword = false;
-      localStore.set("getCheckPassword", false)
-      this.$toast(this.$i18n.t("toast4"));
+      localStore.set('getCheckPassword', false);
+      this.$toast(this.$i18n.t('toast4'));
     } else {
       this.isCheckPassword = true;
-      localStore.set("getCheckPassword", true)
+      localStore.set('getCheckPassword', true);
     }
   }
   public onClickRegistery() {
     if (
-      this.phone != "" &&
-      this.idCard != "" &&
+      this.phone != '' &&
+      this.idCard != '' &&
       this.isCheckPassword &&
       this.isReaded &&
-      this.question != "" &&
-      this.answer != ""
+      this.question != '' &&
+      this.answer != ''
     ) {
       // (['nickname','gender','phone','idCard','password','birthday','question','answer']);
 
@@ -570,7 +577,7 @@ export default class Register extends Vue {
         nickname: this.nickname,
         gender: this.radio,
         // phone: "86_" + this.phone,
-        phone: this.areaCode+ "_" + this.phone,
+        phone: this.areaCode+ '_' + this.phone,
         idCard: this.idCard,
         password: this.password,
         birthday: this.birthday,
@@ -583,7 +590,7 @@ export default class Register extends Vue {
             // 存储用户信息
             // 写入成功后，判断是否有座位
             this.$store
-              .dispatch("setUserInfo", {
+              .dispatch('setUserInfo', {
                 name: res.data.userName,
                 token: res.data.access_token,
                 id: res.data.id,
@@ -613,12 +620,12 @@ export default class Register extends Vue {
                   // points: "2000"
                   if (res.code == 200 && res.data.Seat == null) {
                     this.$router.push({
-                      name: "selectSeat",
+                      name: 'selectSeat',
                     });
                   } else if (res.code == 200 && res.data.Seat.Name) {
-                    this.$store.commit("setSeatNumber", res.data.Seat.Name);
+                    this.$store.commit('setSeatNumber', res.data.Seat.Name);
                     this.$router.push({
-                      name: "home",
+                      name: 'home',
                     });
                   }
                 });
@@ -628,139 +635,283 @@ export default class Register extends Vue {
           }
         })
         .catch((reason: any) => {
-          this.$toast(this.$i18n.t("toast5"));
+          this.$toast(this.$i18n.t('toast5'));
         });
     } else if (!this.isCheckPassword) {
-      this.$toast(this.$i18n.t("toast4"));
+      this.$toast(this.$i18n.t('toast4'));
     } else if (!this.isReaded) {
-      this.$toast(this.$i18n.t("toast6"));
-    } else if (this.question == "") {
-      this.$toast(this.$i18n.t("toast9"));
-    } else if (this.answer == "") {
-      this.$toast(this.$i18n.t("toast10"));
+      this.$toast(this.$i18n.t('toast6'));
+    } else if (this.question == '') {
+      this.$toast(this.$i18n.t('toast9'));
+    } else if (this.answer == '') {
+      this.$toast(this.$i18n.t('toast10'));
     } else {
-      this.$toast(this.$i18n.t("toast7"));
+      this.$toast(this.$i18n.t('toast7'));
     }
   }
 
   public gotoPrivacy() {
     this.$router.push({
-      name: "privacyPolicy",
+      name: 'privacyPolicy',
     });
   }
 
   public gotoTerms() {
     this.$router.push({
-      name: "termsOfService",
+      name: 'termsOfService',
     });
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.area-code {
-  position: absolute;
-  left: 1.7rem;
-  top: 0;
-  width: 0.9rem;
-  line-height: 0.8rem;
-  text-align: center;
-  font-size: .3rem;
-  // color: #666;
-}
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.area-code {
+		  position: absolute;
+		  left: 1.7rem;
+		  top: 0;
+		  width: 0.9rem;
+		  line-height: 0.8rem;
+		  text-align: center;
+		  font-size: .3rem;
+		  // color: #666;
+		}
+		
+		.registery {
+		  padding: 0.3rem 0 0;
+		  box-sizing: border-box;
+		  height: 100vh;
+		  .con {
+		    background-color: #fff;
+		    padding: 0.3rem 0.3rem 0;
+		    .main-item {
+		      position: relative;
+		      display: flex;
+		      padding: 0 0 0.3rem 0;
+		      .title {
+		        padding: 0.1rem 0 0;
+		        width: 1.7rem;
+		        color: #333;
+		      }
+		      .main-item-con {
+		        box-sizing: border-box;
+		        padding: 0 0 0 0.3rem;
+		        flex: 1;
+		        height: 0.8rem;
+		        border-radius: 0.04rem;
+		        border: 0.02rem solid rgba(51, 51, 51, 0.1);
+		        color: #333;
+		      }
+		      .padding4 {
+		        padding: 0 0 0 1rem;
+		      }
+		      .title.line-h {
+		        padding: 0;
+		        line-height: 0.8rem;
+		      }
+		    }
+		    .location {
+		      position: relative;
+		      .data-icon {
+		        position: absolute;
+		        right: 0.2rem;
+		        top: 0.2rem;
+		        width: 0.32rem;
+		        height: 0.32rem;
+		      }
+		    }
+		  }
+		}
+		.text-selected,
+		.text-unselected {
+			
+		  font-size: 0.24rem !important;
+		}
+		.img-icon {
+		  width: 0.24rem;
+		  height: 0.24rem;
+		}
+		.policy {
+		  margin-left: 0.3rem;
+		  font-weight: 400;
+		  color: rgba(51, 51, 51, 1);
+		  line-height: 0.64rem;
+		  font-size: 0.28rem;
+		}
+		.button-box {
+		  margin: 0.1rem 0.3rem 0.5rem;
+		  .button {
+		    width: 100%;
+		    height: 0.8rem;
+		    background: rgba(0, 32, 91, 1);
+		    border-radius: 0.4rem;
+		    text-align: center;
+		    line-height: 0.8rem;
+		    color: #fff;
+		    font-weight: bold;
+		  }
+		}
+		.text-selected {
+		  margin: 0 0 0 0.1rem;
+		  color: rgba(51, 51, 51, 1);
+		  line-height: 0.32rem;
+		  transition: all ease-in-out 0.3s;
+		}
+		.text-unselected {
+		  margin: 0 0 0 0.1rem;
+		  color: rgba(51, 51, 51, 0.3);
+		  line-height: 0.32rem;
+		  transition: all ease-in-out 0.3s;
+		}
+		.icon-text {
+		  font-size: 0.22rem;
+		  width: 0.22rem;
+		  height: 0.22rem;
+		}
+		.icon-read {
+		  width: 0.3rem;
+		  height: 0.3rem;
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.registery-ctn{
+			position: relative;
+				.title-ctn{
+					left:0;
+					width: 100%;
+					height: rpx(56);
+					border-bottom: 14px solid #fafafa;
+					    position: fixed;
+					    z-index: 100;
+					
+				}
+				
+				.area-code {
+				      position: absolute;
+				      left: rpx(80);
+				      top: 0;
+				      line-height: rpx(40);
+				      text-align: center;
+				      font-size: rpx(14);
+				}
+				
+				.registery {
+				  padding: rpx(70) 0 0;
+				  box-sizing: border-box;
+				  .con {
+				    background-color: #fff;
+					padding:rpx(40) rpx(300);
+					
+				    .main-item {
+				      position: relative;
+				      display: flex;
+				      padding: 0 0 0.3rem 0;
+				      .title {
+				        // padding: 0.1rem 0 0;
+						font-size: rpx(14);
+						line-height: rpx(40);
+				        width: rpx(64);
+				        color: #333;
+				      }
+				      .main-item-con {
+						  display: inline-block;
+				        box-sizing: border-box;
+				        padding: 0 0 0 rpx(16);
+				        flex: 1;
+						//width: rpx(250);
+				        height: rpx(40);
+				        border-radius: 0.04rem;
+				        border: 0.02rem solid rgba(51, 51, 51, 0.1);
+				        color: #333;
+						font-size: rpx(14);
+						line-height: rpx(40);
+				      }
+				      .padding4 {
+				        padding: 0 0 0 rpx(56);
+				      }
+				      .title.line-h {
+				        padding: 0;
+				        line-height: rpx(40);
+				      }
+				    }
+				    .location {
+				      position: relative;
+				      .data-icon {
+				        position: absolute;
+				        right: rpx(10);
+				        top: rpx(10);
+				      
+						>.icon{
+							vertical-align: top;
+							width: rpx(20);
+							height: rpx(20);
+						}
+				      }
+				    }
+				  }
+				}
+				.text-selected,
+				.text-unselected {
+					margin-right: rpx(10) !important;
+				  font-size: rpx(12) !important;
+				}
+				.img-icon {
+				  width: 0.24rem;
+				  height: 0.24rem;
+				}
+				.policy {
+					margin-top:rpx(40);
+					margin-bottom:rpx(14);
+					padding:0 rpx(300);
+				  // margin-left: 0.3rem;
+				  font-weight: 400;
+				  color: rgba(51, 51, 51, 1);
+				  line-height: rpx(16);
+				  font-size: rpx(14);
+				  
+				}
+				.button-box {
+				padding:0 rpx(300)  rpx(84);
+				  .button {
+				    width: 100%;
+				    height: rpx(40);
+				    background: rgba(0, 32, 91, 1);
+				    border-radius: rpx(20);
+				    text-align: center;
+				    line-height: rpx(40);
+				    color: #fff;
+				    font-weight: bold;
+					font-size: rpx(18);
+				  }
+				}
+				.text-selected {
+				  margin: 0 0 0 0.1rem;
+				  color: rgba(51, 51, 51, 1);
+				  // line-height: 0.32rem;
+				  transition: all ease-in-out 0.3s;
+				}
+				.text-unselected {
+				  margin: 0 0 0 0.1rem;
+				  color: rgba(51, 51, 51, 0.3);
+				  // line-height: 0.32rem;
+				  transition: all ease-in-out 0.3s;
+				}
+				.icon-text {
+				  font-size: rpx(14);
+				  width:rpx(12);
+				  height: rpx(12);
+				}
+				.icon-read {
+				  width: rpx(12);
+				  height: rpx(12);
+				}
+				
+			}
+			
+	}
+	
 
-.registery {
-  padding: 0.3rem 0 0;
-  box-sizing: border-box;
-  height: 100vh;
-  .con {
-    background-color: #fff;
-    padding: 0.3rem 0.3rem 0;
-    .main-item {
-      position: relative;
-      display: flex;
-      padding: 0 0 0.3rem 0;
-      .title {
-        padding: 0.1rem 0 0;
-        width: 1.7rem;
-        color: #333;
-      }
-      .main-item-con {
-        box-sizing: border-box;
-        padding: 0 0 0 0.3rem;
-        flex: 1;
-        height: 0.8rem;
-        border-radius: 0.04rem;
-        border: 0.02rem solid rgba(51, 51, 51, 0.1);
-        color: #333;
-      }
-      .padding4 {
-        padding: 0 0 0 1rem;
-      }
-      .title.line-h {
-        padding: 0;
-        line-height: 0.8rem;
-      }
-    }
-    .location {
-      position: relative;
-      .data-icon {
-        position: absolute;
-        right: 0.2rem;
-        top: 0.2rem;
-        width: 0.32rem;
-        height: 0.32rem;
-      }
-    }
-  }
-}
-.text-selected,
-.text-unselected {
-  font-size: 0.24rem !important;
-}
-.img-icon {
-  width: 0.24rem;
-  height: 0.24rem;
-}
-.policy {
-  margin-left: 0.3rem;
-  font-weight: 400;
-  color: rgba(51, 51, 51, 1);
-  line-height: 0.64rem;
-  font-size: 0.28rem;
-}
-.button-box {
-  margin: 0.1rem 0.3rem 0.5rem;
-  .button {
-    width: 100%;
-    height: 0.8rem;
-    background: rgba(0, 32, 91, 1);
-    border-radius: 0.4rem;
-    text-align: center;
-    line-height: 0.8rem;
-    color: #fff;
-    font-weight: bold;
-  }
-}
-.text-selected {
-  margin: 0 0 0 0.1rem;
-  color: rgba(51, 51, 51, 1);
-  line-height: 0.32rem;
-  transition: all ease-in-out 0.3s;
-}
-.text-unselected {
-  margin: 0 0 0 0.1rem;
-  color: rgba(51, 51, 51, 0.3);
-  line-height: 0.32rem;
-  transition: all ease-in-out 0.3s;
-}
-.icon-text {
-  font-size: 0.22rem;
-  width: 0.22rem;
-  height: 0.22rem;
-}
-.icon-read {
-  width: 0.3rem;
-  height: 0.3rem;
-}
 </style>

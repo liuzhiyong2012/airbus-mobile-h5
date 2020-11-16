@@ -176,11 +176,11 @@
   }
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import LoginService from "../../service/login";
-import AbusTitle from "../../components/AbusTitle.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import LoginService from '../../service/login';
+import AbusTitle from '../../components/AbusTitle.vue';
 @Component({
-  name: "ForgotPassword",
+  name: 'ForgotPassword',
   components: { AbusTitle },
 })
 export default class ForgotPassword extends Vue {
@@ -192,29 +192,29 @@ export default class ForgotPassword extends Vue {
   private fullWidth: number = 750;
   private countdown: number = 60;
   private aLeft: number = 0;
-  private phone: string = "";
-  private code: string = "";
-  private question: string = "";
-  private answer: string = "";
-  private password: string = "";
-  private newPassword: string = "";
-  private confirmPassword: string = "";
-  private userId: string = "";
+  private phone: string = '';
+  private code: string = '';
+  private question: string = '';
+  private answer: string = '';
+  private password: string = '';
+  private newPassword: string = '';
+  private confirmPassword: string = '';
+  private userId: string = '';
 
   private created() {
     this.fullWidth = document.documentElement.clientWidth;
   }
   private mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   public getUserPhoneLength(e:any){
     if(e.target.value.length >= 11 && e.keyCode != 8){
-      this.$toast(this.$i18n.t('toast1'))
-      this.phone = e.target.value.substring(0,10)
+      this.$toast(this.$i18n.t('toast1'));
+      this.phone = e.target.value.substring(0,10);
     }
   }
   // 验证手机号是否注册
@@ -235,13 +235,13 @@ export default class ForgotPassword extends Vue {
         }
       })
       .catch((reason: any) => {
-        console.log("=== Error ===");
+        console.log('=== Error ===');
         if(reason.code == 500 || reason.code == 502){
-          this.$toast(this.$i18n.t('toast6'))
+          this.$toast(this.$i18n.t('toast6'));
         }else if(reason.code == 400){
-          this.$toast(reason.message)
+          this.$toast(reason.message);
         }else {
-          this.$toast(reason.message != '' ? this.$i18n.t('toast6'):reason.message)
+          this.$toast(reason.message != '' ? this.$i18n.t('toast6'):reason.message);
         }
       });
   }
@@ -269,7 +269,7 @@ export default class ForgotPassword extends Vue {
         }
       })
       .catch((reason: any) => {
-        console.log("=== Error ===");
+        console.log('=== Error ===');
         this.$toast(reason.message);
       });
   }
@@ -290,7 +290,7 @@ export default class ForgotPassword extends Vue {
           }
         })
         .catch((reason: any) => {
-          console.log("=== Error ===");
+          console.log('=== Error ===');
           console.log(reason);
           this.$toast(reason.message);
         });
@@ -322,7 +322,7 @@ export default class ForgotPassword extends Vue {
     }
   }
   public onClickConfirm() {
-    if (this.newPassword != "" && this.newPassword == this.confirmPassword) {
+    if (this.newPassword != '' && this.newPassword == this.confirmPassword) {
       var data = {
         id: this.userId,
         password: this.password,
@@ -334,16 +334,16 @@ export default class ForgotPassword extends Vue {
           this.isActiveTwo = false;
           this.isActiveThr = false;
           this.$router.push({
-            path: "/login",
+            path: '/login',
           });
         } else {
           this.$toast(res.message);
         }
       }).catch((reason:any) => {
         this.$toast(reason.message);
-      })
+      });
     } else if (
-      this.newPassword != "" &&
+      this.newPassword != '' &&
       this.newPassword != this.confirmPassword
     ) {
       this.$toast(this.$i18n.t('toast4'));
@@ -363,224 +363,478 @@ export default class ForgotPassword extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.forgot-password {
-  min-height: 100vh;
-  overflow: hidden;
-  .tab {
-    box-sizing: border-box;
-    display: flex;
-    align-items: baseline;
-    padding: 0.4rem 1rem 0;
-    height: 1rem;
-    .place {
-      position: relative;
-      font-size: 0.24rem;
-      color: rgb(0, 32, 91);
-      .place-icon {
-        box-sizing: border-box;
-        width: 0.45rem;
-        height: 0.45rem;
-        border: 0.02rem dashed rgba(51, 51, 51, 0.2);
-        border-radius: 50%;
-        text-align: center;
-        line-height: 0.42rem;
-        font-weight: bold;
-        color: rgba(168, 168, 168, 1);
-        font-size: 0.28rem;
-      }
-      .text {
-        position: absolute;
-        left: -0.75rem;
-        top: 0.6rem;
-        width: 3rem;
-        font-size: 0.24rem;
-        color: rgba(51, 51, 51, 1);
-        line-height: 0.24rem;
-      }
-    }
-    .place.active {
-      .place-icon {
-        background-color: #00205b;
-        color: #fff;
-        border: 0.02rem solid #00205b;
-        transition: all ease-out 0.3s;
-      }
-      .text {
-        color: #00205b;
-        font-weight: bold;
-      }
-    }
-    .f1 {
-      height: 0.08rem;
-      flex: 1;
-      border-top: 0.02rem dashed #cfcfcf;
-    }
-    .f1.active {
-      border-top: 0.02rem solid #00205b;
-      transition: all ease-out 0.3s;
-    }
-  }
-  .tab-flex {
-    display: flex;
-    text-align: center;
-    padding: 0 0 0.3rem 0;
-    .text1 {
-      flex: 1;
-      font-size: 0.24rem;
-      color: rgba(51, 51, 51, 1);
-      line-height: 0.24rem;
-    }
-  }
-  .tab-con {
-    position: relative;
-    width: 100%;
-    min-height: 60vh;
-    overflow: hidden;
-    .item {
-      display: flex;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: #fafafa;
-      transition: all ease-out 0.3s;
+	
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.forgot-password {
+		  min-height: 100vh;
+		  overflow: hidden;
+		  .tab {
+		    box-sizing: border-box;
+		    display: flex;
+		    align-items: baseline;
+		    padding: 0.4rem 1rem 0;
+		    height: 1rem;
+		    .place {
+		      position: relative;
+		      font-size: 0.24rem;
+		      color: rgb(0, 32, 91);
+		      .place-icon {
+		        box-sizing: border-box;
+		        width: 0.45rem;
+		        height: 0.45rem;
+		        border: 0.02rem dashed rgba(51, 51, 51, 0.2);
+		        border-radius: 50%;
+		        text-align: center;
+		        line-height: 0.42rem;
+		        font-weight: bold;
+		        color: rgba(168, 168, 168, 1);
+		        font-size: 0.28rem;
+		      }
+		      .text {
+		        position: absolute;
+		        left: -0.75rem;
+		        top: 0.6rem;
+		        width: 3rem;
+		        font-size: 0.24rem;
+		        color: rgba(51, 51, 51, 1);
+		        line-height: 0.24rem;
+		      }
+		    }
+		    .place.active {
+		      .place-icon {
+		        background-color: #00205b;
+		        color: #fff;
+		        border: 0.02rem solid #00205b;
+		        transition: all ease-out 0.3s;
+		      }
+		      .text {
+		        color: #00205b;
+		        font-weight: bold;
+		      }
+		    }
+		    .f1 {
+		      height: 0.08rem;
+		      flex: 1;
+		      border-top: 0.02rem dashed #cfcfcf;
+		    }
+		    .f1.active {
+		      border-top: 0.02rem solid #00205b;
+		      transition: all ease-out 0.3s;
+		    }
+		  }
+		  .tab-flex {
+		    display: flex;
+		    text-align: center;
+		    padding: 0 0 0.3rem 0;
+		    .text1 {
+		      flex: 1;
+		      font-size: 0.24rem;
+		      color: rgba(51, 51, 51, 1);
+		      line-height: 0.24rem;
+		    }
+		  }
+		  .tab-con {
+		    position: relative;
+		    width: 100%;
+		    min-height: 60vh;
+		    overflow: hidden;
+		    .item {
+		      display: flex;
+		      position: absolute;
+		      left: 0;
+		      top: 0;
+		      background-color: #fafafa;
+		      transition: all ease-out 0.3s;
+		
+		      .f1 {
+		        flex: 1;
+		        .main-box {
+		          box-sizing: border-box;
+		          display: flex;
+		          padding: 0.3rem;
+		          height: 1.6rem;
+		          background-color: #fff;
+		          color: rgba(51, 51, 51, 1);
+		          line-height: 1rem;
+		          .title {
+		            width: 1.6rem;
+		          }
+		          .title.pad {
+		            display: flex;
+		            align-items: center;
+		          }
+		          .flex1 {
+		            flex: 1;
+		            padding: 0 0 0 0.24rem;
+		            border: 0.02rem solid rgba(51, 51, 51, 0.1);
+		            border-radius: 0.04rem;
+		          }
+		        }
+		        .main-box.no-pad {
+		          height: 1.3rem;
+		          padding: 0 0.3rem 0.3rem;
+		        }
+		        .main-box.line-height {
+		          line-height: 0.32rem;
+		        }
+		        .next {
+		          margin: 0.3rem;
+		          height: 0.8rem;
+		          background: rgba(0, 32, 91, 1);
+		          border-radius: 0.5rem;
+		          color: #fff;
+		          line-height: 0.8rem;
+		          text-align: center;
+		          font-weight: bold;
+		          font-size: 0.34rem;
+		        }
+		        .ul-box {
+		          padding: 0 0.3rem;
+		          background: #fff;
+		          .collapse-item {
+		            position: relative;
+		            overflow: hidden;
+		            .collapse-item-title {
+		              padding: 0.46rem 0;
+		              color: #333;
+		              background: #fff;
+		            }
+		            .on-sms {
+		              position: relative;
+		            }
+		            .sms-code {
+		              position: absolute;
+		              right: 0.35rem;
+		              top: 0.05rem;
+		              padding: 0.2rem;
+		              font-size: 0.24rem;
+		              min-width: 1rem;
+		              color: #fff;
+		              background: rgba(0, 32, 91, 1);
+		              line-height: 0.5rem;
+		              border-radius: 0.1rem;
+		              text-align: center;
+		            }
+		            .collapse-item-con {
+		              height: 0;
+		              background: #f3f2f9;
+		              transition: all ease-in-out 0.3s;
+		              .collapse-item-main {
+		                box-sizing: border-box;
+		                display: flex;
+		                padding: 0.3rem;
+		                color: rgba(51, 51, 51, 1);
+		                line-height: 0.32rem;
+		                .title {
+		                  width: 1.6rem;
+		                  line-height: 0.5rem;
+		                  display: flex;
+		                  align-items: center;
+		                }
+		                .title.pad {
+		                  // padding: 0.2rem 0 0 0;
+		                  display: flex;
+		                  align-items: center;
+		                }
+		                .flex1 {
+		                  flex: 1;
+		                  padding: 0 0 0 0.24rem;
+		                  border: 0.02rem solid rgba(51, 51, 51, 0.1);
+		                  border-radius: 0.04rem;
+		                  background-color: #f3f2f9;
+		                }
+		
+		                .flex1.no-inp {
+		                  padding: 0;
+		                  line-height: 0.5rem;
+		                  border: none;
+		                }
+		                .flex1.add-line-h {
+		                  line-height: 1rem;
+		                }
+		              }
+		              .collapse-item-main.no-pad {
+		                padding: 0 0.3rem 0.3rem;
+		                height: 1.3rem;
+		              }
+		              .main-boxcollapse-item-main.line-height {
+		                line-height: 0.32rem;
+		              }
+		            }
+		          }
+		          .collapse-item.active {
+		            .collapse-item-con {
+		              height: 2.4rem;
+		              .main-boxcollapse-item-main.no-pad {
+		                padding: 0 0.3rem 0.3rem;
+		              }
+		            }
+		            .add-height {
+		              height: 2.9rem;
+		            }
+		            .add-line-h {
+		              line-height: 1rem;
+		            }
+		            .collapse-item-title {
+		              color: #001f5b;
+		              font-weight: bold;
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.forgot-password {
+		  min-height: 100vh;
+		  overflow: hidden;
+		  .tab {
+		    // box-sizing: border-box;
+		    display: flex;
+		    align-items: baseline;
+		    padding: rpx(42) rpx(270) 0;
+		    height: rpx(34);
+		    .place {
+		      position: relative;
+		      font-size: 0.24rem;
+		      color: rgb(0, 32, 91);
+		      .place-icon {
+		        box-sizing: border-box;
+		        width: rpx(24);
+		        height: rpx(24);
+		        border: rpx(2) dashed rgba(51, 51, 51, 0.2);
+		        border-radius: 50%;
+		        text-align: center;
+		        line-height:rpx(20);
+		        font-weight: bold;
+		        color: rgba(168, 168, 168, 1);
+		        font-size:  rpx(14);
+		      }
+		      .text {
+		        position: absolute;
+		        left: -0.75rem;
+		        top: 0.6rem;
+		        width: 3rem;
+		        font-size: 0.24rem;
+		        color: rgba(51, 51, 51, 1);
+		        line-height: 0.24rem;
+		      }
+		    }
+		    .place.active {
+		      .place-icon {
+		        background-color: #00205b;
+		        color: #fff;
+		        border: 0.02rem solid #00205b;
+		        transition: all ease-out 0.3s;
+		      }
+		      .text {
+		        color: #00205b;
+		        font-weight: bold;
+		      }
+		    }
+		    .f1 {
+		      height: 0.08rem;
+		      flex: 1;
+		      border-top: 0.02rem dashed #cfcfcf;
+		    }
+		    .f1.active {
+		      border-top: 0.02rem solid #00205b;
+		      transition: all ease-out 0.3s;
+		    }
+		  }
+		  .tab-flex {
+		    display: flex;
+		    text-align: center;
+		    padding: 0 rpx(180) rpx(40);
+		    .text1 {
+		      flex: 1;
+		      font-size: rpx(12);
+		      color: rgba(51, 51, 51, 1);
+		      line-height:  rpx(12);
+		    }
+		  }
+		  .tab-con {
+		    position: relative;
+		    width: 100%;
+		    min-height: 60vh;
+		    overflow: hidden;
+		    .item {
+		      display: flex;
+		      position: absolute;
+		      left: 0;
+		      top: 0;
+		      background-color: #fafafa;
+		      transition: all ease-out 0.3s;
+		
+		      .f1 {
+		        flex: 1;
+		        .main-box {
+		          // box-sizing: border-box;
+		          display: flex;
+		          padding:rpx(104) rpx(310);
+		          // height: 1.6rem;
+		          background-color: #fff;
+		          color: rgba(51, 51, 51, 1);
+				  align-items: center;
+		          // line-height: 1rem;
+		          .title {
+		            // width: 1.6rem;
+					
+					font-size: rpx(14);
+					font-family: Helvetica;
+					color: #333333;
+					line-height: rpx(16);
+					display: inline-block;
+					    white-space: nowrap;
+						padding-right: rpx(32);
+		          }
+		          .title.pad {
+		            display: flex;
+		            align-items: center;
+		          }
+		          .flex1 {
+		            flex: 1;
+					font-size: rpx(14);
+					height: rpx(40);
+					line-height: rpx(16);
+		            padding: 0 0 0 rpx(12);
+		            border: 0.02rem solid rgba(51, 51, 51, 0.1);
+		            border-radius: 0.04rem;
+		          }
+		        }
+		        .main-box.no-pad {
+		              padding: 0rem rpx(310) rpx(40) !important;
+		        }
+		        .main-box.line-height {
+				  line-height: 0.32rem;
+				      padding: rpx(40) rpx(310);
+		        }
+				
+		        .next {
+		          margin: auto;
+				  margin-top:rpx(40);
+				  width: rpx(340);
+		          height: rpx(40);
+		          background: rgba(0, 32, 91, 1);
+		          border-radius: 0.5rem;
+		          color: #fff;
+		          line-height: rpx(40);
+		          text-align: center;
+		          font-weight: bold;
+		          font-size: rpx(16);
+		        }
+		        .ul-box {
+		          padding: 0;
+		          background: #fff;
+		          .collapse-item {
+		            position: relative;
+		            overflow: hidden;
+		            .collapse-item-title {
+					  padding: rpx(20) rpx(310);
+		              color: #333;
+		              background: #fff;
+					  font-size: rpx(14);
+					  line-height: rpx(16);
+		            }
+		            .on-sms {
+		              position: relative;
+		            }
+		            .sms-code {
+		              position: absolute;
+		              right: 0;
+		              top: 0;
+		              padding: 0;
+		              font-size: rpx(14);
+		               min-width: 1rem;
+		              color: #fff;
+		              background: rgba(0, 32, 91, 1);
+		              line-height: rpx(40);
+		              border-radius: rpx(4);
+		              text-align: center;
+		            }
+		            .collapse-item-con {
+		              height: 0;
+		              background: #f3f2f9;
+					  padding:0 rpx(310);
+		              transition: all ease-in-out 0.3s;
+		              .collapse-item-main {
+		                box-sizing: border-box;
+		                display: flex;
+		                padding: rpx(24) 0 0 0;
+		                color: rgba(51, 51, 51, 1);
+		                line-height: 0.32rem;
+		                .title {
+		                  width: rpx(88);
+		                  line-height: rpx(16);
+						  font-size: rpx(14);
+		                  display: flex;
+		                  align-items: center;
+		                }
+		                .title.pad {
+		                  // padding: 0.2rem 0 0 0;
+		                  display: flex;
+		                  align-items: center;
+		                }
+		                .flex1 {
+							line-height: rpx(40);
+							height: rpx(40);
+							font-size: rpx(14);
+		                  flex: 1;
+		                  padding: 0 0 0 rpx(12);
+		                  border: 0.02rem solid rgba(51, 51, 51, 0.1);
+		                  border-radius: rpx(4);
+		                  background-color: #f3f2f9;
+						  box-sizing: border-box;
+		                }
+		
+		                .flex1.no-inp {
+		                  padding: 0;
+		                  line-height: rpx(40);
+		                  border: none;
+		                }
+		                .flex1.add-line-h {
+		                  line-height: 1rem;
+		                }
+		              }
+		              .collapse-item-main.no-pad {
+		                padding: 0  0 rpx(24) 0;
+		                // height: 1.3rem;
+		              }
+		              .main-boxcollapse-item-main.line-height {
+		                line-height: 0.32rem;
+		              }
+		            }
+		          }
+		          .collapse-item.active {
+		            .collapse-item-con {
+		              height: rpx(130);
+		              .main-boxcollapse-item-main.no-pad {
+		                padding: 0 0.3rem 0.3rem;
+		              }
+		            }
+		            .add-height {
+		              height: rpx(130);
+		            }
+		            .add-line-h {
+		              line-height: 1rem;
+		            }
+		            .collapse-item-title {
+		              color: #001f5b;
+		              font-weight: bold;
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+	}
+	
+	
 
-      .f1 {
-        flex: 1;
-        .main-box {
-          box-sizing: border-box;
-          display: flex;
-          padding: 0.3rem;
-          height: 1.6rem;
-          background-color: #fff;
-          color: rgba(51, 51, 51, 1);
-          line-height: 1rem;
-          .title {
-            width: 1.6rem;
-          }
-          .title.pad {
-            display: flex;
-            align-items: center;
-          }
-          .flex1 {
-            flex: 1;
-            padding: 0 0 0 0.24rem;
-            border: 0.02rem solid rgba(51, 51, 51, 0.1);
-            border-radius: 0.04rem;
-          }
-        }
-        .main-box.no-pad {
-          height: 1.3rem;
-          padding: 0 0.3rem 0.3rem;
-        }
-        .main-box.line-height {
-          line-height: 0.32rem;
-        }
-        .next {
-          margin: 0.3rem;
-          height: 0.8rem;
-          background: rgba(0, 32, 91, 1);
-          border-radius: 0.5rem;
-          color: #fff;
-          line-height: 0.8rem;
-          text-align: center;
-          font-weight: bold;
-          font-size: 0.34rem;
-        }
-        .ul-box {
-          padding: 0 0.3rem;
-          background: #fff;
-          .collapse-item {
-            position: relative;
-            overflow: hidden;
-            .collapse-item-title {
-              padding: 0.46rem 0;
-              color: #333;
-              background: #fff;
-            }
-            .on-sms {
-              position: relative;
-            }
-            .sms-code {
-              position: absolute;
-              right: 0.35rem;
-              top: 0.05rem;
-              padding: 0.2rem;
-              font-size: 0.24rem;
-              min-width: 1rem;
-              color: #fff;
-              background: rgba(0, 32, 91, 1);
-              line-height: 0.5rem;
-              border-radius: 0.1rem;
-              text-align: center;
-            }
-            .collapse-item-con {
-              height: 0;
-              background: #f3f2f9;
-              transition: all ease-in-out 0.3s;
-              .collapse-item-main {
-                box-sizing: border-box;
-                display: flex;
-                padding: 0.3rem;
-                color: rgba(51, 51, 51, 1);
-                line-height: 0.32rem;
-                .title {
-                  width: 1.6rem;
-                  line-height: 0.5rem;
-                  display: flex;
-                  align-items: center;
-                }
-                .title.pad {
-                  // padding: 0.2rem 0 0 0;
-                  display: flex;
-                  align-items: center;
-                }
-                .flex1 {
-                  flex: 1;
-                  padding: 0 0 0 0.24rem;
-                  border: 0.02rem solid rgba(51, 51, 51, 0.1);
-                  border-radius: 0.04rem;
-                  background-color: #f3f2f9;
-                }
-
-                .flex1.no-inp {
-                  padding: 0;
-                  line-height: 0.5rem;
-                  border: none;
-                }
-                .flex1.add-line-h {
-                  line-height: 1rem;
-                }
-              }
-              .collapse-item-main.no-pad {
-                padding: 0 0.3rem 0.3rem;
-                height: 1.3rem;
-              }
-              .main-boxcollapse-item-main.line-height {
-                line-height: 0.32rem;
-              }
-            }
-          }
-          .collapse-item.active {
-            .collapse-item-con {
-              height: 2.4rem;
-              .main-boxcollapse-item-main.no-pad {
-                padding: 0 0.3rem 0.3rem;
-              }
-            }
-            .add-height {
-              height: 2.9rem;
-            }
-            .add-line-h {
-              line-height: 1rem;
-            }
-            .collapse-item-title {
-              color: #001f5b;
-              font-weight: bold;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 </style>

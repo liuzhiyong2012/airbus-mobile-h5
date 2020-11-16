@@ -50,7 +50,7 @@
 			}else{
 				if(this.backRouteName=='backLoginFromSelectSeat'){
 					this.$store.dispatch('logout');
-					this.$router.go(-1)
+					this.$router.go(-1);
 				}else{
 					(this as any).$router.push({
 						name:this.backRouteName,
@@ -69,30 +69,69 @@
 </script>
 
 <style lang="scss" scoped>
-	.abustitle-main-ctn{  
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding:0.30rem 0.30rem;
-		height: 0.40rem;
-		background: #ffffff;
-		
-		.back-ctn{
-			.icon{
-				font-size: 0.32rem;
-				color:#000000;
+	
+	@import '../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.abustitle-main-ctn{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding:0.30rem 0.30rem;
+			height: 0.40rem;
+			background: #ffffff;
+			
+			.back-ctn{
+				.icon{
+					font-size: 0.32rem;
+					color:#000000;
+				}
+			}
+			
+			.title{
+				font-size:0.38rem;
+				font-weight:bold;
+				color:rgba(51,51,51,1);
+				line-height:0.46rem;
+			}
+			
+			.right-ctn{
+				position: relative;
 			}
 		}
-		
-		.title{
-			font-size:0.38rem;
-			font-weight:bold;
-			color:rgba(51,51,51,1);
-			line-height:0.46rem;
-		}
-		
-		.right-ctn{
-			position: relative;
+	}
+	
+	@media  (orientation:landscape) {
+		.abustitle-main-ctn{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			// padding:0.30rem 0.30rem;
+			height: rpx(56);
+			background: #ffffff;
+			box-sizing: border-box;
+			
+			.back-ctn{
+				.icon{
+					margin-left: rpx(20);
+					font-size: rpx(20);
+					color:#000000;
+				}
+			}
+			
+			.title{
+				font-size:rpx(20);
+				font-weight:bold;
+				color: #333333;
+				line-height:rpx(20);
+			}
+			
+			
+			.right-ctn{
+				position: relative;
+			}
 		}
 	}
+	
+	
 </style>

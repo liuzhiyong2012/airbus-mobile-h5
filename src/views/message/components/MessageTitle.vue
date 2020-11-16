@@ -18,16 +18,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Prop, Component } from "vue-property-decorator";
+import { Vue, Prop, Component } from 'vue-property-decorator';
 
 @Component({
-  name: "MessageTitle",
+  name: 'MessageTitle',
   components: {},
 })
 export default class MessageTitle extends Vue {
   public stepTo(page: any): void {
     this.$router.push({
-      name: "meIndex",
+      name: 'meIndex',
     });
   }
   public back(): void {
@@ -37,41 +37,90 @@ export default class MessageTitle extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.message-title-ctn {
-  display: flex;
-  justify-content: space-between;
-  height: 0.4rem;
-  padding: 0.3rem;
-  align-items: center;
-  background: #ffffff;
-  .icon-p {
-    width: 0.3rem;
-    height: 0.3rem;
-  }
-  .title-left-ctn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
+	
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.message-title-ctn {
+		  display: flex;
+		  justify-content: space-between;
+		  height: 0.4rem;
+		  padding: 0.3rem;
+		  align-items: center;
+		  background: #ffffff;
+		  .icon-p {
+		    width: 0.3rem;
+		    height: 0.3rem;
+		  }
+		  .title-left-ctn {
+		    flex: 1;
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .title-center {
+		    font-size: 0.38rem;
+		    font-weight: bold;
+		    color: rgba(51, 51, 51, 1);
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		  }
+		
+		  .title-right-ctn {
+		    flex: 1;
+		    display: flex;
+		    justify-content: flex-end;
+		    align-items: center;
+		
+		    .icon-user {
+		      font-size: 0.4rem;
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		
+			.message-title-ctn {
+			  display: flex;
+			  justify-content: space-between;
+			  height: rpx(20);
+			  padding: rpx(18) rpx(20);
+			  align-items: center;
+			  background: #ffffff;
+			  .icon-p {
+			    width: 0.3rem;
+			    height: 0.3rem;
+			  }
+			  .title-left-ctn {
+			    flex: 1;
+			    display: flex;
+			    align-items: center;
+			  }
+			
+			  .title-center {
+			    font-size: 0.38rem;
+			    font-weight: bold;
+			    color: rgba(51, 51, 51, 1);
+			    display: flex;
+			    align-items: center;
+			    justify-content: space-between;
+			  }
+			
+			  .title-right-ctn {
+			    flex: 1;
+			    display: flex;
+			    justify-content: flex-end;
+			    align-items: center;
+			
+			    .icon-user {
+			      font-size: 0.4rem;
+			    }
+			  }
+			}
+		
+	}
+	
 
-  .title-center {
-    font-size: 0.38rem;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .title-right-ctn {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    .icon-user {
-      font-size: 0.4rem;
-    }
-  }
-}
 </style>

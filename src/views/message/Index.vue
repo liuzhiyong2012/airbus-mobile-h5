@@ -12,19 +12,11 @@
         <div
           slot="right"
           :class="
-            showMessage == true ? 'header-message' : 'header-message-disable'
-          "
-        >
-          <span class="message-mr" @click="gotoChatMessage('notice')">{{
-            $t("message")
-          }}</span>
+            showMessage == true ? 'header-message' : 'header-message-disable'">
+			  <span class="message-mr" @click="gotoChatMessage('notice')">{{
+				$t("message")
+			  }}</span>
           <span>
-            <!-- <i class="icon icon-able3_1" v-show="showDelete == false" @click="deleteMsgShow"></i>
-            <i
-              class="icon icon-able3_1"
-              style="color: rgba(46, 46, 46, 0.3);"
-              v-show="showDelete == true"
-            ></i> -->
             <svg
               class="icon icon-p"
               v-show="showDelete == false"
@@ -101,12 +93,6 @@
             <svg class="icon icon-p" v-if="item.Read == 1" aria-hidden="true">
               <use xlink:href="#icon-readed_11" />
             </svg>
-            <!-- <i class="icon icon-unread1_1" v-if="item.Read == 0"></i>
-            <i
-              class="icon icon-unread1_1"
-              v-if="item.Read == 1"
-              style="color: rgba(46, 46, 46, 0.3);"
-            ></i> -->
           </div>
           <p
             :class="
@@ -137,13 +123,13 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import MessageTitle from "./components/MessageTitle.vue";
-import MessageService from "../../service/message";
-import { localStore } from "../../utils/data-management";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import MessageTitle from './components/MessageTitle.vue';
+import MessageService from '../../service/message';
+import { localStore } from '../../utils/data-management';
 declare let io: any;
 @Component({
-  name: "messageIndex",
+  name: 'messageIndex',
   components: {
     MessageTitle,
   },
@@ -169,7 +155,7 @@ export default class messageIndex extends Vue {
     // },
   ];
 
-  private wordContent: string = "";
+  private wordContent: string = '';
   private systemMsgList: Array<any> = [
     // {
     //   CreatedAt: "2020-07-31 09:17:21",
@@ -185,11 +171,11 @@ export default class messageIndex extends Vue {
   }
 
   private created() {
-    this.uInfo = localStore.get("userInfo");
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    this.uInfo = localStore.get('userInfo');
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   private mounted() {
@@ -201,7 +187,7 @@ export default class messageIndex extends Vue {
       //e = window.event||e;
       //e.returnValue=('确定离开当前网站吗?');
     };
-    window.addEventListener("beforeunload", this.unloadHandler);
+    window.addEventListener('beforeunload', this.unloadHandler);
 
     this.getChatMessage(); // 获取聊天记录
     this.getSysNoticeList(); //获取系统通知列表
@@ -211,12 +197,12 @@ export default class messageIndex extends Vue {
 
   private updated() {
     // 聊天定位到底部
-    let ele: any = document.getElementById("chat-inner");
+    let ele: any = document.getElementById('chat-inner');
     ele.scrollTop = ele.scrollHeight;
   }
 
   private beforeDestroy() {
-    window.removeEventListener("beforeunload", this.unloadHandler);
+    window.removeEventListener('beforeunload', this.unloadHandler);
     this.socket && this.socket.close && this.socket.close();
     this.socket && this.socket.destroy && this.socket.destroy();
     this.socket = null;
@@ -229,10 +215,10 @@ export default class messageIndex extends Vue {
 
   // 切换聊天与系统消息
   public gotoChatMessage(type: string) {
-    if (type == "message") {
+    if (type == 'message') {
       this.showChat = true;
       this.showMessage = false;
-    } else if (type == "notice") {
+    } else if (type == 'notice') {
       this.showChat = false;
       this.showMessage = true;
 
@@ -250,7 +236,7 @@ export default class messageIndex extends Vue {
     this.showDelete = this.systemMsgList.every((item) => {
       return item.Read == 1;
     });
-    this.$store.dispatch("saveNoticeList", this.systemMsgList);
+    this.$store.dispatch('saveNoticeList', this.systemMsgList);
     this.changeNoticeStatus();
   }
 
@@ -273,19 +259,19 @@ export default class messageIndex extends Vue {
     let uid = _this.uInfo.id.trim();
 
     // socket连接后以uid登录
-    _this.socket.on("connect", function() {
-      console.log("聊天页:connect", uid.trim());
-      _this.socket.emit("login", uid);
+    _this.socket.on('connect', function() {
+      console.log('聊天页:connect', uid.trim());
+      _this.socket.emit('login', uid);
     });
     // 后端推送来消息时
-    _this.socket.on("new_msg", (msg: any) => {
-      console.log("聊天页:new_msg", msg);
+    _this.socket.on('new_msg', (msg: any) => {
+      console.log('聊天页:new_msg', msg);
       let midMsg = msg.replace(/&quot;/g, '"');
       let endMsg = JSON.parse(midMsg);
-      console.log("聊天页:new_msg格式化", endMsg);
+      console.log('聊天页:new_msg格式化', endMsg);
       // {type: "message", content: "Your netFlow order has been completed", mark: "你的流量套餐订单已完成"}
-      if (endMsg.type == "system") {
-        console.log("chat: new_msg-system");
+      if (endMsg.type == 'system') {
+        console.log('chat: new_msg-system');
         // 系统通知
         // _this.systemMsgList.unshift({
         //   CreatedAt: '',
@@ -297,9 +283,9 @@ export default class messageIndex extends Vue {
         // _this.$store.dispatch('saveNoticeList', _this.systemMsgList);
         // _this.changeNoticeStatus();
         _this.getSysNoticeList();
-      } else if (endMsg.type == "message") {
+      } else if (endMsg.type == 'message') {
         // 聊天
-        console.log("chat: new_msg-chat");
+        console.log('chat: new_msg-chat');
         if (this.userInfo.id != endMsg.from_user_id) {
           // _this.chatList.push({
           //   id: '', //消息id
@@ -319,8 +305,8 @@ export default class messageIndex extends Vue {
     });
 
     // 后端推送来在线数据时
-    _this.socket.on("update_online_count", (online_stat: any) => {
-      console.log("聊天页：update_online_count", online_stat);
+    _this.socket.on('update_online_count', (online_stat: any) => {
+      console.log('聊天页：update_online_count', online_stat);
     });
   }
 
@@ -360,14 +346,14 @@ export default class messageIndex extends Vue {
   // 发送消息给空乘
   public sendMsgToManager() {
     const _this = this;
-    if (!this.wordContent) return this.$toast(this.$i18n.t("toast1"));
+    if (!this.wordContent) return this.$toast(this.$i18n.t('toast1'));
     let req = {
-      id: "", //消息id
+      id: '', //消息id
       from_user_id: this.uInfo.id, //发送人id
-      to_user_id: "", //接收人id
+      to_user_id: '', //接收人id
       content: this.wordContent, //发送的消息
-      created_time: "", // 发送时间
-      airbus_id: "", //航班id
+      created_time: '', // 发送时间
+      airbus_id: '', //航班id
       read: 0, // 已读  0未读 1已读
       type: 1, // 1 发送给空乘  2发送给用户
     };
@@ -378,11 +364,11 @@ export default class messageIndex extends Vue {
       if (res.code == 200) {
         // _this.chatList.push(req);
         // _this.$store.dispatch('saveChatList', _this.chatList);
-        _this.wordContent = "";
+        _this.wordContent = '';
         _this.getChatMessage();
       }
     });
-    this.wordContent = "";
+    this.wordContent = '';
   }
 
   // 获取系统消息 1已读 0未读
@@ -433,215 +419,431 @@ export default class messageIndex extends Vue {
 
   // 点击某条系统通知
   public changeReadStatus(item: any) {
-    console.log("某条系统通知", item);
+    console.log('某条系统通知', item);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.icon-p {
-  width: 0.3rem;
-  height: 0.3rem;
-}
-.header-wrap {
-  .header-chat {
-    margin-right: 0.3rem;
-  }
-  .header-chat-disable {
-    margin-right: 0.3rem;
-    color: rgba(46, 46, 46, 0.3);
-  }
-  .header-message {
-    margin-left: 0.3rem;
-  }
-  .header-message-disable {
-    margin-left: 0.3rem;
-    color: rgba(46, 46, 46, 0.3);
-  }
-  .message-mr {
-    display: inline-block;
-    margin-right: 0.1rem;
-  }
-  .icon-able3_1,
-  .icon-diasable_1 {
-    width: 0.1rem;
-  }
-}
+	
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.icon-p {
+		  width: 0.3rem;
+		  height: 0.3rem;
+		}
+		.header-wrap {
+		  .header-chat {
+		    margin-right: 0.3rem;
+		  }
+		  .header-chat-disable {
+		    margin-right: 0.3rem;
+		    color: rgba(46, 46, 46, 0.3);
+		  }
+		  .header-message {
+		    margin-left: 0.3rem;
+		  }
+		  .header-message-disable {
+		    margin-left: 0.3rem;
+		    color: rgba(46, 46, 46, 0.3);
+		  }
+		  .message-mr {
+		    display: inline-block;
+		    margin-right: 0.1rem;
+		  }
+		  .icon-able3_1,
+		  .icon-diasable_1 {
+		    width: 0.1rem;
+		  }
+		}
+		
+		.chat-wrap {
+		  .chat-inner {
+		    position: absolute;
+		    width: 100%;
+		    overflow-y: scroll;
+		    overflow-x: hidden;
+		    top: 1rem;
+		    bottom: 0.9rem;
+		    background: #f7f7f7;
+		
+		    .left-talk {
+		      margin: 0.3rem;
+		      width: 70%;
+		      .talk-item {
+		        display: inline-block;
+		        padding: 0.1rem;
+		        border-radius: 0.5rem 0.5rem 0.5rem 0;
+		        background: #fff;
+		
+		        .talk-item-box {
+		          display: flex;
+		          align-items: center;
+		          justify-content: center;
+		          .item-img {
+		            margin-right: 0.2rem;
+		            img {
+		              border-radius: 50%;
+		              width: 0.8rem;
+		            }
+		          }
+		          .item-content {
+		            font-family: Helvetica;
+		            .item-content-name {
+		              font-size: 0.24rem;
+		              margin-bottom: 0.1rem;
+		              color: rgba(46, 46, 46, 0.3);
+		            }
+		            .item-content-word {
+		              font-size: 0.32rem;
+		              line-height: 0.4rem;
+		              margin-right: 0.2rem;
+		              font-weight: 600;
+		              color: rgba(46, 46, 46, 0.8);
+		            }
+		          }
+		        }
+		      }
+		    }
+		
+		    .right-talk {
+		      width: 70%;
+		      margin: 0.3rem;
+		      float: right;
+		      text-align: right;
+		      .talk-item {
+		        display: inline-block;
+		        padding: 0.1rem;
+		        border-radius: 0.5rem 0.5rem 0 0.5rem;
+		        background: #001f5b;
+		        color: #fff;
+		        .talk-item-box {
+		          display: flex;
+		          align-items: center;
+		          justify-content: center;
+		          flex-direction: row-reverse;
+		          .item-img {
+		            margin-left: 0.2rem;
+		            img {
+		              border-radius: 50%;
+		              width: 0.8rem;
+		            }
+		          }
+		          .item-content {
+		            font-family: Helvetica;
+		            padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+		            text-align: left;
+		            .item-content-name {
+		              font-size: 0.24rem;
+		              margin-bottom: 0.1rem;
+		            }
+		            .item-content-word {
+		              font-size: 0.32rem;
+		              line-height: 0.4rem;
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		  .div::-webkit-scrollbar {
+		    display: none;
+		  }
+		
+		  .send-box {
+		    position: fixed;
+		    bottom: 0;
+		    width: 100%;
+		    height: 0.96rem;
+		    line-height: 0.96rem;
+		    font-size: 0.3rem;
+		    background: #fff;
+		
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		
+		    .word-input {
+		      margin: auto 0.3rem;
+		      width: 80%;
+		      text-indent: 0.3rem;
+		      height: 0.56rem;
+		      background: #f2f4f7;
+		      border-radius: 0.28rem;
+		      color: #2e2e2e;
+		    }
+		
+		    .send-btn {
+		      width: 1.12rem;
+		      height: 0.56rem;
+		      line-height: 0.56rem;
+		      border-radius: 0.28rem;
+		      background: #001f5b;
+		      margin-right: 0.3rem;
+		
+		      font-family: Helvetica-Bold, Helvetica;
+		      font-weight: bold;
+		      font-size: 0.28rem;
+		      color: #fff;
+		    }
+		  }
+		}
+		
+		.message-wrap {
+		  margin-top: 0.2rem;
+		  .message-inner {
+		    .message-item {
+		      display: flex;
+		      align-items: center;
+		      background: rgba(255, 255, 255, 1);
+		      height: 1rem;
+		      padding-left: 0.3rem;
+		      border-bottom: 1px solid rgba(247, 247, 247, 0.9);
+		      .message-icon {
+		        margin-right: 0.3rem;
+		      }
+		      .message-content {
+		        font-size: 0.3rem;
+		        font-family: Helvetica;
+		        color: rgba(38, 64, 115, 1);
+		        line-height: 0.4rem;
+		        margin-right: 0.3rem;
+		
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 1;
+		        -webkit-box-orient: vertical;
+		      }
+		      .message-content-readed {
+		        font-size: 0.3rem;
+		        font-family: Helvetica;
+		        color: rgba(51, 51, 51, 0.4);
+		        line-height: 0.4rem;
+		        margin-right: 0.3rem;
+		
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 1;
+		        -webkit-box-orient: vertical;
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.icon-p {
+		  width: 0.3rem;
+		  height: 0.3rem;
+		}
+		.header-wrap {
+		  .header-chat {
+		    margin-right: 0.3rem;
+		  }
+		  .header-chat-disable {
+		    margin-right: 0.3rem;
+		    color: rgba(46, 46, 46, 0.3);
+		  }
+		  .header-message {
+		    margin-left: 0.3rem;
+		  }
+		  .header-message-disable {
+		    margin-left: 0.3rem;
+		    color: rgba(46, 46, 46, 0.3);
+		  }
+		  .message-mr {
+		    display: inline-block;
+		    margin-right: 0.1rem;
+		  }
+		  .icon-able3_1,
+		  .icon-diasable_1 {
+		    width: 0.1rem;
+		  }
+		}
+		
+		.chat-wrap {
+		  .chat-inner {
+		    position: absolute;
+		    width: 100%;
+		    overflow-y: scroll;
+		    overflow-x: hidden;
+		    top: 1rem;
+		    bottom: 0.9rem;
+		    background: #f7f7f7;
+		
+		    .left-talk {
+		      margin: 0.3rem;
+		      width: 70%;
+		      .talk-item {
+		        display: inline-block;
+		        padding: 0.1rem;
+		        border-radius: 0.5rem 0.5rem 0.5rem 0;
+		        background: #fff;
+		
+		        .talk-item-box {
+		          display: flex;
+		          align-items: center;
+		          justify-content: center;
+		          .item-img {
+		            margin-right: 0.2rem;
+		            img {
+		              border-radius: 50%;
+		              width: 0.8rem;
+		            }
+		          }
+		          .item-content {
+		            font-family: Helvetica;
+		            .item-content-name {
+		              font-size: 0.24rem;
+		              margin-bottom: 0.1rem;
+		              color: rgba(46, 46, 46, 0.3);
+		            }
+		            .item-content-word {
+		              font-size: 0.32rem;
+		              line-height: 0.4rem;
+		              margin-right: 0.2rem;
+		              font-weight: 600;
+		              color: rgba(46, 46, 46, 0.8);
+		            }
+		          }
+		        }
+		      }
+		    }
+		
+		    .right-talk {
+		      width: 70%;
+		      margin: 0.3rem;
+		      float: right;
+		      text-align: right;
+		      .talk-item {
+		        display: inline-block;
+		        padding: 0.1rem;
+		        border-radius: 0.5rem 0.5rem 0 0.5rem;
+		        background: #001f5b;
+		        color: #fff;
+		        .talk-item-box {
+		          display: flex;
+		          align-items: center;
+		          justify-content: center;
+		          flex-direction: row-reverse;
+		          .item-img {
+		            margin-left: 0.2rem;
+		            img {
+		              border-radius: 50%;
+		              width: 0.8rem;
+		            }
+		          }
+		          .item-content {
+		            font-family: Helvetica;
+		            padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+		            text-align: left;
+		            .item-content-name {
+		              font-size: 0.24rem;
+		              margin-bottom: 0.1rem;
+		            }
+		            .item-content-word {
+		              font-size: 0.32rem;
+		              line-height: 0.4rem;
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		  .div::-webkit-scrollbar {
+		    display: none;
+		  }
+		
+		  .send-box {
+		    position: fixed;
+		    bottom: 0;
+		    width: 100%;
+		    height: 0.96rem;
+		    line-height: 0.96rem;
+		    font-size: 0.3rem;
+		    background: #fff;
+		
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		
+		    .word-input {
+		      margin: auto 0.3rem;
+		      width: 80%;
+		      text-indent: 0.3rem;
+		      height: 0.56rem;
+		      background: #f2f4f7;
+		      border-radius: 0.28rem;
+		      color: #2e2e2e;
+		    }
+		
+		    .send-btn {
+		      width: 1.12rem;
+		      height: 0.56rem;
+		      line-height: 0.56rem;
+		      border-radius: 0.28rem;
+		      background: #001f5b;
+		      margin-right: 0.3rem;
+		
+		      font-family: Helvetica-Bold, Helvetica;
+		      font-weight: bold;
+		      font-size: 0.28rem;
+		      color: #fff;
+		    }
+		  }
+		}
+		
+		.message-wrap {
+		  margin-top: 0.2rem;
+		  .message-inner {
+		    .message-item {
+		      display: flex;
+		      align-items: center;
+		      background: rgba(255, 255, 255, 1);
+		      height: 1rem;
+		      padding-left: 0.3rem;
+		      border-bottom: 1px solid rgba(247, 247, 247, 0.9);
+		      .message-icon {
+		        margin-right: 0.3rem;
+		      }
+		      .message-content {
+		        font-size: 0.3rem;
+		        font-family: Helvetica;
+		        color: rgba(38, 64, 115, 1);
+		        line-height: 0.4rem;
+		        margin-right: 0.3rem;
+		
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 1;
+		        -webkit-box-orient: vertical;
+		      }
+		      .message-content-readed {
+		        font-size: 0.3rem;
+		        font-family: Helvetica;
+		        color: rgba(51, 51, 51, 0.4);
+		        line-height: 0.4rem;
+		        margin-right: 0.3rem;
+		
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 1;
+		        -webkit-box-orient: vertical;
+		      }
+		    }
+		  }
+		}
+	}
+	
+	
 
-.chat-wrap {
-  .chat-inner {
-    position: absolute;
-    width: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    top: 1rem;
-    bottom: 0.9rem;
-    background: #f7f7f7;
-
-    .left-talk {
-      margin: 0.3rem;
-      width: 70%;
-      .talk-item {
-        display: inline-block;
-        padding: 0.1rem;
-        border-radius: 0.5rem 0.5rem 0.5rem 0;
-        background: #fff;
-
-        .talk-item-box {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          .item-img {
-            margin-right: 0.2rem;
-            img {
-              border-radius: 50%;
-              width: 0.8rem;
-            }
-          }
-          .item-content {
-            font-family: Helvetica;
-            .item-content-name {
-              font-size: 0.24rem;
-              margin-bottom: 0.1rem;
-              color: rgba(46, 46, 46, 0.3);
-            }
-            .item-content-word {
-              font-size: 0.32rem;
-              line-height: 0.4rem;
-              margin-right: 0.2rem;
-              font-weight: 600;
-              color: rgba(46, 46, 46, 0.8);
-            }
-          }
-        }
-      }
-    }
-
-    .right-talk {
-      width: 70%;
-      margin: 0.3rem;
-      float: right;
-      text-align: right;
-      .talk-item {
-        display: inline-block;
-        padding: 0.1rem;
-        border-radius: 0.5rem 0.5rem 0 0.5rem;
-        background: #001f5b;
-        color: #fff;
-        .talk-item-box {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: row-reverse;
-          .item-img {
-            margin-left: 0.2rem;
-            img {
-              border-radius: 50%;
-              width: 0.8rem;
-            }
-          }
-          .item-content {
-            font-family: Helvetica;
-            padding: 0.1rem 0.1rem 0.1rem 0.2rem;
-            text-align: left;
-            .item-content-name {
-              font-size: 0.24rem;
-              margin-bottom: 0.1rem;
-            }
-            .item-content-word {
-              font-size: 0.32rem;
-              line-height: 0.4rem;
-            }
-          }
-        }
-      }
-    }
-  }
-  .div::-webkit-scrollbar {
-    display: none;
-  }
-
-  .send-box {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 0.96rem;
-    line-height: 0.96rem;
-    font-size: 0.3rem;
-    background: #fff;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .word-input {
-      margin: auto 0.3rem;
-      width: 80%;
-      text-indent: 0.3rem;
-      height: 0.56rem;
-      background: #f2f4f7;
-      border-radius: 0.28rem;
-      color: #2e2e2e;
-    }
-
-    .send-btn {
-      width: 1.12rem;
-      height: 0.56rem;
-      line-height: 0.56rem;
-      border-radius: 0.28rem;
-      background: #001f5b;
-      margin-right: 0.3rem;
-
-      font-family: Helvetica-Bold, Helvetica;
-      font-weight: bold;
-      font-size: 0.28rem;
-      color: #fff;
-    }
-  }
-}
-
-.message-wrap {
-  margin-top: 0.2rem;
-  .message-inner {
-    .message-item {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 1);
-      height: 1rem;
-      padding-left: 0.3rem;
-      border-bottom: 1px solid rgba(247, 247, 247, 0.9);
-      .message-icon {
-        margin-right: 0.3rem;
-      }
-      .message-content {
-        font-size: 0.3rem;
-        font-family: Helvetica;
-        color: rgba(38, 64, 115, 1);
-        line-height: 0.4rem;
-        margin-right: 0.3rem;
-
-        text-overflow: -o-ellipsis-lastline;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-      }
-      .message-content-readed {
-        font-size: 0.3rem;
-        font-family: Helvetica;
-        color: rgba(51, 51, 51, 0.4);
-        line-height: 0.4rem;
-        margin-right: 0.3rem;
-
-        text-overflow: -o-ellipsis-lastline;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-      }
-    }
-  }
-}
 </style>
