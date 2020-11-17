@@ -45,24 +45,50 @@
 </script>
 
 <style lang="scss" scoped>
+	@import '../../assets/style/index.scss';
 	
-.game-detail-ctn{
-	position: relative;
-	.content-ctn{
-		position: fixed;
-		   
-		    top: 1.00rem;
-		    left: 0;
-		    bottom: 0;
-			right: 0;
-			
-		.game-cotent{
+	@media  (orientation:portrait) {
+		.game-detail-ctn{
 			position: relative;
-			width: 100%;
-			height: 100%;
-			
+			.content-ctn{
+				position: fixed;
+				   
+				    top: 1.00rem;
+				    left: 0;
+				    bottom: 0;
+					right: 0;
+					
+				.game-cotent{
+					position: relative;
+					width: 100%;
+					height: 100%;
+					
+				}
+			}
 		}
+		
 	}
-}
+	
+	@media  (orientation:landscape) {
+		.game-detail-ctn{
+			position: relative;
+			.content-ctn{
+				position: fixed;
+				    top: rpx(56);
+				    left: 0;
+				    bottom: 0;
+					right: 0;
+					
+				.game-cotent{
+					position: relative;
+					width: 100%;
+					height: 100%;
+					
+				}
+			}
+		}
+		
+	}
+	
 
 </style>

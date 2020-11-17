@@ -106,14 +106,14 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			// padding:0.30rem 0.30rem;
+			padding:0 rpx(20);
 			height: rpx(56);
 			background: #ffffff;
 			box-sizing: border-box;
 			
 			.back-ctn{
 				.icon{
-					margin-left: rpx(20);
+					// margin-left: rpx(20);
 					font-size: rpx(20);
 					color:#000000;
 				}
@@ -128,7 +128,9 @@
 			
 			
 			.right-ctn{
-				position: relative;
+				// position: absolute;
+				right: rpx(20);
+				top:rpx(18);
 			}
 		}
 	}

@@ -36,10 +36,10 @@
 	}
 </i18n>
 <script>
-import MyDishOrder from "./MyDishOrder";
-import MyShoppingOrder from "./MyShoppingOrder";
-import MyInternetOrder from "./MyInternetOrder";
-import AbusTitle from "../../../components/AbusTitle.vue";
+import MyDishOrder from './MyDishOrder';
+import MyShoppingOrder from './MyShoppingOrder';
+import MyInternetOrder from './MyInternetOrder';
+import AbusTitle from '../../../components/AbusTitle.vue';
 export default {
   components: {
     MyDishOrder,
@@ -49,23 +49,42 @@ export default {
   },
   data() {
     return {
-      tabData: ["Dish", "Shopping", "Internet"],
+      tabData: ['Dish', 'Shopping', 'Internet'],
     };
   },
   mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.f1{
-  /deep/ .van-tab{
-    line-height: 0.4rem;
-  }
+	
+	
+@import '../../../assets/style/index.scss';
+
+@media  (orientation:portrait) {
+	.f1{
+	  /deep/ .van-tab{
+	    line-height: 0.4rem;
+	  }
+	}
 }
+
+@media  (orientation:landscape) {
+	.f1{
+	  /deep/ .van-tab{
+		  width:100px;
+		  
+		   width:rpx(100);
+	   /* line-height: 0.4rem; */
+	   
+	  }
+	}
+}
+
 </style>
