@@ -13,31 +13,31 @@
   </section>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { localStore } from "../../../utils/data-management";
-import AbusTitle from "@/components/AbusTitle.vue";
-import MeService from "../../../service/me";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { localStore } from '../../../utils/data-management';
+import AbusTitle from '@/components/AbusTitle.vue';
+import MeService from '../../../service/me';
 
 @Component({
-  name: "ServiceDetailPage",
+  name: 'ServiceDetailPage',
   components: {
     AbusTitle,
   },
 })
 export default class ServiceDetailPage extends Vue {
   private ServiceDetail: any = {};
-  private lang: String  = '';
+  private lang: String = '';
   private created() {
     this.getServiceItem();
   }
 
   private mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
-      this.lang = 'en'
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
+      this.lang = 'en';
     } else {
-      this.$i18n.locale = "zh";
-      this.lang = 'zh'
+      this.$i18n.locale = 'zh';
+      this.lang = 'zh';
     }
     window.scrollTo(0, 0);
   }
@@ -47,26 +47,52 @@ export default class ServiceDetailPage extends Vue {
   }
   public getServiceItem() {
     MeService.ServiceItem({
-      Item: "PrivacyAgreementItem",
+      Item: 'PrivacyAgreementItem',
     }).then((res) => {
       this.ServiceDetail = res.data;
-      this.ServiceDetail.FullDescription = this.ServiceDetail.FullDescription.replace(new RegExp("http://kf.vpclub.cn/airbusifeimg","g"),process.env.VUE_APP_STATIC_URL);
+      this.ServiceDetail.FullDescription = this.ServiceDetail.FullDescription.replace(new RegExp('http://kf.vpclub.cn/airbusifeimg','g'),process.env.VUE_APP_STATIC_URL);
     });
   }
 }
 </script>
 <style lang="scss" scoped>
-.service-info {
-  padding: 0.25rem;
-  background: #fff;
-  line-height: 0.36rem;
-  text-align: justify;
-  font-size: 0.3rem;
-  // color: #333333;
-  font-weight: 400;
-  color: #666666;
-  /deep/ img{
-    width: 100%;
-  }
-}
+	
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.service-info {
+			    padding: 0.22rem;
+		  background: #fff;
+		  line-height: 0.40rem;
+		  text-align: justify;
+		  font-size: 0.3rem;
+		  font-weight: 400;
+		  color: #333333;
+		  text-indent: 1em;
+		  font-weight: 400;
+		  /deep/ img{
+		    width: 100%;
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.service-info {
+			margin-top:rpx(14);
+		 padding: rpx(14) rpx(20);
+		 background: #fff;
+		 line-height:rpx(30);
+		 text-align: justify;
+		 font-size: rpx(18);
+		 font-weight: 400;
+		 color: #333333;
+		 text-indent: 1em;
+		 font-weight: 400;
+		  /deep/ img{
+		    width: 100%;
+		  }
+		}
+	}
+	
+
 </style>

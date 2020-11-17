@@ -638,8 +638,8 @@ export default class messageIndex extends Vue {
 	
 	@media  (orientation:landscape) {
 		.icon-p {
-		  width: 0.3rem;
-		  height: 0.3rem;
+		  width: rpx(24);
+		  height: rpx(24);  
 		}
 		.header-wrap {
 		  .header-chat {
@@ -650,10 +650,14 @@ export default class messageIndex extends Vue {
 		    color: rgba(46, 46, 46, 0.3);
 		  }
 		  .header-message {
-		    margin-left: 0.3rem;
+			  display: flex;
+			  align-items: center;
+		    // margin-left: 0.3rem;
 		  }
 		  .header-message-disable {
-		    margin-left: 0.3rem;
+			  display: flex;
+			  align-items: center;
+		    // margin-left: 0.3rem;
 		    color: rgba(46, 46, 46, 0.3);
 		  }
 		  .message-mr {
@@ -677,12 +681,13 @@ export default class messageIndex extends Vue {
 		    background: #f7f7f7;
 		
 		    .left-talk {
-		      margin: 0.3rem;
+		      margin: rpx(10);
 		      width: 70%;
+			  clear: both;
 		      .talk-item {
 		        display: inline-block;
-		        padding: 0.1rem;
-		        border-radius: 0.5rem 0.5rem 0.5rem 0;
+		        padding: rpx(6);
+		        border-radius: rpx(26) rpx(26) rpx(26) 0;
 		        background: #fff;
 		
 		        .talk-item-box {
@@ -690,22 +695,23 @@ export default class messageIndex extends Vue {
 		          align-items: center;
 		          justify-content: center;
 		          .item-img {
-		            margin-right: 0.2rem;
+		            margin-right: rpx(8);
 		            img {
 		              border-radius: 50%;
-		              width: 0.8rem;
+		              width: rpx(40);
 		            }
 		          }
 		          .item-content {
 		            font-family: Helvetica;
 		            .item-content-name {
-		              font-size: 0.24rem;
-		              margin-bottom: 0.1rem;
+						line-height: rpx(12);
+		              font-size: rpx(12);
+		              margin-bottom: rpx(4);
 		              color: rgba(46, 46, 46, 0.3);
 		            }
 		            .item-content-word {
-		              font-size: 0.32rem;
-		              line-height: 0.4rem;
+		              font-size: rpx(16);
+		              line-height: rpx(16);
 		              margin-right: 0.2rem;
 		              font-weight: 600;
 		              color: rgba(46, 46, 46, 0.8);
@@ -717,13 +723,14 @@ export default class messageIndex extends Vue {
 		
 		    .right-talk {
 		      width: 70%;
-		      margin: 0.3rem;
+		      margin: rpx(10);
 		      float: right;
+			  clear: both;
 		      text-align: right;
 		      .talk-item {
 		        display: inline-block;
-		        padding: 0.1rem;
-		        border-radius: 0.5rem 0.5rem 0 0.5rem;
+		        padding: rpx(18) rpx(20);
+		        border-radius: rpx(26)  rpx(26) 0  rpx(26);
 		        background: #001f5b;
 		        color: #fff;
 		        .talk-item-box {
@@ -731,24 +738,24 @@ export default class messageIndex extends Vue {
 		          align-items: center;
 		          justify-content: center;
 		          flex-direction: row-reverse;
-		          .item-img {
+		         /* .item-img {
 		            margin-left: 0.2rem;
 		            img {
 		              border-radius: 50%;
 		              width: 0.8rem;
 		            }
-		          }
+		          } */
 		          .item-content {
 		            font-family: Helvetica;
-		            padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+		           // padding: 0.1rem 0.1rem 0.1rem 0.2rem;
 		            text-align: left;
-		            .item-content-name {
+		            /* .item-content-name {
 		              font-size: 0.24rem;
 		              margin-bottom: 0.1rem;
-		            }
+		            } */
 		            .item-content-word {
-		              font-size: 0.32rem;
-		              line-height: 0.4rem;
+		              font-size: rpx(16);
+		              line-height: rpx(20);
 		            }
 		          }
 		        }
@@ -763,9 +770,9 @@ export default class messageIndex extends Vue {
 		    position: fixed;
 		    bottom: 0;
 		    width: 100%;
-		    height: 0.96rem;
-		    line-height: 0.96rem;
-		    font-size: 0.3rem;
+		    height: rpx(52);
+		    line-height:rpx(52);
+		    font-size:rpx(20);
 		    background: #fff;
 		
 		    display: flex;
@@ -774,42 +781,46 @@ export default class messageIndex extends Vue {
 		
 		    .word-input {
 		      margin: auto 0.3rem;
-		      width: 80%;
-		      text-indent: 0.3rem;
-		      height: 0.56rem;
+		      flex:1;
+		      text-indent: rpx(20);
+		      height: rpx(32);
 		      background: #f2f4f7;
-		      border-radius: 0.28rem;
+		      border-radius: rpx(16);
 		      color: #2e2e2e;
 		    }
 		
 		    .send-btn {
-		      width: 1.12rem;
-		      height: 0.56rem;
-		      line-height: 0.56rem;
-		      border-radius: 0.28rem;
+		      width: rpx(68);
+		      height: rpx(32);
+		      line-height: rpx(32);
+		      border-radius:rpx(16);
 		      background: #001f5b;
-		      margin-right: 0.3rem;
+		      margin-right: rpx(30);
 		
 		      font-family: Helvetica-Bold, Helvetica;
 		      font-weight: bold;
-		      font-size: 0.28rem;
+		      font-size:rpx(16);
 		      color: #fff;
 		    }
 		  }
 		}
 		
 		.message-wrap {
-		  margin-top: 0.2rem;
+		  margin-top: rpx(14);
 		  .message-inner {
 		    .message-item {
 		      display: flex;
 		      align-items: center;
 		      background: rgba(255, 255, 255, 1);
-		      height: 1rem;
-		      padding-left: 0.3rem;
+		      height: rpx(56);
+		      padding-left: rpx(20);
 		      border-bottom: 1px solid rgba(247, 247, 247, 0.9);
 		      .message-icon {
-		        margin-right: 0.3rem;
+		        margin-right: rpx(20);
+				>.icon-p{
+					width: rpx(16);
+					height: rpx(16);
+				}
 		      }
 		      .message-content {
 		        font-size: 0.3rem;
@@ -826,11 +837,11 @@ export default class messageIndex extends Vue {
 		        -webkit-box-orient: vertical;
 		      }
 		      .message-content-readed {
-		        font-size: 0.3rem;
+		        font-size: rpx(16);
 		        font-family: Helvetica;
 		        color: rgba(51, 51, 51, 0.4);
 		        line-height: 0.4rem;
-		        margin-right: 0.3rem;
+		        margin-right: rpx(20);
 		
 		        text-overflow: -o-ellipsis-lastline;
 		        overflow: hidden;

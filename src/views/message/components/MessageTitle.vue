@@ -90,8 +90,8 @@ export default class MessageTitle extends Vue {
 			  align-items: center;
 			  background: #ffffff;
 			  .icon-p {
-			    width: 0.3rem;
-			    height: 0.3rem;
+			    width: rpx(24);
+			    height: rpx(24);
 			  }
 			  .title-left-ctn {
 			    flex: 1;
@@ -100,7 +100,7 @@ export default class MessageTitle extends Vue {
 			  }
 			
 			  .title-center {
-			    font-size: 0.38rem;
+			    font-size: rpx(20);
 			    font-weight: bold;
 			    color: rgba(51, 51, 51, 1);
 			    display: flex;
@@ -115,7 +115,7 @@ export default class MessageTitle extends Vue {
 			    align-items: center;
 			
 			    .icon-user {
-			      font-size: 0.4rem;
+			      font-size: rpx(24);
 			    }
 			  }
 			}
