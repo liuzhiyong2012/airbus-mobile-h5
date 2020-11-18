@@ -52,11 +52,11 @@
 }
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import AbusTitle from "../../../components/AbusTitle.vue";
-import ShoppingService from "../../../service/shopping";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import AbusTitle from '../../../components/AbusTitle.vue';
+import ShoppingService from '../../../service/shopping';
 @Component({
-  name: "ShoppingSearch",
+  name: 'ShoppingSearch',
   components: {
     AbusTitle,
   },
@@ -72,11 +72,11 @@ export default class ShoppingSearch extends Vue {
     var data = { name: value };
     ShoppingService.getShoppingList(data).then((res: any) => {
       if(res.code == 200){
-          this.searchData = res.data.Dishes
+          this.searchData = res.data.Dishes;
           if(res.data.Dishes.length >0){
-              this.haveList = true
+              this.haveList = true;
           }else{
-              this.haveList = false
+              this.haveList = false;
           }
       }
 
@@ -86,7 +86,7 @@ export default class ShoppingSearch extends Vue {
   // 点击跳转详情页
   private stepToDetail(item: any) {
     this.$router.push({
-      name: "shoppingDetails",
+      name: 'shoppingDetails',
       query: {
         id: item.Id,
       },
@@ -96,74 +96,167 @@ export default class ShoppingSearch extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.no-list {
-  align-items: center;
-  line-height: 2rem;
-  justify-content: center;
-}
-.goods-box {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0.2rem 0 0 0;
-
-  .goods-item {
-    box-sizing: border-box;
-    width: 50%;
-    padding: 0 0.13rem 0.3rem 0.3rem;
-    .goods {
-      width: 100%;
-      background: #fff;
-      border-radius: 0.08rem;
-      box-shadow: 0 0 0.1rem #efefef;
-      .goods-img {
-        display: flex;
-        height: 3.5rem;
-        align-items: center;
-        background-color: #fafafa;
-        overflow: hidden;
-        img {
-          width: 100%;
-        }
-      }
-      .price {
-        padding: 0 0.2rem;
-        font-size: 0.36rem;
-        color: #001f5b;
-        font-weight: bold;
-      }
-      .name {
-        padding: 0.14rem 0.2rem;
-        color: #000;
-        text-overflow: -o-ellipsis-lastline;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        height: 0.7rem;
-      }
-      .qty {
-        padding: 0 0.2rem 0.3rem 0.2rem;
-        font-size: 0.24rem !important;
-        color: #999;
-        position: relative;
-        .buy {
-          position: absolute;
-          right: 0.2rem;
-          bottom: 0.2rem;
-          width: 1.2rem;
-          height: 0.5rem;
-          background: rgba(0, 31, 91, 1);
-          border-radius: 0.25rem;
-          text-align: center;
-          line-height: 0.5rem;
-          color: #fff;
-        }
-      }
-    }
-  }
-  :nth-child(even) {
-    padding: 0 0.3rem 0.3rem 0.13rem;
-  }
-}
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.no-list {
+		  align-items: center;
+		  line-height: 2rem;
+		  justify-content: center;
+		}
+		.goods-box {
+		  display: flex;
+		  flex-wrap: wrap;
+		  padding: 0.2rem 0 0 0;
+		
+		  .goods-item {
+		    box-sizing: border-box;
+		    width: 50%;
+		    padding: 0 0.13rem 0.3rem 0.3rem;
+		    .goods {
+		      width: 100%;
+		      background: #fff;
+		      border-radius: 0.08rem;
+		      box-shadow: 0 0 0.1rem #efefef;
+		      .goods-img {
+		        display: flex;
+		        height: 3.5rem;
+		        align-items: center;
+		        background-color: #fafafa;
+		        overflow: hidden;
+		        img {
+		          width: 100%;
+		        }
+		      }
+		      .price {
+		        padding: 0 0.2rem;
+		        font-size: 0.36rem;
+		        color: #001f5b;
+		        font-weight: bold;
+		      }
+		      .name {
+		        padding: 0.14rem 0.2rem;
+		        color: #000;
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 2;
+		        -webkit-box-orient: vertical;
+		        height: 0.7rem;
+		      }
+		      .qty {
+		        padding: 0 0.2rem 0.3rem 0.2rem;
+		        font-size: 0.24rem !important;
+		        color: #999;
+		        position: relative;
+		        .buy {
+		          position: absolute;
+		          right: 0.2rem;
+		          bottom: 0.2rem;
+		          width: 1.2rem;
+		          height: 0.5rem;
+		          background: rgba(0, 31, 91, 1);
+		          border-radius: 0.25rem;
+		          text-align: center;
+		          line-height: 0.5rem;
+		          color: #fff;
+		        }
+		      }
+		    }
+		  }
+		  :nth-child(even) {
+		    padding: 0 0.3rem 0.3rem 0.13rem;
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.van-search{
+			height: 0.4rem !important;
+			box-sizing: border-box !important;
+			padding-left: 0.2rem;
+		}
+		.van-icon-search {
+			width: 0.2rem !important;
+			height: 0.2rem !important;
+		}
+		.icon-size {
+			width: 0.2rem;
+			height: 0.2rem;
+		}
+		.van-cell__value{
+			font-size: 0.16rem;
+		}
+		.no-list {
+		  align-items: center;
+		  line-height: 2rem;
+		  justify-content: center;
+		}
+		.goods-box {
+		  display: flex;
+		  flex-wrap: wrap;
+		  padding: 0.2rem 0 0 0;
+		
+		  .goods-item {
+		    box-sizing: border-box;
+		    width: 50%;
+		    padding: 0 0.13rem 0.3rem 0.3rem;
+		    .goods {
+		      width: 100%;
+		      background: #fff;
+		      border-radius: 0.08rem;
+		      box-shadow: 0 0 0.1rem #efefef;
+		      .goods-img {
+		        display: flex;
+		        height: 3.5rem;
+		        align-items: center;
+		        background-color: #fafafa;
+		        overflow: hidden;
+		        img {
+		          width: 100%;
+		        }
+		      }
+		      .price {
+		        padding: 0 0.2rem;
+		        font-size: 0.36rem;
+		        color: #001f5b;
+		        font-weight: bold;
+		      }
+		      .name {
+		        padding: 0.14rem 0.2rem;
+		        color: #000;
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 2;
+		        -webkit-box-orient: vertical;
+		        height: 0.7rem;
+		      }
+		      .qty {
+		        padding: 0 0.2rem 0.3rem 0.2rem;
+		        font-size: 0.24rem !important;
+		        color: #999;
+		        position: relative;
+		        .buy {
+		          position: absolute;
+		          right: 0.2rem;
+		          bottom: 0.2rem;
+		          width: 1.2rem;
+		          height: 0.5rem;
+		          background: rgba(0, 31, 91, 1);
+		          border-radius: 0.25rem;
+		          text-align: center;
+		          line-height: 0.5rem;
+		          color: #fff;
+		        }
+		      }
+		    }
+		  }
+		  :nth-child(even) {
+		    padding: 0 0.3rem 0.3rem 0.13rem;
+		  }
+		}
+	}
 </style>

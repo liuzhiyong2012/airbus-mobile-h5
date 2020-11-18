@@ -147,125 +147,262 @@ export default class DishIndex extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.dish-main-ctn {
-	.dish-recomend-item {
-		position: relative;
-		width: 100%;
-		height: 4rem;
-		.dish-recomend-img {
-			width: 100%;
-			height: 100%;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: 100%;
-			background-color: #fff;
-		}
-	}
-
-	.dishes-list {
-		padding: 0.3rem;
-		&:after {
-			content: '';
-			clear: both;
-			display: block;
-			width: 100%;
-			height: 0px;
-		}
-		overflow: hidden;
-		.dishes-item {
-			&:nth-child(2n - 1) {
-				float: left;
-			}
-			&:nth-child(2n) {
-				float: right;
-			}
-
-			&:nth-child(1) {
-				margin-top: 0;
-			}
-			&:nth-child(2) {
-				margin-top: 0;
-			}
-
-			position: relative;
-			margin-top: 0.3rem;
-			width: 3.32rem;
-			height: 5.3rem;
-			background: rgba(255, 255, 255, 1);
-			border-radius: 0.08rem;
-
-			.img-ctn {
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.dish-main-ctn {
+			.dish-recomend-item {
+				position: relative;
 				width: 100%;
-				height: 3rem;
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: contain;
+				height: 4rem;
+				.dish-recomend-img {
+					width: 100%;
+					height: 100%;
+					background-position: center center;
+					background-repeat: no-repeat;
+					background-size: 100%;
+					background-color: #fff;
+				}
 			}
-			.dish-info {
-				padding: 0.2rem;
-				.price-ctn {
-					font-size: 0.36rem;
-					font-weight: bold;
-					color: rgba(0, 31, 91, 1);
-					line-height: 0.36rem;
-					margin-bottom: 0.2rem;
-
-					&.is-discount {
-						> span {
-							&:nth-child(1) {
-								color: #e4002b;
-								margin-right: 0.16rem;
-							}
-							&:nth-child(2) {
-								color: rgba(51, 51, 51, 1);
-								line-height: 0.28rem;
-								font-size: 0.24rem;
-								text-decoration: line-through;
-							}
-						}
-					}
-
-					> span {
-						&:nth-child(1) {
-						}
-						&:nth-child(2) {
-						}
-					}
+		
+			.dishes-list {
+				padding: 0.3rem;
+				&:after {
+					content: '';
+					clear: both;
+					display: block;
+					width: 100%;
+					height: 0px;
 				}
-				.name-ctn {
-					height: 0.7rem;
-					font-size: 0.28rem;
-					font-family: Helvetica;
-					color: rgba(0, 0, 0, 1);
-					line-height: 0.34rem;
-					margin-bottom: 0.14rem;
-				}
-				.bottom-ctn {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					.qty-ctn {
-						font-size: 0.22rem;
-						// color: rgba(51, 51, 51, 1);
-						color:gray;
-						line-height: 0.26rem;
-						> span:nth-child(1) {
-							margin-right: 0.12rem;
-						}
+				overflow: hidden;
+				.dishes-item {
+					&:nth-child(2n - 1) {
+						float: left;
 					}
-					.order-btn {
-						line-height: 0.5rem;
-						text-align: center;
-						font-size: 0.26rem;
-						color: #ffffff;
-						width: 1.2rem;
-						height: 0.5rem;
-						background: rgba(0, 31, 91, 1);
-						border-radius: 0.25rem;
+					&:nth-child(2n) {
+						float: right;
+					}
+		
+					&:nth-child(1) {
+						margin-top: 0;
+					}
+					&:nth-child(2) {
+						margin-top: 0;
+					}
+		
+					position: relative;
+					margin-top: 0.3rem;
+					width: 3.32rem;
+					height: 5.3rem;
+					background: rgba(255, 255, 255, 1);
+					border-radius: 0.08rem;
+		
+					.img-ctn {
+						width: 100%;
+						height: 3rem;
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: contain;
+					}
+					.dish-info {
+						padding: 0.2rem;
+						.price-ctn {
+							font-size: 0.36rem;
+							font-weight: bold;
+							color: rgba(0, 31, 91, 1);
+							line-height: 0.36rem;
+							margin-bottom: 0.2rem;
+		
+							&.is-discount {
+								> span {
+									&:nth-child(1) {
+										color: #e4002b;
+										margin-right: 0.16rem;
+									}
+									&:nth-child(2) {
+										color: rgba(51, 51, 51, 1);
+										line-height: 0.28rem;
+										font-size: 0.24rem;
+										text-decoration: line-through;
+									}
+								}
+							}
+		
+							> span {
+								&:nth-child(1) {
+								}
+								&:nth-child(2) {
+								}
+							}
+						}
+						.name-ctn {
+							height: 0.7rem;
+							font-size: 0.28rem;
+							font-family: Helvetica;
+							color: rgba(0, 0, 0, 1);
+							line-height: 0.34rem;
+							margin-bottom: 0.14rem;
+						}
+						.bottom-ctn {
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
+							.qty-ctn {
+								font-size: 0.22rem;
+								// color: rgba(51, 51, 51, 1);
+								color:gray;
+								line-height: 0.26rem;
+								> span:nth-child(1) {
+									margin-right: 0.12rem;
+								}
+							}
+							.order-btn {
+								line-height: 0.5rem;
+								text-align: center;
+								font-size: 0.26rem;
+								color: #ffffff;
+								width: 1.2rem;
+								height: 0.5rem;
+								background: rgba(0, 31, 91, 1);
+								border-radius: 0.25rem;
+							}
+						}
 					}
 				}
 			}
 		}
 	}
-}
+	
+	@media  (orientation:landscape) {
+		.van-swipe{
+			width: 5.44rem;
+			height: 1.81rem;
+			margin: 0 auto;
+			margin-bottom: 0.15rem;
+		}
+		
+		.dish-main-ctn {
+			.dish-recomend-item {
+				position: relative;
+				width: 100%;
+				height: 4rem;
+				.dish-recomend-img {
+					width: 100%;
+					height: 100%;
+					background-position: center center;
+					background-repeat: no-repeat;
+					background-size: 100%;
+					background-color: #fff;
+				}
+			}
+			
+			.dishes-list {
+				// padding: 0.3rem;
+				width: 5.44rem;
+				margin: 0 auto;
+				&:after {
+					content: '';
+					clear: both;
+					display: block;
+					width: 100%;
+					height: 0px;
+				}
+				overflow: hidden;
+				.dishes-item {
+					
+					&:nth-child(2n - 1) {
+						float: left;
+					}
+					&:nth-child(2n) {
+						float: right;
+					}
+		
+					&:nth-child(1) {
+						margin-top: 0;
+					}
+					&:nth-child(2) {
+						margin-top: 0;
+					}
+					position: relative;
+					width: 1.72rem;
+					height: 2.74rem;
+					background: rgba(255, 255, 255, 1);
+					border-radius: 0.08rem;
+					// margin-right: 0.14rem;
+					.img-ctn {
+						width: 1.72rem;
+						height: 1.56rem;
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: contain;
+					}
+					.dish-info {
+						padding: 0.1rem;
+						.price-ctn {
+							font-size: 0.18rem;
+							font-weight: bold;
+							color: rgba(0, 31, 91, 1);
+							line-height: 0.18rem;
+							// margin-bottom: 0.2rem;
+		
+							&.is-discount {
+								> span {
+									&:nth-child(1) {
+										color: #e4002b;
+										margin-right: 0.16rem;
+									}
+									&:nth-child(2) {
+										color: rgba(51, 51, 51, 1);
+										line-height: 0.28rem;
+										font-size: 0.24rem;
+										text-decoration: line-through;
+									}
+								}
+							}
+		
+							> span {
+								&:nth-child(1) {
+								}
+								&:nth-child(2) {
+								}
+							}
+						}
+						.name-ctn {
+							height: 0.36rem;
+							font-size: 0.14rem;
+							font-family: Helvetica;
+							color: rgba(0, 0, 0, 1);
+							line-height: 0.34rem;
+							margin-bottom: 0.14rem;
+						}
+						.bottom-ctn {
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
+							.qty-ctn {
+								font-size: 0.12rem;
+								// color: rgba(51, 51, 51, 1);
+								color:gray;
+								line-height: 0.12rem;
+								> span:nth-child(1) {
+									margin-right: 0.12rem;
+								}
+							}
+							.order-btn {
+								line-height: 0.26rem;
+								text-align: center;
+								font-size: 0.12rem;
+								color: #ffffff;
+								width: 0.62rem;
+								height: 0.26rem;
+								background: rgba(0, 31, 91, 1);
+								border-radius: 0.25rem;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 </style>

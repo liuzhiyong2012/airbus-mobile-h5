@@ -17,10 +17,10 @@
 </i18n>
 
 <script lang = "ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({
-  name: "CartIcon",
+  name: 'CartIcon',
   components: {},
 })
 export default class DishCartIcon extends Vue {
@@ -29,37 +29,67 @@ export default class DishCartIcon extends Vue {
   }
 
   private back(): void {
-    this.$emit("back");
+    this.$emit('back');
   }
 
   public toCart(): void {
-    this.$emit("toCart");
+    this.$emit('toCart');
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.cardicon-ctn {
-  position: relative;
-  width: 0.32rem;
-  height: 0.32rem;
-  .cart-number {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 0.16rem;
-    height: 0.16rem;
-    line-height: 0.16rem;
-    font-size: 0.14rem;
-    color: #ffffff;
-    text-align: center;
-    border-radius: 50%;
-    background: #d40132;
-  }
-
-  .icon {
-    font-size: 0.32rem;
-    color: #011c57;
-  }
-}
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.cardicon-ctn {
+		  position: relative;
+		  width: 0.32rem;
+		  height: 0.32rem;
+		  .cart-number {
+		    position: absolute;
+		    right: 0;
+		    bottom: 0;
+		    width: 0.16rem;
+		    height: 0.16rem;
+		    line-height: 0.16rem;
+		    font-size: 0.14rem;
+		    color: #ffffff;
+		    text-align: center;
+		    border-radius: 50%;
+		    background: #d40132;
+		  }
+		
+		  .icon {
+		    font-size: 0.32rem;
+		    color: #011c57;
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.cardicon-ctn {
+		  position: relative;
+		  width: 0.32rem;
+		  height: 0.32rem;
+		  .cart-number {
+		    position: absolute;
+		    right: 0;
+		    bottom: 0;
+		    width: 0.16rem;
+		    height: 0.16rem;
+		    line-height: 0.16rem;
+		    font-size: 0.14rem;
+		    color: #ffffff;
+		    text-align: center;
+		    border-radius: 50%;
+		    background: #d40132;
+		  }
+		
+		  .icon {
+		    font-size: 0.32rem;
+		    color: #011c57;
+		  }
+		}
+	}
 </style>

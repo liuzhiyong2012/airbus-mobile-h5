@@ -92,65 +92,136 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.abus-scroller-box{
-    margin: 0;
-    padding: .28rem 0;
-    border-radius: 0%;
-}
-.nut-hor-scroll{
-    background-color: #fff !important;
-}
-.nut-scroller{
-    background-color: #fff !important;
-    padding: .2rem 0;
-}
-.s-box {
-  float: left;
-  // height: 1.6rem;
-  margin: 0 0 0 0.28rem;
-  border-radius: 0.08rem;
-  width: 1.6rem;
-
-  .img-box {
-    display: flex;
-    align-items: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    text-align: center;
-    box-shadow: 0 0 0.08rem #efefef;
-    overflow: hidden;
-    .img {
-      width: 100%;
-      border-radius: 0.1rem;
-    }
-  }
-  .name {
-    line-height: 0.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
-    height: 0.5rem;
-    color: rgb(51, 51, 51);
-  }
-  .price {
-    color:rgba(0, 31, 91, 1);
-    font-size: 0.24rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    span {
-      // display: inline-block;
-      margin-left: 0.1rem;
-      color: #ccc;
-      text-decoration: line-through;
-      font-size: 0.19rem;
-      font-weight: normal;
-    }
-  }
-}
-.s-box-right {
-  margin-right: 0.28rem;
-}
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.abus-scroller-box{
+		    margin: 0;
+		    padding: .28rem 0;
+		    border-radius: 0%;
+		}
+		.nut-hor-scroll{
+		    background-color: #fff !important;
+		}
+		.nut-scroller{
+		    background-color: #fff !important;
+		    padding: .2rem 0;
+		}
+		.s-box {
+		  float: left;
+		  // height: 1.6rem;
+		  margin: 0 0 0 0.28rem;
+		  border-radius: 0.08rem;
+		  width: 1.6rem;
+		
+		  .img-box {
+		    display: flex;
+		    align-items: center;
+		    width: 1.6rem;
+		    height: 1.6rem;
+		    text-align: center;
+		    box-shadow: 0 0 0.08rem #efefef;
+		    overflow: hidden;
+		    .img {
+		      width: 100%;
+		      border-radius: 0.1rem;
+		    }
+		  }
+		  .name {
+		    line-height: 0.5rem;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    width: 100%;
+		    height: 0.5rem;
+		    color: rgb(51, 51, 51);
+		  }
+		  .price {
+		    color:rgba(0, 31, 91, 1);
+		    font-size: 0.24rem;
+		    font-weight: bold;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    span {
+		      // display: inline-block;
+		      margin-left: 0.1rem;
+		      color: #ccc;
+		      text-decoration: line-through;
+		      font-size: 0.19rem;
+		      font-weight: normal;
+		    }
+		  }
+		}
+		.s-box-right {
+		  margin-right: 0.28rem;
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.abus-scroller-box{
+		    margin: 0;
+		    border-radius: 0%;
+			padding: 0 2.09rem;
+		}
+		.nut-hor-scroll{
+		    background-color: #fff !important;
+		}
+		.nut-scroller{
+		    background-color: #f7f7f7 !important;
+		}
+		.s-box {
+		  float: left;
+		  margin-right: 0.13rem;
+		  border-radius: 0.08rem;
+		  width: 0.98rem;
+		  height: 1.44rem;
+		  background-color: #FFFFFF;
+		  .img-box {
+		    display: flex;
+		    align-items: center;
+		    width: 0.75rem;
+		    height: 0.76rem;
+			padding: 0.09rem 0.115rem 0 0.115rem;
+		    text-align: center;
+		    box-shadow: 0 0 0.08rem #efefef;
+		    overflow: hidden;
+		    .img {
+		      width: 100%;
+		      border-radius: 0.1rem;
+		    }
+		  }
+		  .name {
+		    line-height: 0.12rem;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    width: 0.83rem;
+		    height: 0.24rem;
+			font-size: 0.12rem;
+			padding: 0 0.075rem;
+		    color: rgb(51, 51, 51);
+		  }
+		  .price {
+		    color:rgba(0, 31, 91, 1);
+		    font-size: 0.15rem;
+			padding-left: 0.075rem;
+		    font-weight: bold;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    span {
+		      // display: inline-block;
+		      margin-left: 0.1rem;
+		      color: #ccc;
+		      text-decoration: line-through;
+		      font-size: 0.19rem;
+		      font-weight: normal;
+		    }
+		  }
+		}
+		.s-box-right {
+		  margin-right: 0.28rem;
+		}
+	}
 </style>
