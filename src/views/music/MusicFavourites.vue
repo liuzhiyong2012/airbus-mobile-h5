@@ -21,8 +21,6 @@
 			</div>
 
 			<div class="item-content-ctn">
-				<!-- <van-pull-refresh v-model="refreshing" @refresh="onRefresh"> -->
-					<!-- <van-list  v-model="loading" :finished="finished" :finished-text="nomore" @load="onLoad" :offset="100" :immediate-check="false" ref="mylist"> -->
 						<div  v-if="activePage == 'song'" refs="aaa" class="collect-list-ctn song">
 							<van-swipe-cell v-for="(item, index) in resultList" :key="index" class="mysong-swipe-item">
 								<template #right>
@@ -65,8 +63,6 @@
 						<div class="v-finished-text">
 							{{ $t("noMore") }}
 						</div>
-					<!-- </van-list> -->
-				<!-- </van-pull-refresh> -->
 			</div>
 		</section>
 	</section>
@@ -133,7 +129,7 @@ export default class MusicFavourites extends Vue {
 			value: 'playList'
 		}
 	];
-	private nomore: string = "";
+	private nomore: string = '';
 	
     private allSongs: any[] = [];
 	
@@ -153,24 +149,19 @@ export default class MusicFavourites extends Vue {
 		this.getAllSong();
 		if (localStorage.getItem('lang') == 'en') {
 			this.$i18n.locale = 'en';
-			this.nomore = 'no more'
+			this.nomore = 'no more';
 			this.tabList.forEach(item=>{
-				item.name = item.EName
-			})
+				item.name = item.EName;
+			});
 		} else {
 			this.$i18n.locale = 'zh';
-			this.nomore = '没有更多了'
+			this.nomore = '没有更多了';
 			this.tabList.forEach(item=>{
-				item.name = item.ZhName
-			})
+				item.name = item.ZhName;
+			});
 		}
 	}
 
-
-	// public deleteSong(item:any){
-		
-	// }
-	
 	private stepToPage(item:any):void{
 				 this.$router.push({
 					 name:'musicPlaylistDetail',
@@ -237,8 +228,6 @@ export default class MusicFavourites extends Vue {
 	public getMySongList(): void {
 		this.resultList = [];
 		MusicService.getMySongList({
-			// take: this.pageSize,
-			// skip: (this.pageNumber - 1) * this.pageSize
 			take: 9999,
 			skip: 0
 		}).then((resData: any) => {
@@ -246,7 +235,6 @@ export default class MusicFavourites extends Vue {
 					if (resData.data.EOF) {
 						this.finished = true;
 					}
-					// this.resultList = this.resultList.concat(resData.data.palyList);
 					this.resultList = resData.data.palyList;
 					this.total = resData.data.count;
 				} else {
@@ -265,8 +253,6 @@ export default class MusicFavourites extends Vue {
 	public getMyPlaylist(): void {
 		this.resultList = [];
 		MusicService.getMyPlaylist({
-			// take: this.pageSize,
-			// skip: (this.pageNumber - 1) * this.pageSize
 			take: 9999,
 			skip: 0
 		}).then((resData: any) => {
@@ -276,7 +262,6 @@ export default class MusicFavourites extends Vue {
 					item.CoverImgUrl = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.CoverImgUrl));
 				});
 				
-				// this.resultList = this.resultList.concat(resData.data.Playlist); 
 				this.resultList = resData.data.Playlist; 
 				this.total = resData.data.count;
 				
@@ -373,226 +358,431 @@ export default class MusicFavourites extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.music-main-ctn {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	width: 100%;
-
-	.music-tab-ctn {
-		margin-bottom: 0.2rem;
-	}
-
-	.content-ctn {
-		position: relative;
-		overflow-y: auto;
-		overflow-x: hidden;
-
-		flex: 1;
-		padding: 0.3rem 0.24rem;
-		background: #ffffff;
-
-		.title-top {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.music-main-ctn {
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0.24rem 0.3rem;
-			background: #ffffff;
-			z-index: 12;
-			box-sizing: border-box;
-			line-height: 0.42rem;
-
-			.title-left {
-				font-size: 0.22rem;
-				font-family: Helvetica;
-				color: rgba(153, 153, 153, 1);
-
-				span:nth-child(1) {
-					font-size: 0.22rem;
-					font-family: Helvetica;
-					color: rgba(153, 153, 153, 1);
-					margin-right: 0.08rem;
-				}
-				span:nth-child(2) {
-				}
+			flex-direction: column;
+			height: 100vh;
+			width: 100%;
+		
+			.music-tab-ctn {
+				margin-bottom: 0.2rem;
 			}
-			.title-right {
-				display: flex;
-				align-items: center;
-				.icon {
-					margin-right: 0.12rem;
-					font-size: 0.36rem;
-				}
-
-				> span {
-					font-size: 0.26rem;
-					font-family: PingFangSC-Semibold, PingFang SC;
-					font-weight: 600;
-					color: rgba(0, 32, 91, 1);
-				}
-			}
-		}
-
-		.item-content-ctn {
-			position: absolute;
-			top: 0;
-			right: 0;
-			left: 0;
-			bottom: 0;
-			padding-top: 1rem;
-
-			.collect-list-ctn {
-				// padding: 0 0.3rem;
-				// overflow: hidden;
-				// overflow-y: auto;
-				&.song {
-					.mysong-swipe-item {
-						// padding:0.22rem 0;
-						// margin-bottom: 0.44rem;
-						.delete-btn {
-							width: 1.2rem;
-							height: 1.2rem;
-							text-align: center;
-							line-height: 0.68rem;
-							background: rgba(228, 0, 43, 1);
-							>.icon{
-								color:#ffffff;
-								font-size: 0.32rem;
-								line-height: 1.12rem;
-							}
+		
+			.content-ctn {
+				position: relative;
+				overflow-y: auto;
+				overflow-x: hidden;
+		
+				flex: 1;
+				padding: 0.3rem 0.24rem;
+				background: #ffffff;
+		
+				.title-top {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 0.24rem 0.3rem;
+					background: #ffffff;
+					z-index: 12;
+					box-sizing: border-box;
+					line-height: 0.42rem;
+		
+					.title-left {
+						font-size: 0.22rem;
+						font-family: Helvetica;
+						color: rgba(153, 153, 153, 1);
+		
+						span:nth-child(1) {
+							font-size: 0.22rem;
+							font-family: Helvetica;
+							color: rgba(153, 153, 153, 1);
+							margin-right: 0.08rem;
 						}
-
-						.mysong-item {
-							display: flex;
-							justify-content: space-between;
-							align-items: center;
-							padding:0.22rem 0.30rem;
-
-							.song-info {
-								div:nth-child(1) {
-									font-size: 0.3rem;
-									margin-bottom: 0.14rem;
-									font-family: Helvetica;
-									color: rgba(46, 46, 46, 1);
-								}
-								div:nth-child(2) {
-									font-size: 0.2rem;
-									font-family: Helvetica;
-									color: rgba(102, 102, 102, 1);
-									line-height: 0.24rem;
-								}
-							}
-							.oper-ctn {
-								top: 0.30rem;
-								right: 0.30rem;
-								position: absolute;
-								width: 0.4rem;
-								height: 0.4rem;
-							}
+						span:nth-child(2) {
+						}
+					}
+					.title-right {
+						display: flex;
+						align-items: center;
+						.icon {
+							margin-right: 0.12rem;
+							font-size: 0.36rem;
+						}
+		
+						> span {
+							font-size: 0.26rem;
+							font-family: PingFangSC-Semibold, PingFang SC;
+							font-weight: 600;
+							color: rgba(0, 32, 91, 1);
 						}
 					}
 				}
-				&.play-list {
-					.mysong-swipe-item {
-						position: relative;
-						// padding:0.14rem 0;
-						// height: 1.2rem;
-						// padding-left: 1.40rem;
-						
-						.delete-btn {
-							width: 1.2rem;
-							height: 100%;
-							text-align: center;
-							line-height: 1.48rem;
-							background: rgba(228, 0, 43, 1);
-							
-							>.icon{
-								color:#ffffff;
-								font-size: 0.32rem;
-								line-height: 1.48rem;
+		
+				.item-content-ctn {
+					position: absolute;
+					top: 0;
+					right: 0;
+					left: 0;
+					bottom: 0;
+					padding-top: 1rem;
+		
+					.collect-list-ctn {
+						&.song {
+							.mysong-swipe-item {
+								.delete-btn {
+									width: 1.2rem;
+									height: 1.2rem;
+									text-align: center;
+									line-height: 0.68rem;
+									background: rgba(228, 0, 43, 1);
+									>.icon{
+										color:#ffffff;
+										font-size: 0.32rem;
+										line-height: 1.12rem;
+									}
+								}
+		
+								.mysong-item {
+									display: flex;
+									justify-content: space-between;
+									align-items: center;
+									padding:0.22rem 0.30rem;
+		
+									.song-info {
+										div:nth-child(1) {
+											font-size: 0.3rem;
+											margin-bottom: 0.14rem;
+											font-family: Helvetica;
+											color: rgba(46, 46, 46, 1);
+										}
+										div:nth-child(2) {
+											font-size: 0.2rem;
+											font-family: Helvetica;
+											color: rgba(102, 102, 102, 1);
+											line-height: 0.24rem;
+										}
+									}
+									.oper-ctn {
+										top: 0.30rem;
+										right: 0.30rem;
+										position: absolute;
+										width: 0.4rem;
+										height: 0.4rem;
+									}
+								}
 							}
 						}
-						
-						
-						.mysong-item {
-							height:1.20rem;
-							padding:0.14rem 0.30rem;
-							
-							.mysong-img{
-								position: absolute;
-								border-radius: 0.04rem;
-								left:0.30rem;
-								top:0.14rem;
-								width:1.20rem;
-								height:1.20rem;
-								background: red;
-								background-position: center;
-								background-repeat: no-repeat;
-								background-size: contain;
-							}
-							
-							
-
-							.song-info {
-								margin-left: 1.40rem;
-								white-space: nowrap;
-								overflow: hidden;
-								text-overflow: ellipsis;
-								div:nth-child(1) {
-									margin-top:0.12rem;
+						&.play-list {
+							.mysong-swipe-item {
+								position: relative;
+								.delete-btn {
+									width: 1.2rem;
+									height: 100%;
+									text-align: center;
+									line-height: 1.48rem;
+									background: rgba(228, 0, 43, 1);
 									
-									font-size:0.30rem;
-									font-family:Helvetica;
-									color:rgba(46,46,46,1);
-									line-height:0.36rem;
-									margin-bottom: 0.34rem;
-									
-									overflow: inherit;
-									    text-overflow: ellipsis;
-									    white-space: nowrap;
+									>.icon{
+										color:#ffffff;
+										font-size: 0.32rem;
+										line-height: 1.48rem;
+									}
 								}
-								div:nth-child(2) {
+								
+								
+								.mysong-item {
+									height:1.20rem;
+									padding:0.14rem 0.30rem;
 									
-									font-size:0.22rem;
-									font-family:Helvetica;
-									color:rgba(102,102,102,1);
-									line-height:0.26rem;
+									.mysong-img{
+										position: absolute;
+										border-radius: 0.04rem;
+										left:0.30rem;
+										top:0.14rem;
+										width:1.20rem;
+										height:1.20rem;
+										background: red;
+										background-position: center;
+										background-repeat: no-repeat;
+										background-size: contain;
+									}
 									
-									overflow: inherit;
-									    text-overflow: ellipsis;
-									    white-space: nowrap;
 									
-									/* font-size: 0.2rem;
-									font-family: Helvetica;
-									color: rgba(102, 102, 102, 1);
-									line-height: 0.24rem; */
+		
+									.song-info {
+										margin-left: 1.40rem;
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+										div:nth-child(1) {
+											margin-top:0.12rem;
+											
+											font-size:0.30rem;
+											font-family:Helvetica;
+											color:rgba(46,46,46,1);
+											line-height:0.36rem;
+											margin-bottom: 0.34rem;
+											
+											overflow: inherit;
+											    text-overflow: ellipsis;
+											    white-space: nowrap;
+										}
+										div:nth-child(2) {
+											
+											font-size:0.22rem;
+											font-family:Helvetica;
+											color:rgba(102,102,102,1);
+											line-height:0.26rem;
+											
+											overflow: inherit;
+											    text-overflow: ellipsis;
+											    white-space: nowrap;
+											
+										}
+									}
+									.oper-ctn {
+										top: 0;
+										right: 0;
+										position: absolute;
+										width: 0.4rem;
+										height: 0.4rem;
+									}
 								}
-							}
-							.oper-ctn {
-								top: 0;
-								right: 0;
-								position: absolute;
-								width: 0.4rem;
-								height: 0.4rem;
 							}
 						}
 					}
+		
+					.v-finished-text {
+						width: 100% !important;
+						font-size: .24rem !important;
+						text-align: center;
+						line-height: 0.5rem;
+						color: #969799;
+						margin-bottom: 1.2rem;
+					}
 				}
-			}
-
-			.v-finished-text {
-				width: 100% !important;
-				font-size: .24rem !important;
-				text-align: center;
-				line-height: 0.5rem;
-				color: #969799;
-				margin-bottom: 1.2rem;
 			}
 		}
 	}
-}
+	
+	@media  (orientation:landscape) {
+		.music-main-ctn {
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			width: 100%;
+		
+			.music-tab-ctn {
+				margin-bottom: rpx(14);
+			}
+		
+			.content-ctn {
+				position: relative;
+				overflow-y: auto;
+				overflow-x: hidden;
+		
+				flex: 1;
+				padding:0 rpx(20);
+				background: #ffffff;
+		
+				.title-top {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: rpx(18) rpx(20);
+					background: #ffffff;
+					z-index: 12;
+					box-sizing: border-box;
+					line-height: rpx(18);
+		
+					.title-left {
+						font-size: rpx(14);
+						font-family: Helvetica;
+						color: rgba(153, 153, 153, 1);
+		
+						span:nth-child(1) {
+							font-size: rpx(14);
+							font-family: Helvetica;
+							color: rgba(153, 153, 153, 1);
+							margin-right: rpx(6);
+						}
+						span:nth-child(2) {
+						}
+					}
+					.title-right {
+						display: flex;
+						align-items: center;
+						.icon {
+							margin-right: rpx(8);
+							font-size: rpx(18);
+						}
+		
+						> span {
+							font-size: rpx(16);
+							font-family: PingFangSC-Semibold, PingFang SC;
+							font-weight: 600;
+							color: rgba(0, 32, 91, 1);
+						}
+					}
+				}
+		
+				.item-content-ctn {
+					position: absolute;
+					top: 0;
+					right: 0;
+					left: 0;
+					bottom: 0;
+					padding-top: rpx(50);
+		
+					.collect-list-ctn {
+						&.song {
+							.mysong-swipe-item {
+								.delete-btn {
+									width: rpx(80);
+									height: rpx(80);
+									text-align: center;
+									line-height: 0.68rem;
+									background: rgba(228, 0, 43, 1);
+									>.icon{
+										color:#ffffff;
+										font-size: 0.32rem;
+										line-height: rpx(80);
+									}
+								}
+		
+								.mysong-item {
+									display: flex;
+									justify-content: space-between;
+									align-items: center;
+									padding:rpx(14) rpx(20);
+		
+									.song-info {
+										div:nth-child(1) {
+											font-size: rpx(16);
+											margin-bottom: 0.14rem;
+											font-family: Helvetica;
+											color: rgba(46, 46, 46, 1);
+											line-height: rpx(20);
+										}
+										div:nth-child(2) {
+											font-size: rpx(14);
+											font-family: Helvetica;
+											color: rgba(102, 102, 102, 1);
+											line-height: rpx(18);
+										}
+									}
+									.oper-ctn {
+										top: 0.30rem;
+										right: 0.30rem;
+										position: absolute;
+										width: 0.4rem;
+										height: 0.4rem;
+									}
+								}
+							}
+						}
+						&.play-list {
+							.mysong-swipe-item {
+								position: relative;
+								.delete-btn {
+									width: 1.2rem;
+									height: 100%;
+									text-align: center;
+									line-height: rpx(92);
+									background: rgba(228, 0, 43, 1);
+									
+									>.icon{
+										color:#ffffff;
+										font-size: 0.32rem;
+										line-height: rpx(92);
+									}
+								}
+								
+								
+								.mysong-item {
+									// height:1.20rem;
+									padding:0.14rem rpx(20);
+									
+									.mysong-img{
+										position: absolute;
+										border-radius: 0.04rem;
+										left:0.20rem;
+										top:0.14rem;
+										width:rpx(60);
+										height:rpx(60);
+										background: red;
+										background-position: center;
+										background-repeat: no-repeat;
+										background-size: contain;
+									}
+									
+									
+		
+									.song-info {
+										margin-left:rpx(80);
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+										
+										div:nth-child(1) {
+											margin-top:0.12rem;
+											font-size:rpx(16);
+											font-family:Helvetica;
+											color:rgba(46,46,46,1);
+											line-height:rpx(20);
+											margin-bottom: 0.12rem;
+											
+											overflow: inherit;
+											    text-overflow: ellipsis;
+											    white-space: nowrap;
+										}
+										div:nth-child(2) {
+											font-size:rpx(14);
+											font-family:Helvetica;
+											color:rgba(102,102,102,1);
+											line-height:0.18rem;
+											
+											overflow: inherit;
+											    text-overflow: ellipsis;
+											    white-space: nowrap;
+											
+										}
+									}
+									.oper-ctn {
+										top: 0;
+										right: 0;
+										position: absolute;
+										width: 0.4rem;
+										height: 0.4rem;
+									}
+								}
+							}
+						}
+					}
+		
+					.v-finished-text {
+						width: 100% !important;
+						font-size: rpx(14) !important;
+						text-align: center;
+						line-height: rpx(24);
+						color: #969799;
+						margin-bottom: rpx(60);
+					}
+				}
+			}
+		}
+	}
+	
+
 </style>

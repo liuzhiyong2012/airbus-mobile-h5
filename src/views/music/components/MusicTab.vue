@@ -41,46 +41,79 @@
 </script>
 
 <style lang="scss" scoped>
+	@import '../../../assets/style/index.scss';
 	
-	.music-tab-ctn{
-		height: 0.80rem;
-		background: #ffffff;
-		display: flex;
-		align-items: center;
-		// justify-content: space-between;
-		
-		.tab-item{
-			position: relative;
-			flex: 1;
-			text-align: center;
-			line-height: 0.80rem;
+	@media  (orientation:portrait) {
+		.music-tab-ctn{
+			height: 0.80rem;
+			background: #ffffff;
+			display: flex;
+			align-items: center;
 			
-			font-size:0.30rem;
-			font-family:Helvetica-Bold,Helvetica;
-			font-weight:bold;
-			color:rgba(0,32,91,1);
-			line-height:0.80rem;
-			
-			&.active{
-				&:after{
-					content:'';
-					position: absolute;
-					width:0.42rem;
-					height: 0.08rem;
-					bottom: 0;
-					left:50%;
-					transform: translateX(-50%);
-					background:rgba(0,32,91,1);
-					border-radius:100px 100px 0px 0px;
+			.tab-item{
+				position: relative;
+				flex: 1;
+				text-align: center;
+				line-height: 0.80rem;
+				font-size:0.30rem;
+				font-family:Helvetica-Bold,Helvetica;
+				font-weight:bold;
+				color:rgba(0,32,91,1);
+				line-height:0.80rem;
+				
+				&.active{
+					&:after{
+						content:'';
+						position: absolute;
+						width:0.42rem;
+						height: 0.08rem;
+						bottom: 0;
+						left:50%;
+						transform: translateX(-50%);
+						background:rgba(0,32,91,1);
+						border-radius:100px 100px 0px 0px;
+					}
 				}
 			}
 			
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.music-tab-ctn{
+			background: #ffffff;
+			display: flex;
+			align-items: center;
 			
-			
+			.tab-item{
+				position: relative;
+				flex: 1;
+				text-align: center;
+				font-size:rpx(14);
+				font-family:Helvetica-Bold,Helvetica;
+				font-weight:bold;
+				color:rgba(0,32,91,1);
+				line-height:rpx(40);
+				
+				&.active{
+					&:after{
+						content:'';
+						position: absolute;
+						width:rpx(20);
+						height: rpx(4);
+						bottom: 0;
+						left:50%;
+						transform: translateX(-50%);
+						background:rgba(0,32,91,1);
+						border-radius:rpx(20) rpx(20) 0px 0px;
+					}
+				}
+			}
 			
 		}
-		
 	}
+	
+	
 	
 	
 </style>

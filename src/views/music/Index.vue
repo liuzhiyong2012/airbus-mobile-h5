@@ -8,26 +8,6 @@
 		<section class="content-ctn">
 			<div class="content-top-ctn">
 				<shopping-item></shopping-item>
-				<!-- <div class="abus-scroller-box">
-				 <scroller>
-				   <div slot="list" v-for="(item, index) of recomendList" :key="index">
-				     <div class="s-box s-box-right"   >
-				       <div class="img-box">
-				         <div class="img">
-				           <img :src="item.ImgPath | addBaseUrl" :alt="item.Name" width="100%" />
-				         </div>
-				       </div>
-				       <div class="name">{{ item.Name }}</div>
-				     </div>
-				   </div>
-				 </scroller>
-				</div> -->
-				
-				<!-- <van-swipe :autoplay="3000" class="music-recomend-ctn">
-					<van-swipe-item class="music-recomend-item" v-for="(item, index) in recomendList" :key="index">
-						<div class="music-recomend-img" :style="{ backgroundImage: `url(${item.ImgPath})` }"></div>
-					</van-swipe-item>
-				</van-swipe> -->
 				
 				<div class="function-ctn">
 					<div class="function-item favourites" @click="stepTo('favourites')">
@@ -118,7 +98,6 @@
 	import AbusTitle from '../../components/AbusTitle.vue';
 	import MusicService from '../../service/music';
 	import MusicPlayer from './components/MusicPlayer.vue';
-	
 	import ShoppingItem from './components/ShoppingItem.vue';
 	
 	@Component({
@@ -155,33 +134,15 @@
 		 }
 		 
 		 private getMusicBanners(){
-			/*Music/Playlist/Hot*/
-			/* MusicService.getMusicBanners({}).then((res:any)=>{
-				 if(res.code == '200'){
-					 this.recomendList = res.data.Banners;  
-					 this.recomendList.forEach((item,index)=>{
-						 item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.ImgPath));
-					 });
-				 }
-			 }); */
-			 
 			   MusicService.getMusicPlaylistHot({
 			     take: 10,
 			     skip: 0,
 			   }).then((resData: any) => {
 			     if (resData.code == 200) {
-			       //this.isHaveData = true;
-			      // this.musicList = resData.data.Playlists;
-				   
 				   this.recomendList = resData.data.Playlists;
 				   this.recomendList.forEach((item,index)=>{
 					   	item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.CoverImgUrl));
-				   						// item.ImgPath = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.ImgPath));
 				   });
-				   
-				   /* resData.data.Playlists.forEach((item,index)=>{
-				   	item.CoverImgUrl = UrlUtils.addBaseUrl( UrlUtils.delBaseUrl(item.CoverImgUrl));
-				   }); */
 			     }
 			   });
 		 }
@@ -283,244 +244,342 @@
 </script>
 
 <style lang="scss" scoped>
-	.music-main-ctn{
-		.title-ctn{
-			position: fixed;
-			z-index: 100;
-			top:0;
-			left: 0;
-			width: 100%;
-		}
-		
-		.content-ctn{
-			padding-top:1.00rem;
-			.content-top-ctn{
-				padding:0.40rem 0.30rem 0.34rem;
-				background:#ffffff;
-				
-				.abus-scroller-box{
+	
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.music-main-ctn{
+			.title-ctn{
+				position: fixed;
+				z-index: 100;
+				top:0;
+				left: 0;
+				width: 100%;
+			}
+			
+			.content-ctn{
+				padding-top:1.00rem;
+				.content-top-ctn{
+					padding:0.40rem 0.30rem 0.34rem;
+					background:#ffffff;
 					
-					.s-box {
-					  float: left;
-					  // height: 1.6rem;
-					  margin: 0 0 0 0.28rem;
-					  border-radius: 0.08rem;
-					  width: 1.6rem;
-					
-					  .img-box {
-					    display: flex;
-					    align-items: center;
-					    width: 1.6rem;
-					    height: 1.6rem;
-					    text-align: center;
-					    box-shadow: 0 0 0.08rem #efefef;
-					    overflow: hidden;
-					    .img {
-					      width: 100%;
-					      border-radius: 0.1rem;
-					    }
-					  }
-					  .name {
-					    line-height: 0.5rem;
-					    overflow: hidden;
-					    white-space: nowrap;
-					    text-overflow: ellipsis;
-					    width: 100%;
-					    height: 0.5rem;
-					    color: rgb(51, 51, 51);
-					  }
-					  .price {
-					    color: rgb(228, 0, 43);
-					    font-size: 0.24rem;
-					    font-weight: bold;
-					    overflow: hidden;
-					    white-space: nowrap;
-					    text-overflow: ellipsis;
-					    span {
-					      // display: inline-block;
-					      margin-left: 0.1rem;
-					      color: #ccc;
-					      text-decoration: line-through;
-					      font-size: 0.19rem;
-					      font-weight: normal;
-					    }
-					  }
-					}
-					.s-box-right {
-					  margin-right: 0.82rem;
-					}
-					/* .img-box{
-						display: -webkit-box;
-						    display: -webkit-flex;
+					.abus-scroller-box{
+						
+						.s-box {
+						  float: left;
+						  margin: 0 0 0 0.28rem;
+						  border-radius: 0.08rem;
+						  width: 1.6rem;
+						
+						  .img-box {
 						    display: flex;
-						    -webkit-box-align: center;
-						    -webkit-align-items: center;
 						    align-items: center;
 						    width: 1.6rem;
 						    height: 1.6rem;
 						    text-align: center;
 						    box-shadow: 0 0 0.08rem #efefef;
 						    overflow: hidden;
-						.img{
-							width: 100%;
-							    border-radius: 0.1rem;
-						}
-					}
-					.name{
-						line-height: 0.5rem;
+						    .img {
+						      width: 100%;
+						      border-radius: 0.1rem;
+						    }
+						  }
+						  .name {
+						    line-height: 0.5rem;
 						    overflow: hidden;
 						    white-space: nowrap;
 						    text-overflow: ellipsis;
 						    width: 100%;
 						    height: 0.5rem;
-						    color: #333333;
-					} */
+						    color: rgb(51, 51, 51);
+						  }
+						  .price {
+						    color: rgb(228, 0, 43);
+						    font-size: 0.24rem;
+						    font-weight: bold;
+						    overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						    span {
+						      margin-left: 0.1rem;
+						      color: #ccc;
+						      text-decoration: line-through;
+						      font-size: 0.19rem;
+						      font-weight: normal;
+						    }
+						  }
+						}
+						.s-box-right {
+						  margin-right: 0.82rem;
+						}
+						
+					}
 					
-				}
-				
-				.music-recomend-ctn{
-					border-radius:8px;
-					margin-bottom: 0.40rem;
-					.music-recomend-item {
-						position: relative;
-						width: 100%;
-						height: 3.24rem;
-						.music-recomend-img {
+					.music-recomend-ctn{
+						border-radius:8px;
+						margin-bottom: 0.40rem;
+						.music-recomend-item {
+							position: relative;
 							width: 100%;
-							height: 100%;
-							background-position: center center;
-							background-repeat: no-repeat;
-							background-size: 100%;
-						}
-					}
-				}
-				
-				/* .function-ctn{
-					.function-item{
-						&.favourites{
-							
-						}
-						&.airfm{
-							
-						}
-						&.topranks{
-							
-						}
-						
-						.function-icon-ctn {
-							svg.icon{
-								
-							}
-						}
-						.function-name{
-							
-						}
-					}
-				} */
-				
-				.function-ctn{
-					padding-top:0.20rem;
-					display: flex;
-					justify-content: space-around;
-					.function-item{
-						&.favourites{
-							
-						}
-						&.airfm{
-							
-						}
-						&.topranks{
-							
-						}
-						
-						.function-icon-ctn{
-							display: block;
-							margin:auto;
-							width: 0.82rem;
-							height: 0.82rem;
-							margin-bottom: 0.14rem;
-							text-align: center;
-							svg.icon{
+							height: 3.24rem;
+							.music-recomend-img {
 								width: 100%;
 								height: 100%;
+								background-position: center center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+						}
+					}
+					
+					.function-ctn{
+						padding-top:0.20rem;
+						display: flex;
+						justify-content: space-around;
+						.function-item{
+							&.favourites{
 								
 							}
-						}
-						.function-name{
-							font-size:0.24rem;
-							font-family:Helvetica;
-							color:rgba(46,46,46,1);
-							line-height:0.30rem;
-						}
-					}
-				}
-				
-				
-			}
-			
-			.album-ctn{
-				padding:0.50rem 0.30rem;
-				background:#ffffff;
-				
-				.album-title{
-					font-size:0.36rem;
-					font-family:Helvetica-Bold,Helvetica;
-					font-weight:bold;
-					color:rgba(51,51,51,1);
-					line-height:0.42rem;
-					margin-bottom: 0.30rem;
-				}
-				
-				.album-list-ctn{
-					padding-bottom: 0.8rem;
-					
-					.album-item-ctn{
-						
-						.album-item-ctn{
-							display: flex;
-							justify-content: space-between;
-							align-items: center;
-							flex-wrap: wrap;
-							.album-item{
-								width:2.00rem;
-								.album-image{
-									box-sizing: border-box;
-									border:10px solid #e8cebb;
-									border-radius:0.08rem;
-									overflow: hidden;
-									width:100%;
-									height: 2.00rem;
-									margin-bottom: 0.16rem;
-									background-position:center;
-									background-repeat:no-repeat;
-									background-size: contain;
-								}
-								.album-label{
-									white-space: nowrap;
-									overflow: hidden;
-									text-overflow: ellipsis;
-									font-size:0.24rem;
-									font-weight:bold;
-									color:rgba(46,46,46,1);
-									line-height:0.30rem;
-									padding-bottom: 0.14rem;
+							&.airfm{
+								
+							}
+							&.topranks{
+								
+							}
+							
+							.function-icon-ctn{
+								display: block;
+								margin:auto;
+								width: 0.82rem;
+								height: 0.82rem;
+								margin-bottom: 0.14rem;
+								text-align: center;
+								svg.icon{
+									width: 100%;
+									height: 100%;
+									
 								}
 							}
+							.function-name{
+								font-size:0.24rem;
+								font-family:Helvetica;
+								color:rgba(46,46,46,1);
+								line-height:0.30rem;
+							}
 						}
-						
 					}
 					
 					
 				}
+				
+				.album-ctn{
+					padding:0.50rem 0.30rem;
+					background:#ffffff;
+					
+					.album-title{
+						font-size:0.36rem;
+						font-family:Helvetica-Bold,Helvetica;
+						font-weight:bold;
+						color:rgba(51,51,51,1);
+						line-height:0.42rem;
+						margin-bottom: 0.30rem;
+					}
+					
+					.album-list-ctn{
+						padding-bottom: 0.8rem;
+						
+						.album-item-ctn{
+							
+							.album-item-ctn{
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								flex-wrap: wrap;
+								.album-item{
+									width:2.00rem;
+									.album-image{
+										box-sizing: border-box;
+										border:10px solid #e8cebb;
+										border-radius:0.08rem;
+										overflow: hidden;
+										width:100%;
+										height: 2.00rem;
+										margin-bottom: 0.16rem;
+										background-position:center;
+										background-repeat:no-repeat;
+										background-size: contain;
+									}
+									.album-label{
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+										font-size:0.24rem;
+										font-weight:bold;
+										color:rgba(46,46,46,1);
+										line-height:0.30rem;
+										padding-bottom: 0.14rem;
+									}
+								}
+							}
+							
+						}
+						
+						
+					}
+				}
+				
+				
 			}
 			
-			
-		}
-		
-		.music-player-ctn{
-			position:fixed;
-			bottom: 0;
-			
+			.music-player-ctn{
+				position:fixed;
+				bottom: 0;
+				
+			}
 		}
 	}
+	
+	@media  (orientation:landscape) {
+		.music-main-ctn{
+			.title-ctn{
+				position: fixed;
+				z-index: 100;
+				top:0;
+				left: 0;
+				width: 100%;
+			}
+			
+			.content-ctn{
+				padding-top:rpx(70);
+				.content-top-ctn{
+					padding:rpx(20);
+					background:#ffffff;
+					
+					
+					.music-recomend-ctn{
+						border-radius:8px;
+						margin-bottom: 0.40rem;
+						.music-recomend-item {
+							position: relative;
+							width: 100%;
+							height: 3.24rem;
+							.music-recomend-img {
+								width: 100%;
+								height: 100%;
+								background-position: center center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+						}
+					}
+					
+					.function-ctn{
+						padding-top:0.20rem;
+						display: flex;
+						justify-content: space-around;
+						.function-item{
+							&.favourites{
+								
+							}
+							&.airfm{
+								
+							}
+							&.topranks{
+								
+							}
+							
+							.function-icon-ctn{
+								display: block;
+								margin:auto;
+								width: rpx(50);
+								height:  rpx(50);
+								margin-bottom: 0.14rem;
+								text-align: center;
+								svg.icon{
+									width: 100%;
+									height: 100%;
+									
+								}
+							}
+							.function-name{
+								font-size:rpx(18);
+								font-family:Helvetica;
+								color:rgba(46,46,46,1);
+								line-height::rpx(24);
+							}
+						}
+					}
+					
+					
+				}
+				
+				.album-ctn{
+					padding:rpx(20);
+					background:#ffffff;
+					
+					.album-title{
+						font-size:rpx(20);
+						font-family:Helvetica-Bold,Helvetica;
+						font-weight:bold;
+						color:rgba(51,51,51,1);
+						line-height:rpx(24);
+						margin-bottom: rpx(20);
+					}
+					
+					.album-list-ctn{
+						padding-bottom: 0.8rem;
+						
+						.album-item-ctn{
+							
+							.album-item-ctn{
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								flex-wrap: wrap;
+								.album-item{
+									width:2.00rem;
+									.album-image{
+										box-sizing: border-box;
+										border:10px solid #e8cebb;
+										border-radius:rpx(4);
+										overflow: hidden;
+										width:100%;
+										height: 2.00rem;
+										margin-bottom: rpx(8);
+										background-position:center;
+										background-repeat:no-repeat;
+										background-size: contain;
+									}
+									.album-label{
+										text-align: center;
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+										font-size:rpx(18);
+										font-weight:bold;
+										color:rgba(46,46,46,1);
+										line-height:rpx(24);
+										padding-bottom: rpx(16);
+									}
+								}
+							}
+							
+						}
+						
+						
+					}
+				}
+				
+				
+			}
+			
+			.music-player-ctn{
+				position:fixed;
+				bottom: 0;
+				
+			}
+		}
+	}
+	
+	
 </style>

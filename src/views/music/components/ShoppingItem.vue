@@ -1,5 +1,5 @@
 <template>
-	<div class="abus-scroller-box" :style="{ backgroundColor: isHaveData ? '#f8f8f8' : '#fff' }">
+	<div class="abus-scroller-box" :style="{ backgroundColor: isHaveData ? '#ffffff' : '#fff' }">
 		<scroller>
 			<div slot="list" v-for="(item, index) of recomendList" :key="index">
 				<div @click="stepToDetail(item)" class="s-box s-box-right" v-if="index + 1 == recomendList.length">
@@ -82,65 +82,144 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.abus-scroller-box {
-	margin: 0;
-	padding: 0.28rem 0;
-	border-radius: 0%;
-}
-.nut-hor-scroll {
-	background-color: #fff !important;
-}
-.nut-scroller {
-	background-color: #fff !important;
-	padding: 0.2rem 0;
-}
-.s-box {
-	float: left;
-	// height: 1.6rem;
-	margin: 0 0 0 0.28rem;
-	border-radius: 0.08rem;
-	width: 1.6rem;
+	
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.abus-scroller-box {
+			margin: 0;
+			padding: 0.28rem 0;
+			border-radius: 0%;
+		}
+		.nut-hor-scroll {
+			background-color: #fff !important;
+		}
+		.nut-scroller {
+			background-color: #fff !important;
+			padding: 0.2rem 0;
+		}
+		.s-box {
+			float: left;
+			// height: 1.6rem;
+			margin: 0 0 0 0.28rem;
+			border-radius: 0.08rem;
+			width: 1.6rem;
+		
+			.img-box {
+				display: flex;
+				align-items: center;
+				width: 1.6rem;
+				height: 1.6rem;
+				text-align: center;
+				box-shadow: 0 0 0.08rem #efefef;
+				overflow: hidden;
+				.img {
+					width: 100%;
+					border-radius: 0.1rem;
+				}
+			}
+			.name {
+				line-height: 0.5rem;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width: 100%;
+				height: 0.5rem;
+				color: rgb(51, 51, 51);
+			}
+			.price {
+				color: rgba(0, 31, 91, 1);
+				font-size: 0.24rem;
+				font-weight: bold;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				span {
+					// display: inline-block;
+					margin-left: 0.1rem;
+					color: #ccc;
+					text-decoration: line-through;
+					font-size: 0.19rem;
+					font-weight: normal;
+				}
+			}
+		}
+		.s-box-right {
+			margin-right: 0.28rem;
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.abus-scroller-box {
+			margin: 0;
+			padding:  0;
+			border-radius: 0%;
+			box-shadow: none !important;
+		}
+		.nut-hor-scroll {
+			background-color: #fff !important;
+		}
+	
+		.nut-scroller {
+			background-color: #fff !important;
+			padding:0;
+		}
+		.s-box {
+			float: left;
+			margin-right: rpx(20);
+			border-radius: 0.08rem;
+			width: 1.6rem;
+			margin-bottom:rpx(6) ;
+		
+			.img-box {
+				display: flex;
+				align-items: center;
+				width: 1.6rem;
+				height: 1.6rem;
+				text-align: center;
+				box-shadow: 0 0 0.08rem #efefef;
+				overflow: hidden;
+				margin-bottom:rpx(6) ;
+				font-size: 0;
+				line-height: 0;
+				.img {
+					width: 100%;
+					overflow: hidden;
+					border-radius: rpx(4);
+				}
+			}
+			.name {
+				text-align: center;
+				font-size: rpx(18);
+				line-height: rpx(20);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width: 100%;
+				color: rgb(51, 51, 51);
+				
+			}
+			.price {
+				color: rgba(0, 31, 91, 1);
+				font-size: 0.24rem;
+				font-weight: bold;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				span {
+					// display: inline-block;
+					margin-left: 0.1rem;
+					color: #ccc;
+					text-decoration: line-through;
+					font-size: 0.19rem;
+					font-weight: normal;
+				}
+			}
+		}
+		.s-box-right {
+			margin-right: 0.28rem;
+		}
+	}
+	
 
-	.img-box {
-		display: flex;
-		align-items: center;
-		width: 1.6rem;
-		height: 1.6rem;
-		text-align: center;
-		box-shadow: 0 0 0.08rem #efefef;
-		overflow: hidden;
-		.img {
-			width: 100%;
-			border-radius: 0.1rem;
-		}
-	}
-	.name {
-		line-height: 0.5rem;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		width: 100%;
-		height: 0.5rem;
-		color: rgb(51, 51, 51);
-	}
-	.price {
-		color: rgba(0, 31, 91, 1);
-		font-size: 0.24rem;
-		font-weight: bold;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		span {
-			// display: inline-block;
-			margin-left: 0.1rem;
-			color: #ccc;
-			text-decoration: line-through;
-			font-size: 0.19rem;
-			font-weight: normal;
-		}
-	}
-}
-.s-box-right {
-	margin-right: 0.28rem;
-}
 </style>
