@@ -109,3 +109,6 @@ export default class ServiceDetailPage extends Vue {
   }
 } */
 </style>
+
+
+

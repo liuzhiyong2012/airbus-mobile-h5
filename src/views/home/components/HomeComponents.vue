@@ -62,21 +62,46 @@ export default class HomeComponents extends Vue{
 
 
 <style lang="scss" scoped>
-.block-title-background {
-//   background-color: #fafafa00;
-  background: transparent;
-}
-.van-cell {
-  font-size: 0.36rem;
-      padding: 0.1rem 0.3rem !important; 
-}
-.i-icon{
-	font-size: .5rem !important;
-}
-.icon-more{
-	    color: #818181;
-	    font-size: 0.32rem;
-	    padding-left: 0.30rem;
-	    padding-right: 0.10rem;
-}
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.block-title-background {
+		  background: transparent;
+		}
+		.van-cell {
+		  font-size: 0.36rem;
+		      padding: 0.1rem 0.3rem !important; 
+		}
+		.i-icon{
+			font-size: .5rem !important;
+		}
+		.icon-more{
+			    color: #818181;
+			    font-size: 0.32rem;
+			    padding-left: 0.30rem;
+			    padding-right: 0.10rem;
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.block-title-background {
+		  background: transparent;
+		}
+		.van-cell {
+		  font-size: rpx(18) !important;
+		  line-height: rpx(18) !important;;
+		      padding: rpx(20) rpx(20) rpx(10) !important;; 
+		}
+		.i-icon{
+			font-size: .5rem !important;
+		}
+		.icon-more{
+			    color: #818181;
+			    font-size: 0.32rem;
+			    padding-left: 0.30rem;
+			    padding-right: 0.10rem;
+		}
+	}
+	
+
 </style>

@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Scroller from "@nutui/nutui/dist/packages/scroller/scroller.js"; // 加载构建后的JS
-import "@nutui/nutui/dist/packages/scroller/scroller.css";
-import DishService from "../../../service/dish";
+import Vue from 'vue';
+import Scroller from '@nutui/nutui/dist/packages/scroller/scroller.js'; // 加载构建后的JS
+import '@nutui/nutui/dist/packages/scroller/scroller.css';
+import DishService from '../../../service/dish';
 Scroller.install(Vue);
 export default {
   components: {
@@ -48,71 +48,71 @@ export default {
       isHaveData: false,
       dishData: [
         {
-          img: require("../images/food.png"),
-          name: "Pock rice",
-          price: "10",
+          img: require('../images/food.png'),
+          name: 'Pock rice',
+          price: '10',
         },
         {
-          img: require("../images/shopping.jpg"),
-          name: "Pock rice",
-          price: "14",
+          img: require('../images/shopping.jpg'),
+          name: 'Pock rice',
+          price: '14',
         },
         {
-          img: require("../images/food.png"),
-          name: "Pock ricePock ricePock rice",
-          price: "10",
+          img: require('../images/food.png'),
+          name: 'Pock ricePock ricePock rice',
+          price: '10',
         },
         {
-          img: require("../images/shopping.jpg"),
-          name: "Pock rice",
-          price: "14",
+          img: require('../images/shopping.jpg'),
+          name: 'Pock rice',
+          price: '14',
         },
         {
-          img: require("../images/food.png"),
-          name: "Pock rice",
-          price: "10",
+          img: require('../images/food.png'),
+          name: 'Pock rice',
+          price: '10',
         },
         {
-          img: require("../images/shopping.jpg"),
-          name: "Pock rice",
-          price: "14",
+          img: require('../images/shopping.jpg'),
+          name: 'Pock rice',
+          price: '14',
         },
         {
-          img: require("../images/food.png"),
-          name: "Pock rice",
-          price: "10",
+          img: require('../images/food.png'),
+          name: 'Pock rice',
+          price: '10',
         },
         {
-          img: require("../images/shopping.jpg"),
-          name: "Pock rice",
-          price: "14",
+          img: require('../images/shopping.jpg'),
+          name: 'Pock rice',
+          price: '14',
         },
       ],
     };
   },
   created() {
     this.getDishesRecommendedList();
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   },
   methods: {
     stepToDetail(item) {
-      var _this = this
+      var _this = this;
       if (item.Stocking > 0) {
         _this.$router.push({
-          name: "dishDetail",
+          name: 'dishDetail',
           query: {
             id: item.Id,
           },
         });
       } else {
-        if (localStorage.getItem("lang") == "en") {
-          _this.$toast("Stockout!");
+        if (localStorage.getItem('lang') == 'en') {
+          _this.$toast('Stockout!');
         } else {
-          _this.$toast("暂时缺货");
+          _this.$toast('暂时缺货');
         }
       }
       // this.$router.push({
@@ -129,19 +129,8 @@ export default {
 
         this.recomendList.forEach((item, index) => {
           item.BannerImgPath =
-            "http://172.16.125.11:8010/fcf29d23-6af0-45d5-a2e6-90ccc95d0457";
+            'http://172.16.125.11:8010/fcf29d23-6af0-45d5-a2e6-90ccc95d0457';
         });
-
-        /* :version/api/Dishes/List */
-        /*  BannerImgPath: "172.16.125.11:8010/133b9f0b-dfa4-4cd9-8ebb-958c44bfbf26"
-            Id: "e2dc9e2c-6733-e911-b13c-96af276fddb7"
-            Name: "素食拼盘"
-            Price: 32
-            Remark: null
-            SampleImgPath: "172.16.125.11:8010/eb8ea336-9434-4295-8215-3821c76baba8"
-            Status: 0
-            Stocking: 0 */
-        // http://172.16.125.11:8010/50.jpg
       });
     },
   },

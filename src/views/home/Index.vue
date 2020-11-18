@@ -1,15 +1,5 @@
 <template>
-  <div class="home">
-    <!-- <van-sticky>
-      <van-nav-bar title="Airbus" @click-right="showPopup">
-        <template #right>
-          <van-icon name="scan" size="18" />
-        </template>
-        <template #left>
-          <van-icon name="chat" size="18" />
-        </template>
-      </van-nav-bar> 
-    </van-sticky>-->
+  <div class="home-ctn">
     <van-sticky :offset-top="0">
       <div class="home-title">
         <home-title @stepTo="stepToPage($event)" :showRed="showRedPoint"></home-title>
@@ -372,136 +362,279 @@ export default class Home extends Vue {
 </script>
 
 <style scoped lang="scss">
-.home {
-  padding: 0 0 0.5rem 0;
-}
-.van-tab--active {
-  font-weight: 600;
-}
-.van-popup {
-  background-color: rgba(255, 255, 255, 0);
-}
-.van-tab__text--ellipsis{
-  overflow: inherit !important;
-}
-.popup-toast {
-  padding: 0 0 0.01rem;
-  width: 5.42rem;
-  background-color: #fff;
-  border-radius: 0.12rem;
-  .title {
-    width: 100%;
-    height: 1.2rem;
-    background-color: #00205b;
-    text-align: center;
-    font-size: 0.36rem;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    line-height: 1.2rem;
-    border-radius: 0.12rem 0.12rem 0 0;
-  }
-  .service {
-    padding: 0.3rem 0;
-    height: auto;
-    line-height: 0.42rem;
-  }
-  .con {
-    padding: 0.3rem;
-    background-color: #fff;
-    font-size: 0.28rem;
-    color: rgba(51, 51, 51, 1);
-    line-height: 0.42rem;
-    word-break: normal;
-    word-wrap: break-word;
-    .txt {
-      color: #00205b;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-  }
-  .btn {
-    margin: 0 0.3rem;
-    background-color: #00205b;
-    font-size: 0.34rem;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    line-height: 0.74rem;
-    text-align: center;
-    border-radius: 0.37rem;
-  }
-  .later {
-    margin: 0.3rem 0;
-    padding: 0 0.3rem;
-    font-size: 0.26rem;
-    font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: rgba(51, 51, 51, 1);
-    background-color: #fff;
-    line-height: 0.3rem;
-    height: 0.5rem;
-  }
-  .surplus {
-    padding: 0 0.3rem;
-    text-align: right;
-    background: #f2f4f7;
-    line-height: 0.7rem;
-    font-size: 0.28rem;
-    font-weight: bold;
-    color: rgba(0, 32, 91, 1);
-    .now {
-      margin: 0 0.2rem 0 0;
-      font-size: 0.28rem;
-      color: rgba(51, 51, 51, 1);
-      font-weight: 400;
-    }
-  }
-}
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.home-ctn {
+		  padding: 0 0 0.5rem 0;
+		  .van-tab--active {
+		    font-weight: 600;
+		  }
+		  .van-popup {
+		    background-color: rgba(255, 255, 255, 0);
+		  }
+		  .van-tab__text--ellipsis{
+		    overflow: inherit !important;
+		  }
+		  .popup-toast {
+		    padding: 0 0 0.01rem;
+		    width: 5.42rem;
+		    background-color: #fff;
+		    border-radius: 0.12rem;
+		    .title {
+		      width: 100%;
+		      height: 1.2rem;
+		      background-color: #00205b;
+		      text-align: center;
+		      font-size: 0.36rem;
+		      font-weight: bold;
+		      color: rgba(255, 255, 255, 1);
+		      line-height: 1.2rem;
+		      border-radius: 0.12rem 0.12rem 0 0;
+		    }
+		    .service {
+		      padding: 0.3rem 0;
+		      height: auto;
+		      line-height: 0.42rem;
+		    }
+		    .con {
+		      padding: 0.3rem;
+		      background-color: #fff;
+		      font-size: 0.28rem;
+		      color: rgba(51, 51, 51, 1);
+		      line-height: 0.42rem;
+		      word-break: normal;
+		      word-wrap: break-word;
+		      .txt {
+		        color: #00205b;
+		        text-decoration: underline;
+		        font-weight: bold;
+		      }
+		    }
+		    .btn {
+		      margin: 0 0.3rem;
+		      background-color: #00205b;
+		      font-size: 0.34rem;
+		      font-weight: bold;
+		      color: rgba(255, 255, 255, 1);
+		      line-height: 0.74rem;
+		      text-align: center;
+		      border-radius: 0.37rem;
+		    }
+		    .later {
+		      margin: 0.3rem 0;
+		      padding: 0 0.3rem;
+		      font-size: 0.26rem;
+		      font-family: PingFangSC-Regular, PingFang SC;
+		      font-weight: 400;
+		      color: rgba(51, 51, 51, 1);
+		      background-color: #fff;
+		      line-height: 0.3rem;
+		      height: 0.5rem;
+		    }
+		    .surplus {
+		      padding: 0 0.3rem;
+		      text-align: right;
+		      background: #f2f4f7;
+		      line-height: 0.7rem;
+		      font-size: 0.28rem;
+		      font-weight: bold;
+		      color: rgba(0, 32, 91, 1);
+		      .now {
+		        margin: 0 0.2rem 0 0;
+		        font-size: 0.28rem;
+		        color: rgba(51, 51, 51, 1);
+		        font-weight: 400;
+		      }
+		    }
+		  }
+		  
+		  .cell-group {
+		    padding: 0.3rem 0.3rem 0.01rem;
+		    background-color: #fff;
+		    border-radius: 0 0 0.12rem 0.12rem;
+		    .cell {
+		      margin: 0 0 0.3rem 0;
+		      display: flex;
+		      font-size: 0.3rem;
+		      color: #2e2e2e;
+		      line-height: 0.36rem;
+		      .cell-r {
+		        flex: 1;
+		        text-align: right;
+		        font-size: 0.32rem;
+		        font-weight: bold;
+		        color: rgba(0, 32, 91, 1);
+		      }
+		      .vip {
+		        box-sizing: border-box;
+		        width: 45%;
+		        height: 0.66rem;
+		        border: 0.03rem solid #00205b;
+		        color: #00205b;
+		        text-align: center;
+		        line-height: 0.66rem;
+		        border-radius: 0.33rem;
+		        font-weight: bold;
+		      }
+		      .buy {
+		        margin: 0 0 0 10%;
+		        width: 45%;
+		        height: 0.66rem;
+		        background-color: #00205b;
+		        color: #fff;
+		        text-align: center;
+		        line-height: 0.66rem;
+		        border-radius: 0.33rem;
+		        font-weight: bold;
+		      }
+		      .t-bold {
+		        font-size: 0.35rem;
+		        font-weight: bold;
+		        color: rgba(46, 46, 46, 1);
+		        line-height: 0.42rem;
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.home-ctn {
+		  padding: 0 0 0.5rem 0;
+		  .van-tab--active {
+		    font-weight: 600;
+		  }
+		  .van-popup {
+		    background-color: rgba(255, 255, 255, 0);
+		  }
+		  .van-tab__text--ellipsis{
+		    overflow: inherit !important;
+		  }
+		  .popup-toast {
+		    padding: 0 0 0.01rem;
+		    width: 5.42rem;
+		    background-color: #fff;
+		    border-radius: 0.12rem;
+		    .title {
+		      width: 100%;
+		      height: 1.2rem;
+		      background-color: #00205b;
+		      text-align: center;
+		      font-size: 0.36rem;
+		      font-weight: bold;
+		      color: rgba(255, 255, 255, 1);
+		      line-height: 1.2rem;
+		      border-radius: 0.12rem 0.12rem 0 0;
+		    }
+		    .service {
+		      padding: 0.3rem 0;
+		      height: auto;
+		      line-height: 0.42rem;
+		    }
+		    .con {
+		      padding: 0.3rem;
+		      background-color: #fff;
+		      font-size: 0.28rem;
+		      color: rgba(51, 51, 51, 1);
+		      line-height: 0.42rem;
+		      word-break: normal;
+		      word-wrap: break-word;
+		      .txt {
+		        color: #00205b;
+		        text-decoration: underline;
+		        font-weight: bold;
+		      }
+		    }
+		    .btn {
+		      margin: 0 0.3rem;
+		      background-color: #00205b;
+		      font-size: 0.34rem;
+		      font-weight: bold;
+		      color: rgba(255, 255, 255, 1);
+		      line-height: 0.74rem;
+		      text-align: center;
+		      border-radius: 0.37rem;
+		    }
+		    .later {
+		      margin: 0.3rem 0;
+		      padding: 0 0.3rem;
+		      font-size: 0.26rem;
+		      font-family: PingFangSC-Regular, PingFang SC;
+		      font-weight: 400;
+		      color: rgba(51, 51, 51, 1);
+		      background-color: #fff;
+		      line-height: 0.3rem;
+		      height: 0.5rem;
+		    }
+		    .surplus {
+		      padding: 0 0.3rem;
+		      text-align: right;
+		      background: #f2f4f7;
+		      line-height: 0.7rem;
+		      font-size: 0.28rem;
+		      font-weight: bold;
+		      color: rgba(0, 32, 91, 1);
+		      .now {
+		        margin: 0 0.2rem 0 0;
+		        font-size: 0.28rem;
+		        color: rgba(51, 51, 51, 1);
+		        font-weight: 400;
+		      }
+		    }
+		  }
+		  
+		  .cell-group {
+		    padding: 0.3rem 0.3rem 0.01rem;
+		    background-color: #fff;
+		    border-radius: 0 0 0.12rem 0.12rem;
+		    .cell {
+		      margin: 0 0 0.3rem 0;
+		      display: flex;
+		      font-size: 0.3rem;
+		      color: #2e2e2e;
+		      line-height: 0.36rem;
+		      .cell-r {
+		        flex: 1;
+		        text-align: right;
+		        font-size: 0.32rem;
+		        font-weight: bold;
+		        color: rgba(0, 32, 91, 1);
+		      }
+		      .vip {
+		        box-sizing: border-box;
+		        width: 45%;
+		        height: 0.66rem;
+		        border: 0.03rem solid #00205b;
+		        color: #00205b;
+		        text-align: center;
+		        line-height: 0.66rem;
+		        border-radius: 0.33rem;
+		        font-weight: bold;
+		      }
+		      .buy {
+		        margin: 0 0 0 10%;
+		        width: 45%;
+		        height: 0.66rem;
+		        background-color: #00205b;
+		        color: #fff;
+		        text-align: center;
+		        line-height: 0.66rem;
+		        border-radius: 0.33rem;
+		        font-weight: bold;
+		      }
+		      .t-bold {
+		        font-size: 0.35rem;
+		        font-weight: bold;
+		        color: rgba(46, 46, 46, 1);
+		        line-height: 0.42rem;
+		      }
+		    }
+		  }
+		}
+	}
+	
+	
 
-.cell-group {
-  padding: 0.3rem 0.3rem 0.01rem;
-  background-color: #fff;
-  border-radius: 0 0 0.12rem 0.12rem;
-  .cell {
-    margin: 0 0 0.3rem 0;
-    display: flex;
-    font-size: 0.3rem;
-    color: #2e2e2e;
-    line-height: 0.36rem;
-    .cell-r {
-      flex: 1;
-      text-align: right;
-      font-size: 0.32rem;
-      font-weight: bold;
-      color: rgba(0, 32, 91, 1);
-    }
-    .vip {
-      box-sizing: border-box;
-      width: 45%;
-      height: 0.66rem;
-      border: 0.03rem solid #00205b;
-      color: #00205b;
-      text-align: center;
-      line-height: 0.66rem;
-      border-radius: 0.33rem;
-      font-weight: bold;
-    }
-    .buy {
-      margin: 0 0 0 10%;
-      width: 45%;
-      height: 0.66rem;
-      background-color: #00205b;
-      color: #fff;
-      text-align: center;
-      line-height: 0.66rem;
-      border-radius: 0.33rem;
-      font-weight: bold;
-    }
-    .t-bold {
-      font-size: 0.35rem;
-      font-weight: bold;
-      color: rgba(46, 46, 46, 1);
-      line-height: 0.42rem;
-    }
-  }
-}
+
 </style>
