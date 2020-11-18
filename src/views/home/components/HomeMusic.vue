@@ -39,10 +39,10 @@ export default class HomeMusic extends Vue {
   private isHaveData: boolean = false;
   private created() {
     this.getMusicPlaylistHot();
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   public getMusicPlaylistHot_old() {
@@ -79,54 +79,129 @@ export default class HomeMusic extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.music-box {
-  padding: 0 0.28rem;
-  margin: 0 0.28rem;
-  background-color: #fff;
-  border-radius: 0.1rem;
-  :last-child {
-    border-bottom: none;
-  }
-}
-.music-list {
-  display: flex;
-  padding: 0.28rem 0;
-  border-bottom: 0.02rem solid #efefef;
-  align-items: center;
-  .music-l {
-    display: flex;
-    width: 1rem;
-    height: 1rem;
-    overflow: hidden;
-    border-radius: 0.12rem;
-    background-color: #2d2d2d;
-    align-items: center;
-    .img {
-      width: 100%;
-    }
-  }
+	
+@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.music-box {
+		  padding: 0 0.28rem;
+		  margin: 0 0.28rem;
+		  background-color: #fff;
+		  border-radius: 0.1rem;
+		  :last-child {
+		    border-bottom: none;
+		  }
+		  
+		  .music-list {
+		    display: flex;
+		    padding: 0.28rem 0;
+		    border-bottom: 0.02rem solid #efefef;
+		    align-items: center;
+		    .music-l {
+		      display: flex;
+		      width: 1rem;
+		      height: 1rem;
+		      overflow: hidden;
+		      border-radius: 0.12rem;
+		      background-color: #2d2d2d;
+		      align-items: center;
+		      .img {
+		        width: 100%;
+		      }
+		    }
+		  
+		    .f1 {
+		      flex: 1;
+		      margin: 0 0 0 0.16rem;
+		      display: flex;
+		      flex-direction: column;
+		      align-content: center;
+		      justify-content: center;
+		  
+		      .name {
+		        flex: 1;
+		        font-size: 0.28rem;
+		        color: #666;
+		        line-height: 0.5rem;
+		        font-weight: 500;
+		      }
+		      .author {
+		        flex: 1;
+		        font-size: 0.24rem;
+		        color: #999;
+		        line-height: 0.5rem;
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.music-box {
+		  padding: rpx(10) rpx(20);
+		  margin: 0 rpx(20);
+		  background-color: #fff;
+		  border-radius: 0.1rem;
+		  :last-child {
+		    border-bottom: none;
+		  }
+		  
+		  .music-list {
+		    display: flex;
+		    padding: rpx(10) 0;
+		    border-bottom: 0.02rem solid #efefef;
+		    align-items: center;
+			
+			&:last-child{
+				border-bottom: none;
+			}
+			
+		    .music-l {
+		      display: flex;
+		      width: rpx(60);
+		      height: rpx(60);
+		      overflow: hidden;
+		      border-radius: rpx(4);
+		      background-color: #2d2d2d;
+		      align-items: center;
+		      .img {
+		        width: 100%;
+		      }
+		    }
+		  
+		    .f1 {
+		      flex: 1;
+		      margin: 0 0 0 0.16rem;
+		      display: flex;
+		      flex-direction: column;
+		      align-content: center;
+			  height: rpx(60);
+		      justify-content: space-between;
+		  
+		      .name {
+		        // flex: 1;
+		        font-size: rpx(16);
+		        color: #666;
+		        line-height: rpx(16);
+		        font-weight: 500;
+		      }
+		      .author {
+		        // flex: 1;
+		        font-size: rpx(12);
+		        color: #999;
+		        line-height: rpx(12);
+		      }
+		    }
+			
+			.icon{
+				width: rpx(24);
+				height: rpx(24);
+			}
+		  }
+		}
+	}
+	
+	
 
-  .f1 {
-    flex: 1;
-    margin: 0 0 0 0.16rem;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
 
-    .name {
-      flex: 1;
-      font-size: 0.28rem;
-      color: #666;
-      line-height: 0.5rem;
-      font-weight: 500;
-    }
-    .author {
-      flex: 1;
-      font-size: 0.24rem;
-      color: #999;
-      line-height: 0.5rem;
-    }
-  }
-}
 </style>
