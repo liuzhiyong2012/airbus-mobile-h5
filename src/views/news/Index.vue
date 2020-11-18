@@ -213,44 +213,86 @@ export default class NewsList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.abus-scroller-box {
-  margin: 0.2rem auto;
-  padding: 0;
-  width: 5rem;
-  overflow: hidden;
-  height: 2.32rem;
-  background: #fff;
-  border-radius: 0rem!important;
-}
-.van-tabs{
-    width: 5rem;
-    margin: 0 auto;
-}
-.van-cell {
-  font-weight: 500;
-  padding-top: 0;
-  padding-bottom: 0;
-  span {
-    color: #2e2e2e;
-  }
-}
-.news-filter {
-  /deep/ .van-ellipsis {
-    font-size: 0.13rem;
-  }
-  /deep/ .van-dropdown-menu__bar {
-    height: 0.7rem;
-    box-shadow: 0 0 0 rgba(100, 101, 102, 0.08);
-  }
-  /deep/ .van-cell__title,
-  .van-cell__value {
-    font-size: 0.12rem;
-  }
-  .filter-btn {
-    color: linear-gradient(to right, #4bb0ff, #6149f6);
-  }
-}
-.news-list {
-  background: #fff;
-}
+    @import '../../assets/style/index.scss';
+
+    @media  (orientation:portrait) {
+        .abus-scroller-box {
+            margin: 0.2rem auto;
+            padding: 0;
+            width: 93%;
+            overflow: hidden;
+            height: 3.14rem;
+            background: #fff;
+        }
+        .van-cell {
+            font-weight: 500;
+            padding-top: 0;
+            padding-bottom: 0;
+            span {
+                color: #2e2e2e;
+            }
+        }
+        .news-filter {
+            /deep/ .van-ellipsis {
+                font-size: 0.13rem;
+            }
+            /deep/ .van-dropdown-menu__bar {
+                height: 0.7rem;
+                box-shadow: 0 0 0 rgba(100, 101, 102, 0.08);
+            }
+            /deep/ .van-cell__title,
+            .van-cell__value {
+                font-size: 0.12rem;
+            }
+            .filter-btn {
+                color: linear-gradient(to right, #4bb0ff, #6149f6);
+            }
+        }
+        .news-list {
+            background: #fff;
+        }
+    }
+
+    @media  (orientation:landscape) {
+        .abus-scroller-box {
+            margin: 0.2rem auto;
+            padding: 0;
+            width: 5rem;
+            overflow: hidden;
+            height: 2.32rem;
+            background: #fff;
+            border-radius: 0rem!important;
+        }
+        .van-tabs{
+            width: 5rem;
+            margin: 0 auto;
+        }
+        .van-cell {
+            font-weight: 500;
+            padding-top: 0;
+            padding-bottom: 0;
+            span {
+                color: #2e2e2e;
+            }
+        }
+        .news-filter {
+            /deep/ .van-ellipsis {
+                font-size: 0.13rem;
+            }
+            /deep/ .van-dropdown-menu__bar {
+                height: 0.7rem;
+                box-shadow: 0 0 0 rgba(100, 101, 102, 0.08);
+            }
+            /deep/ .van-cell__title,
+            .van-cell__value {
+                font-size: 0.12rem;
+            }
+            .filter-btn {
+                color: linear-gradient(to right, #4bb0ff, #6149f6);
+            }
+        }
+        .news-list {
+            background: #fff;
+        }
+    }
 </style>

@@ -63,9 +63,21 @@
 </script>
 
 <style lang="scss" scoped>
-    .f1{
-        /deep/ .van-tab{
-            line-height: 0.4rem;
+    @import '../../../assets/style/index.scss';
+
+    @media  (orientation:portrait) {
+        .f1{
+            /deep/ .van-tab{
+                line-height: 0.4rem;
+            }
+        }
+    }
+
+    @media  (orientation:landscape) {
+        .f1{
+            /deep/ .van-tab{
+                line-height: 0.4rem;
+            }
         }
     }
 </style>

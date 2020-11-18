@@ -101,24 +101,40 @@
 </script>
 
 <style lang="scss" scoped>
-    .enter-box {
-        margin-top:0.14rem;
-        padding: 0.2rem;
-        background-color: #fff;
-        .van-field {
-            border: 0.02rem solid #ccc;
-            border-radius: 0.05rem;
-            min-height: 2rem;
+    @import '../../../assets/style/index.scss';
+
+    @media  (orientation:portrait) {
+        .enter-box {
+            padding: 0.3rem;
+            background-color: #fff;
+            .van-field {
+                border: 0.02rem solid #ccc;
+                border-radius: 0.05rem;
+                min-height: 2rem;
+            }
         }
     }
-    .abus-button-box{
-        margin-top: 0.41rem;
-        .abus-button{
-            margin: 0 auto;
-            font-size: 0.17rem;
-            width: 3.4rem;
-            height: 0.4rem;
-            line-height: 0.4rem;
+
+    @media  (orientation:landscape) {
+        .enter-box {
+            margin-top:0.14rem;
+            padding: 0.2rem;
+            background-color: #fff;
+            .van-field {
+                border: 0.02rem solid #ccc;
+                border-radius: 0.05rem;
+                min-height: 2rem;
+            }
+        }
+        .abus-button-box{
+            margin-top: 0.41rem;
+            .abus-button{
+                margin: 0 auto;
+                font-size: 0.17rem;
+                width: 3.4rem;
+                height: 0.4rem;
+                line-height: 0.4rem;
+            }
         }
     }
 </style>

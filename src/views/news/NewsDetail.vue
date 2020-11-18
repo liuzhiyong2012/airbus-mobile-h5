@@ -135,83 +135,123 @@
     }
 </script>
 <style lang="scss" scoped>
-    .news-img {
-        width: 5rem;
-        margin: 0 auto;
 
-        .banner {
-            width: 100%;
+    @import '../../assets/style/index.scss';
+
+    @media  (orientation:portrait) {
+        .news-right-heart {
+            // display: inline-block;
+            img {
+                // position: absolute;
+                // right: 0;
+                // top: 0.1rem;
+                // padding: 0.2rem;
+                width: 0.3rem;
+            }
         }
-    }
 
-    .news-right-heart {
-        // display: inline-block;
-        img {
-            // position: absolute;
-            // right: 0;
-            // top: 0.1rem;
-            // padding: 0.2rem;
-            width: 0.3rem;
+        .news-title-heart{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            .news-right-heart-box{
+                margin-right: 0.3rem;
+            }
         }
-    }
 
-    .news-title-heart {
-        width: 5rem;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #fff;
 
-        .news-right-heart-box {
-            margin-right: 0.3rem;
-
-            .news-right-heart {
-                position: relative;
-                left: 0.2rem;
-
-                img {
-                    width: 0.16rem;
-                    height: 0.14rem;
-                }
+        .news-title {
+            padding: 0.25rem;
+            line-height: 0.46rem;
+            background: #fff;
+            font-weight: bold;
+            font-size: 0.32rem;
+            color: #2e2e2e;
+        }
+        .news-time {
+            padding: 0.1rem 0.25rem;
+            height: 0.2rem;
+            background: #fff;
+            line-height: 0.2rem;
+            font-size: 0.24rem;
+            color: #ddc8c8;
+        }
+        .news-info {
+            padding: 0.25rem;
+            background: #fff;
+            line-height: 0.36rem;
+            text-align: justify;
+            font-size: 0.28rem;
+            font-weight: 400;
+            color: #666666;
+            /deep/ img{
+                width: 100%;
             }
         }
     }
-
-
-    .news-title {
-        padding: 0.1rem 0rem;
-        line-height: 0.3rem;
-        background: #fff;
-        font-weight: bold;
-        font-size: 0.18rem;
-        color: #2e2e2e;
-    }
-
-    .news-time {
-
-        height: 0.2rem;
-        width: 5rem;
-        margin: 0 auto;
-        background: #fff;
-        line-height: 0.2rem;
-        font-size: 0.14rem;
-        color: #BFBFBF;
-    }
-
-    .news-info {
-        width: 5rem;
-        margin: 0 auto;
-        padding: 0.1rem;
-        background: #fff;
-        line-height: 0.36rem;
-        text-align: justify;
-        font-size: 0.14rem;
-        font-weight: 400;
-        color: #666666;
-
-        /deep/ img {
-            width: 100%;
+    @media  (orientation:landscape) {
+        .news-img {
+            width: 5rem;
+            margin: 0 auto;
+            .banner {
+                width: 100%;
+            }
+        }
+        .news-right-heart {
+            img {
+                width: 0.3rem;
+            }
+        }
+        .news-title-heart {
+            width: 5rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            .news-right-heart-box {
+                margin-right: 0.3rem;
+                .news-right-heart {
+                    position: relative;
+                    left: 0.2rem;
+                    img {
+                        width: 0.16rem;
+                        height: 0.14rem;
+                    }
+                }
+            }
+        }
+        .news-title {
+            padding: 0.1rem 0rem;
+            line-height: 0.3rem;
+            background: #fff;
+            font-weight: bold;
+            font-size: 0.18rem;
+            color: #2e2e2e;
+        }
+        .news-time {
+            height: 0.2rem;
+            width: 5rem;
+            margin: 0 auto;
+            background: #fff;
+            line-height: 0.2rem;
+            font-size: 0.14rem;
+            color: #BFBFBF;
+        }
+        .news-info {
+            width: 5rem;
+            margin: 0 auto;
+            padding: 0.1rem;
+            background: #fff;
+            line-height: 0.36rem;
+            text-align: justify;
+            font-size: 0.14rem;
+            font-weight: 400;
+            color: #666666;
+            /deep/ img {
+                width: 100%;
+            }
         }
     }
 </style>

@@ -107,43 +107,78 @@
 </script>
 
 <style lang="scss" scoped>
-  .lang-box {
-    margin-top:0.14rem;
-    padding: 0 0.3rem;
-    background-color: #fff;
-    .lang-cell {
-      padding: 0.3rem 0;
+  @import '../../../assets/style/index.scss';
+
+  @media  (orientation:portrait) {
+    .lang-box {
+      margin-top:0.20rem;
+      padding: 0 0.3rem;
+      background-color: #fff;
+      .lang-cell {
+        padding: 0.3rem 0;
+      }
+      .text-selected {
+        padding: 0 0 0 0.2rem;
+        font-size: 0.32rem;
+        color: rgba(0, 32, 91, 1);
+        font-weight: bold;
+      }
+      .text-unselected {
+        padding: 0 0 0 0.2rem;
+        font-size: 0.32rem;
+        color: #999;
+        font-weight: 400;
+      }
     }
-    .van-radio{
-      height: 0.01rem;
+    .icon-text {
+      margin: 0 0 0.08rem 0;
+      width: 0.24rem;
+      height: 0.24rem;
     }
-    .text-selected {
-      padding: 0 0 0 0.08rem;
-      font-size: 0.16rem;
-      color: rgba(0, 32, 91, 1);
-      font-weight: bold;
-      position: relative;
-      bottom: 0.02rem;
-    }
-    .text-unselected {
-      padding: 0 0 0 0.08rem;
-      font-size: 0.16rem;
-      color: #999;
-      font-weight: 400;
-      position: relative;
-      bottom: 0.02rem;
+    .i-icon {
+      padding: 0 0 0 0.2rem;
     }
   }
-  .icon-text {
-    margin: 0 0 0.08rem 0;
-    width: 0.12rem;
-    height: 0.12rem;
-    position: relative;
-    top: 0.04rem;
-  }
-  .i-icon {
-    padding: 0 0 0 0.08rem;
-    width: 0.2rem;
-    height: 0.2rem;
+
+  @media  (orientation:landscape) {
+    .lang-box {
+      margin-top:0.14rem;
+      padding: 0 0.3rem;
+      background-color: #fff;
+      .lang-cell {
+        padding: 0.3rem 0;
+      }
+      .van-radio{
+        height: 0.01rem;
+      }
+      .text-selected {
+        padding: 0 0 0 0.08rem;
+        font-size: 0.16rem;
+        color: rgba(0, 32, 91, 1);
+        font-weight: bold;
+        position: relative;
+        bottom: 0.02rem;
+      }
+      .text-unselected {
+        padding: 0 0 0 0.08rem;
+        font-size: 0.16rem;
+        color: #999;
+        font-weight: 400;
+        position: relative;
+        bottom: 0.02rem;
+      }
+    }
+    .icon-text {
+      margin: 0 0 0.08rem 0;
+      width: 0.12rem;
+      height: 0.12rem;
+      position: relative;
+      top: 0.04rem;
+    }
+    .i-icon {
+      padding: 0 0 0 0.08rem;
+      width: 0.2rem;
+      height: 0.2rem;
+    }
   }
 </style>

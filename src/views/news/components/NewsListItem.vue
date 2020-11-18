@@ -130,88 +130,168 @@ export default class NewsListItem extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.news-list-wrap {
-  width: 5rem;
-  height: 1rem;
-  background: #fff;
-  margin: 0 auto;
-  border-radius: 0.1rem;
+  @import '../../../assets/style/index.scss';
 
-  .news-list-item {
-    display: flex;
-    padding: 0.2rem;
-    align-items: center;
+  @media  (orientation:portrait) {
+    .news-list-wrap {
+      width: 92%;
+      background: #fff;
+      margin: 0 auto;
+      border-radius: 0.1rem;
 
-    .item-img {
-      width: 1.06rem;
-      height: 0.7rem;
-      border-radius: 0.12rem;
-      overflow: hidden;
-      img {
-        width: 100%;
-      }
-    }
+      .news-list-item {
+        display: flex;
+        padding: 0.28rem 0;
+        align-items: center;
 
-    .item-info {
-      flex: 1;
-      margin: 0 0 0 0.2rem;
-      display: flex;
-      flex-direction: column;
-      align-content: space-around;
-      height: 1.1rem;
-      .name {
-        flex: 3;
-        font-size: 0.16rem;
-        color: #333333;
-        line-height: 0.7rem;
-        font-weight: 600;
-        width: 2.98rem;
-        .line-two {
-          height: 0.52rem;
-          text-overflow: -o-ellipsis-lastline;
+        .item-img {
+          width: 2.1rem;
+          height: 1.38rem;
+          border-radius: 0.12rem;
           overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-      }
-      .author {
-        flex: 1;
-        font-size: 0.12rem;
-        color: #333333;
-
-        .line-one {
-          width: 100%;
-          height: 0.32rem;
-          line-height: 0.16rem;
-          display: flex;
-          justify-content: space-between;
-          position: relative;
-          bottom: 0.25rem;
-          .author-left-info {
-            display: inline-block;
-            text-overflow: -o-ellipsis-lastline;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            width: 92%;
+          img {
+            width: 100%;
           }
-          .author-right-heart {
-            position: relative;
-            bottom: 0.25rem;
-            display: inline-block;
-            width: 0.16rem;
-            height: 0.14rem;
-            img {
+        }
+
+        .item-info {
+          flex: 1;
+          margin: 0 0 0 0.16rem;
+          display: flex;
+          flex-direction: column;
+          align-content: space-around;
+          height: 1.38rem;
+          .name {
+            flex: 3;
+            font-size: 0.3rem;
+            color: #333333;
+            line-height: 0.35rem;
+            font-weight: 600;
+            .line-two {
+              height: 0.7rem;
+              text-overflow: -o-ellipsis-lastline;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+          }
+          .author {
+            flex: 1;
+            font-size: 0.24rem;
+            color: #999;
+            .line-one {
               width: 100%;
+              height: 0.35rem;
+              line-height: 0.35rem;
+              display: flex;
+              justify-content: space-between;
+
+              .author-left-info {
+                display: inline-block;
+                text-overflow: -o-ellipsis-lastline;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                width: 92%;
+              }
+              .author-right-heart {
+                display: inline-block;
+                width: 0.3rem;
+                img {
+                  width: 100%;
+                }
+              }
             }
           }
         }
       }
     }
   }
-}
+
+  @media  (orientation:landscape) {
+    .news-list-wrap {
+      width: 5rem;
+      height: 1rem;
+      background: #fff;
+      margin: 0 auto;
+      border-radius: 0.1rem;
+      .news-list-item {
+        display: flex;
+        padding: 0.2rem;
+        align-items: center;
+        .item-img {
+          width: 1.06rem;
+          height: 0.7rem;
+          border-radius: 0.12rem;
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
+        }
+        .item-info {
+          flex: 1;
+          margin: 0 0 0 0.2rem;
+          display: flex;
+          flex-direction: column;
+          align-content: space-around;
+          height: 1.1rem;
+          .name {
+            flex: 3;
+            font-size: 0.16rem;
+            color: #333333;
+            line-height: 0.7rem;
+            font-weight: 600;
+            width: 2.98rem;
+            .line-two {
+              height: 0.52rem;
+              text-overflow: -o-ellipsis-lastline;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+          }
+          .author {
+            flex: 1;
+            font-size: 0.12rem;
+            color: #333333;
+            .line-one {
+              width: 100%;
+              height: 0.32rem;
+              line-height: 0.16rem;
+              display: flex;
+              justify-content: space-between;
+              position: relative;
+              bottom: 0.25rem;
+              .author-left-info {
+                display: inline-block;
+                text-overflow: -o-ellipsis-lastline;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                width: 92%;
+              }
+              .author-right-heart {
+                position: relative;
+                bottom: 0.25rem;
+                display: inline-block;
+                width: 0.16rem;
+                height: 0.14rem;
+                img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 </style>
