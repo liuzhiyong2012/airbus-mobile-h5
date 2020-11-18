@@ -91,103 +91,206 @@ export default class InternetIndex extends Vue{
 </script>
 
 <style lang="scss" scoped>
-.internet {
-  min-height: 100vh;
-  .padding {
-    padding: 0.3rem 0.3rem 0;
-    box-sizing: border-box;
-    width: 100%;
-    .card {
-      box-sizing: border-box;
-      margin: 0 0 0.3rem 0;
-      padding: 0.3rem;
-      border-radius: 0.08rem;
-      box-shadow: 0 0 0.1rem #efefef;
-      width: 100%;
-      background-color: #fff;
-      .header {
-        display: flex;
-        .time {
-          flex: 1;
-          font-size: 0.42rem;
-          font-weight: bold;
-          color: rgba(51, 51, 51, 1);
-          line-height: 0.5rem;
+@import '../../assets/style/index.scss';
+
+@media  (orientation:portrait) {
+    .internet {
+        min-height: 100vh;
+        .padding {
+            padding: 0.3rem 0.3rem 0;
+            box-sizing: border-box;
+            width: 100%;
+            .card {
+                box-sizing: border-box;
+                margin: 0 0 0.3rem 0;
+                padding: 0.3rem;
+                border-radius: 0.08rem;
+                box-shadow: 0 0 0.1rem #efefef;
+                width: 100%;
+                background-color: #fff;
+                .header {
+                    display: flex;
+                    .time {
+                        flex: 1;
+                        font-size: 0.42rem;
+                        font-weight: bold;
+                        color: rgba(51, 51, 51, 1);
+                        line-height: 0.5rem;
+                    }
+                    .price {
+                        font-size: 0.42rem;
+                        font-weight: bold;
+                        color: rgba(0, 32, 91, 1);
+                        line-height: 0.5rem;
+                    }
+                }
+                .con {
+                    display: flex;
+                    margin: 0.3rem 0 0 0;
+                    .con-l {
+                        flex: 1;
+                        font-size: 0.22rem;
+                        color: rgba(51, 51, 51, 1);
+                        line-height: 0.26rem;
+                        text-overflow: -o-ellipsis-lastline;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                    .pay {
+                        margin: 0 0 0 1rem;
+                        width: 1.21rem;
+                        height: 0.5rem;
+                        background: rgba(0, 31, 91, 1);
+                        border-radius: 0.25rem;
+                        color: #fff;
+                        line-height: 0.5rem;
+                        text-align: center;
+                    }
+                }
+                .text {
+                    margin: 0.3rem 0 0 0;
+                    font-size: 0.22rem;
+                    color: rgba(51, 51, 51, 1);
+                    line-height: 0.26rem;
+                }
+                .bottom {
+                    display: flex;
+                    margin: 0.3rem 0 0;
+                    width: 100%;
+                    height: 0.6rem;
+                    background: rgba(0, 31, 91, 0.05);
+                    border-radius: 0.04rem;
+                    .f1 {
+                        display: flex;
+                        min-width: 1.3rem;
+                        padding: 0 0 0 0.3rem;
+                        line-height: 0.6rem;
+                        align-items: center;
+                        justify-content: center;
+                        .icon {
+                            width: 0.36rem;
+                            height: 0.36rem;
+                        }
+                        .time-t {
+                            flex: 1;
+                            margin-left: 0.1rem;
+                            font-size: 0.24rem;
+                            font-weight: 400;
+                            color: rgba(46, 46, 46, 1);
+                            text-overflow: -o-ellipsis-lastline;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                        }
+                    }
+                }
+            }
         }
-        .price {
-          font-size: 0.42rem;
-          font-weight: bold;
-          color: rgba(0, 32, 91, 1);
-          line-height: 0.5rem;
-        }
-      }
-      .con {
-        display: flex;
-        margin: 0.3rem 0 0 0;
-        .con-l {
-          flex: 1;
-          font-size: 0.22rem;
-          color: rgba(51, 51, 51, 1);
-          line-height: 0.26rem;
-          text-overflow: -o-ellipsis-lastline;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-        .pay {
-          margin: 0 0 0 1rem;
-          width: 1.21rem;
-          height: 0.5rem;
-          background: rgba(0, 31, 91, 1);
-          border-radius: 0.25rem;
-          color: #fff;
-          line-height: 0.5rem;
-          text-align: center;
-        }
-      }
-      .text {
-        margin: 0.3rem 0 0 0;
-        font-size: 0.22rem;
-        color: rgba(51, 51, 51, 1);
-        line-height: 0.26rem;
-      }
-      .bottom {
-        display: flex;
-        margin: 0.3rem 0 0;
-        width: 100%;
-        height: 0.6rem;
-        background: rgba(0, 31, 91, 0.05);
-        border-radius: 0.04rem;
-        .f1 {
-          display: flex;
-          min-width: 1.3rem;
-          padding: 0 0 0 0.3rem;
-          line-height: 0.6rem;
-          align-items: center;
-          justify-content: center;
-          .icon {
-            width: 0.36rem;
-            height: 0.36rem;
-          }
-          .time-t {
-            flex: 1;
-            margin-left: 0.1rem;
-            font-size: 0.24rem;
-            font-weight: 400;
-            color: rgba(46, 46, 46, 1);
-            text-overflow: -o-ellipsis-lastline;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-          }
-        }
-        
-      }
     }
-  }
+}
+
+@media  (orientation:landscape) {
+    .internet {
+        min-height: 100vh;
+        .padding {
+            padding: 0.2rem 0.2rem 0;
+            box-sizing: border-box;
+            width: 100%;
+            .card {
+                box-sizing: border-box;
+                margin: 0 0 0.1rem 0;
+                padding: 0.2rem;
+                border-radius: 0.08rem;
+                box-shadow: 0 0 0.1rem #efefef;
+                width: 100%;
+                background-color: #fff;
+                .header {
+                    display: flex;
+                    .time {
+                        flex: 1;
+                        font-size: 0.2rem;
+                        font-weight: bold;
+                        color: rgba(51, 51, 51, 1);
+                        line-height: 0.5rem;
+                    }
+                    .price {
+                        font-size: 0.2rem;
+                        font-weight: bold;
+                        color: rgba(0, 32, 91, 1);
+                        line-height: 0.5rem;
+                    }
+                }
+                .con {
+                    display: flex;
+                    .con-l {
+                        flex: 1;
+                        font-size: 0.12rem;
+                        //color: rgba(51, 51, 51, 1);
+                        color: #B0B0B0;
+                        line-height: 0.26rem;
+                        text-overflow: -o-ellipsis-lastline;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                    .pay {
+                        margin: 0 0 0 1rem;
+                        width: 0.6rem;
+                        height: 0.28rem;
+                        background: rgba(0, 31, 91, 1);
+                        border-radius: 0.25rem;
+                        color: #fff;
+                        line-height: 0.28rem;
+                        font-size: 0.14rem;
+                        text-align: center;
+                    }
+                }
+                .text {
+                    font-size: 0.12rem;
+                    color: rgba(51, 51, 51, 1);
+                    line-height: 0.26rem;
+                }
+                .bottom {
+                    display: flex;
+                    width: 100%;
+                    height: 0.3rem;
+                    background: rgba(0, 31, 91, 0.05);
+                    border-radius: 0.04rem;
+                    .f1 {
+                        display: flex;
+                        min-width: 1.3rem;
+                        padding: 0 0 0 0.1rem;
+                        line-height: 0.6rem;
+                        align-items: center;
+                        justify-content: center;
+                        .icon {
+                            width: 0.18rem;
+                            height: 0.18rem;
+                        }
+                        .time-t {
+                            flex: 1;
+                            margin-left: 0.05rem;
+                            font-size: 0.12rem;
+                            font-weight: 400;
+                            color: rgba(46, 46, 46, 1);
+                            text-overflow: -o-ellipsis-lastline;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
