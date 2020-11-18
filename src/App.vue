@@ -356,7 +356,7 @@
 	  margin: 0 rpx(20);
 	  padding: rpx(20);
 	  background-color: #fff;
-	  min-height: 2.4rem;
+	  // min-height: 2.4rem;
 	  border-radius: rpx(6);
 	  box-shadow: 0 0 0.1rem #efefef;
 	}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="abus-scroller-box" :style="{'backgroundColor': isHaveData?'#fff':'#f2f4f7'}">
+    <div class="abus-scroller-box home-dish-ctn" :style="{'backgroundColor': isHaveData?'#fff':'#f2f4f7'}">
       <scroller>
         <div
           slot="list"
@@ -115,12 +115,6 @@ export default {
           _this.$toast('暂时缺货');
         }
       }
-      // this.$router.push({
-      //   name: "dishDetail",
-      //   query: {
-      //     id: item.Id,
-      //   },
-      // });
     },
     getDishesRecommendedList() {
       DishService.getDishesRecommendedList({}).then((res) => {
@@ -138,45 +132,107 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.s-box {
-  float: left;
-  // height: 1.6rem;
-  margin: 0 0 0 0.28rem;
-  border-radius: 0.08rem;
-  width: 1.6rem;
-  .img-box {
-    display: flex;
-    align-items: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    text-align: center;
-    box-shadow: 0 0 0.08rem #efefef;
-    overflow: hidden;
-    .img {
-      width: 100%;
-      border-radius: 0.1rem;
-    }
-  }
+	
+	@import '../../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.home-dish-ctn{
+			.s-box {
+			  float: left;
+			  margin: 0 0 0 0.28rem;
+			  border-radius: 0.08rem;
+			  width: 1.6rem;
+			  .img-box {
+			    display: flex;
+			    align-items: center;
+			    width: 1.6rem;
+			    height: 1.6rem;
+			    text-align: center;
+			    box-shadow: 0 0 0.08rem #efefef;
+			    overflow: hidden;
+			    .img {
+			      width: 100%;
+			      border-radius: 0.1rem;
+			    }
+			  }
+			
+			  .name {
+			    line-height: 0.5rem;
+			    overflow: hidden;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			    width: 100%;
+			    height: 0.5rem;
+			    color: rgb(51, 51, 51);
+			  }
+			  .price {
+			    color: rgb(0, 32, 91);
+			    font-size: 0.24rem;
+			    font-weight: bold;
+			    overflow: hidden;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			  }
+			}
+			.s-box-right {
+			  margin-right: 0.82rem;
+			}
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		
+			.home-dish-ctn{
+				margin: 0 rpx(20);
+                border-radius: rpx(4);
+				padding:rpx(20);
+				.s-box {
+				  float: left;
+				  margin: 0 rpx(28) 0 0;
+				  border-radius: 0.08rem;
+				  width: rpx(120);
+				  .img-box {
+				    display: flex;
+				    align-items: center;
+				    width: rpx(120);
+				    height: rpx(120);
+				    text-align: center;
+				    box-shadow: 0 0 0.08rem #efefef;
+					margin-bottom: rpx(6);
+				    overflow: hidden;
+				    .img {
+				      width: 100%;
+				      border-radius: 0.1rem;
+				    }
+				  }
+				
+				  .name {
+				    line-height: rpx(16);
+					font-size: rpx(14);
+					margin-bottom: rpx(6);
+				    overflow: hidden;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				    width: 100%;
+				    // height: 0.5rem;
+				    color: rgb(51, 51, 51);
+				  }
+				  .price {
+				    color: rgb(0, 32, 91);
+				    line-height: rpx(12);
+					font-size: rpx(12);
+				    font-weight: bold;
+				    overflow: hidden;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				  }
+				}
+				.s-box-right {
+				  margin-right: 0.82rem;
+				}
+			}
+		
+	}
+	
 
-  .name {
-    line-height: 0.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
-    height: 0.5rem;
-    color: rgb(51, 51, 51);
-  }
-  .price {
-    color: rgb(0, 32, 91);
-    font-size: 0.24rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-}
-.s-box-right {
-  margin-right: 0.82rem;
-}
 </style>
