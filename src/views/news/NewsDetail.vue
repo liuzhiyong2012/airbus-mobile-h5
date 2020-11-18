@@ -180,7 +180,7 @@
 
 
     .news-title {
-        padding: 0.25rem 0rem;
+        padding: 0.1rem 0rem;
         line-height: 0.3rem;
         background: #fff;
         font-weight: bold;
@@ -202,7 +202,7 @@
     .news-info {
         width: 5rem;
         margin: 0 auto;
-        padding: 0.25rem;
+        padding: 0.1rem;
         background: #fff;
         line-height: 0.36rem;
         text-align: justify;
