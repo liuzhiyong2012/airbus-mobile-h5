@@ -216,10 +216,11 @@ export default class NewsList extends Vue {
 .abus-scroller-box {
   margin: 0.2rem auto;
   padding: 0;
-  width: 93%;
+  width: 5rem;
   overflow: hidden;
-  height: 3.14rem;
+  height: 2.32rem;
   background: #fff;
+  border-radius: 0rem!important;
 }
 .van-cell {
   font-weight: 500;

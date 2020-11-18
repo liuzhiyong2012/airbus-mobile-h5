@@ -131,19 +131,20 @@ export default class NewsListItem extends Vue {
 </script>
 <style lang="scss" scoped>
 .news-list-wrap {
-  width: 92%;
+  width: 5rem;
+  height: 1rem;
   background: #fff;
   margin: 0 auto;
   border-radius: 0.1rem;
 
   .news-list-item {
     display: flex;
-    padding: 0.28rem 0;
+    padding: 0.2rem;
     align-items: center;
 
     .item-img {
-      width: 2.1rem;
-      height: 1.38rem;
+      width: 1.06rem;
+      height: 0.7rem;
       border-radius: 0.12rem;
       overflow: hidden;
       img {
@@ -153,19 +154,20 @@ export default class NewsListItem extends Vue {
 
     .item-info {
       flex: 1;
-      margin: 0 0 0 0.16rem;
+      margin: 0 0 0 0.2rem;
       display: flex;
       flex-direction: column;
       align-content: space-around;
-      height: 1.38rem;
+      height: 1.1rem;
       .name {
         flex: 3;
-        font-size: 0.3rem;
+        font-size: 0.16rem;
         color: #333333;
-        line-height: 0.35rem;
+        line-height: 0.7rem;
         font-weight: 600;
+        width: 2.98rem;
         .line-two {
-          height: 0.7rem;
+          height: 0.52rem;
           text-overflow: -o-ellipsis-lastline;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -176,15 +178,17 @@ export default class NewsListItem extends Vue {
       }
       .author {
         flex: 1;
-        font-size: 0.24rem;
-        color: #999;
+        font-size: 0.12rem;
+        color: #333333;
+
         .line-one {
           width: 100%;
-          height: 0.35rem;
-          line-height: 0.35rem;
+          height: 0.32rem;
+          line-height: 0.16rem;
           display: flex;
           justify-content: space-between;
-
+          position: relative;
+          bottom: 0.25rem;
           .author-left-info {
             display: inline-block;
             text-overflow: -o-ellipsis-lastline;
@@ -196,8 +200,11 @@ export default class NewsListItem extends Vue {
             width: 92%;
           }
           .author-right-heart {
+            position: relative;
+            bottom: 0.25rem;
             display: inline-block;
-            width: 0.3rem;
+            width: 0.16rem;
+            height: 0.14rem;
             img {
               width: 100%;
             }
