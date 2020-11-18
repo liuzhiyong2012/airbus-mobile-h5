@@ -1,0 +1,30 @@
+{
+	
+	"flight":{
+		
+	},
+	"home":{
+		
+	},
+	"login":{
+		"LOGIN": "LOGIN",
+		"Login": "Login",
+		"Registery": "Registery",
+		"Forgot-Password": "Forgot Password",
+		"input-text-01": "Your phone",
+		"input-text-02": "Password",
+		"Registery-p": {
+			"Name": "Name",
+			"Portrait":"Portrait",
+			"Gender":"Gender",
+			"Female":"Female",
+			"Male":"Male",
+			"Phone":"Phone",
+			"Password":"Password",
+			"Confirm-password":"Confirm password",
+			"Date":"Date",
+			"Security-issues":"security questions",
+			"Security-answer":"Security answer"
+		}
+	}
+}

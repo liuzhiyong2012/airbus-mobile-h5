@@ -1,0 +1,4 @@
+{
+    "vue-i18n-ally.localesPaths": "src/assets/i18n",
+    "vue-i18n.i18nPaths": "src\\assets\\i18n"
+}

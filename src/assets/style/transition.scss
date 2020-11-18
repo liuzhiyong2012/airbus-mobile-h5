@@ -1,0 +1,47 @@
+// global-transition-hover
+//用于有阴影的卡片
+.zb-transi-card-hover{
+	transition: 0.2s all ease-out;
+	transform: translateY(0);
+	box-shadow:0 2px 4px rgba(0, 53, 92, 0.1);
+	&:hover{
+		transform: translateY(-2px);
+		box-shadow: 0 10px 30px rgba(21, 31, 47, 0.15)
+	}
+}
+
+.zaoban-transi-hover{
+	transition: 0.2s all ease-out;
+	transform: translateY(0);
+	&:hover{
+		transform: translateY(-2px);
+	}
+}
+
+.zb-transi-hover{
+	transition: 0.2s all ease-out;
+	transform: translateY(0);
+	&:hover{
+		transform: translateY(-12px);
+	}
+}
+
+.zaoban-transi-hover-scale{
+	transition: 0.2s all ease-out;
+	transform:scale(1);
+	&:hover{
+		transform:scale(1.05);
+	}
+}
+
+//渐变按钮的hover效果
+.zaoban-transi-btn-hover{
+	transition: 0.2s all ease-out;
+	background:linear-gradient(90deg, #4649FE 0%, #B75FFA 100%) !important;
+	&:hover{
+		background:linear-gradient(90deg, #6567FF 0%, #CB88FF 100%) !important;
+	}
+
+}
+
+

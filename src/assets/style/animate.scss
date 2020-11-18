@@ -1,0 +1,35 @@
+
+.abus-animat-ease-in{
+	
+	animation: abus-keyfra-ease-in 0.3s;
+}
+
+.abus-animat-rotate{
+	animation: abus-keyfra-rotate  2s infinite linear;
+}
+
+.abus-animat-ease-in{
+	animation: abus-keyfra-ease-in 0.3s;
+}
+
+@keyframes abus-keyfra-ease-in {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+@keyframes abus-keyfra-rotate {
+		from {
+			transform: rotate(0deg);
+			transform-origin: center;
+		}
+
+		to {
+			transform: rotate(360deg);
+			transform-origin: center;
+		}
+	}
