@@ -109,79 +109,162 @@ export default class MusicTopRanks extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.music-main-ctn {
-  .content-ctn {
-    margin-bottom: 1.0rem;
-    .type-item {
-      .type-name {
-        padding: 0 0.3rem;
-        line-height: 1rem;
-        font-size: 0.36rem;
-        font-family: Helvetica-Bold, Helvetica;
-        font-weight: bold;
-        color: rgba(51, 51, 51, 1);
-      }
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.music-main-ctn {
+		  .content-ctn {
+		    margin-bottom: 1.0rem;
+		    .type-item {
+		      .type-name {
+		        padding: 0 0.3rem;
+		        line-height: 1rem;
+		        font-size: 0.36rem;
+		        font-family: Helvetica-Bold, Helvetica;
+		        font-weight: bold;
+		        color: rgba(51, 51, 51, 1);
+		      }
+		
+		      .playlist-ctn {
+		        padding: 0.5rem 0.3rem;
+		        background: #ffffff;
+		        .playlist-item {
+		          display: flex;
+		          &:not(:last-child) {
+		            margin-bottom: 0.5rem;
+		          }
+		
+		          .play-img-ctn {
+		            width: 2.1rem;
+		            height: 1.76rem;
+		            background: blue;
+		            background-position: center;
+		            background-repeat: no-repeat;
+		            background-size: cover;
+		            overflow: hidden;
+		            border-radius: 0 0.42rem 0 0;
+		            margin-right: 0.3rem;
+		          }
+		          .track-list-ctn {
+		            display: flex;
+		            flex-direction: column;
+		            justify-content: space-between;
+		            flex: 1;
+		            .track-item {
+		              position: relative;
+		              .rank-ctn {
+		                position: absolute;
+		                top: 0;
+		                left: 0;
+		                width: 0.42rem;
+		                height: 0.42rem;
+		                font-size: 0.24rem;
+		                font-family: Helvetica-Bold, Helvetica;
+		                font-weight: bold;
+		                color: rgba(255, 255, 255, 1);
+		                line-height: 0.42rem;
+		                text-align: center;
+		                background-position: center;
+		                background-repeat: no-repeat;
+		                background-size: contain;
+		              }
+		              .track-name {
+		                width: 4.34rem;
+		                padding-left: 0.7rem;
+		                overflow: hidden;
+		                text-overflow: ellipsis;
+		                white-space: nowrap;
+		                font-size: 0.3rem;
+		                font-family: PingFangSC-Medium, PingFang SC;
+		                font-weight: 500;
+		                color: rgba(46, 46, 46, 1);
+		                line-height: 0.42rem;
+		              }
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.music-main-ctn {
+		  .content-ctn {
+		    margin-bottom: 1.0rem;
+		    .type-item {
+		      .type-name {
+		        padding: 0 rpx(20);
+		        line-height: rpx(70);
+		        font-size:  rpx(18);
+		        font-family: Helvetica-Bold, Helvetica;
+		        font-weight: bold;
+		        color: rgba(51, 51, 51, 1);
+		      }
+		
+		      .playlist-ctn {
+		        padding:rpx(20);
+		        background: #ffffff;
+		        .playlist-item {
+		          display: flex;
+		          &:not(:last-child) {
+		            margin-bottom: rpx(20);
+		          }
+		
+		          .play-img-ctn {
+		            width: rpx(106);
+		            height: rpx(88);
+		            background: blue;
+		            background-position: center;
+		            background-repeat: no-repeat;
+		            background-size: cover;
+		            overflow: hidden;
+		            border-radius: 0 rpx(20) 0 0;
+		            margin-right: rpx(20);
+		          }
+		          .track-list-ctn {
+		            display: flex;
+		            flex-direction: column;
+		            justify-content: space-between;
+		            flex: 1;
+		            .track-item {
+		              position: relative;
+		              .rank-ctn {
+		                position: absolute;
+		                top: 0;
+		                left: 0;
+		                width: rpx(22);
+		                height: rpx(22);
+		                font-size: rpx(12);
+		                font-family: Helvetica-Bold, Helvetica;
+		                font-weight: bold;
+		                color: rgba(255, 255, 255, 1);
+		                line-height:rpx(22);
+		                text-align: center;
+		                background-position: center;
+		                background-repeat: no-repeat;
+		                background-size: contain;
+		              }
+		              .track-name {
+		                width: 4.34rem;
+		                padding-left: rpx(32);
+		                overflow: hidden;
+		                text-overflow: ellipsis;
+		                white-space: nowrap;
+		                font-size: rpx(16);
+		                font-family: PingFangSC-Medium, PingFang SC;
+		                font-weight: 500;
+		                color: rgba(46, 46, 46, 1);
+		                line-height: rpx(22);
+		              }
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+	}
 
-      .playlist-ctn {
-        padding: 0.5rem 0.3rem;
-        background: #ffffff;
-        .playlist-item {
-          display: flex;
-          &:not(:last-child) {
-            margin-bottom: 0.5rem;
-          }
-
-          .play-img-ctn {
-            width: 2.1rem;
-            height: 1.76rem;
-            background: blue;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            overflow: hidden;
-            border-radius: 0 0.42rem 0 0;
-            margin-right: 0.3rem;
-          }
-          .track-list-ctn {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex: 1;
-            .track-item {
-              position: relative;
-              .rank-ctn {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 0.42rem;
-                height: 0.42rem;
-                font-size: 0.24rem;
-                font-family: Helvetica-Bold, Helvetica;
-                font-weight: bold;
-                color: rgba(255, 255, 255, 1);
-                line-height: 0.42rem;
-                text-align: center;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
-              }
-              .track-name {
-                width: 4.34rem;
-                padding-left: 0.7rem;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                font-size: 0.3rem;
-                font-family: PingFangSC-Medium, PingFang SC;
-                font-weight: 500;
-                color: rgba(46, 46, 46, 1);
-                line-height: 0.42rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
 </style>
