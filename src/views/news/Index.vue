@@ -222,6 +222,10 @@ export default class NewsList extends Vue {
   background: #fff;
   border-radius: 0rem!important;
 }
+.van-tabs{
+    width: 5rem;
+    margin: 0 auto;
+}
 .van-cell {
   font-weight: 500;
   padding-top: 0;
