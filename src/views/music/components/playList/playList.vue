@@ -250,6 +250,7 @@ $screen-width: 37.5;
 }
 .playlist {
   width: 100%;
+  height:70%;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -263,17 +264,17 @@ $screen-width: 37.5;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.58rem;
+  margin-bottom: 0.29rem;
   .song-total{
-	  font-size:0.30rem;
+	  font-size:0.16rem;
 	  font-family:Helvetica-Bold,Helvetica;
 	  font-weight:bold;
 	  color:rgba(255,255,255,1);
-	  line-height:0.36rem;
+	  line-height:0.20rem;
   }
   .icon{
 	  color:#ffffff;
-	  font-size: 0.40rem;
+	  font-size: 0.20rem;
   }
   
 }
@@ -326,11 +327,11 @@ $screen-width: 37.5;
 		.number-ctn{
 			display: block;
 			
-			font-size:0.34rem;
+			font-size:0.18rem;
 			font-family:Helvetica-Bold,Helvetica;
 			font-weight:bold;
 			color:rgba(206,206,206,1);
-			line-height:0.40rem;
+			line-height:0.20rem;
 		}
 		.music-ctn{
 			display: none;
@@ -340,10 +341,10 @@ $screen-width: 37.5;
 	  
 	  .list2-con {
 	    padding:0 0.55rem;
-		font-size:0.30rem;
+		font-size:0.16rem;
 		font-family:Helvetica-Bold,Helvetica;
 		color:rgba(255,255,255,1);
-		line-height:0.40rem;
+		line-height:0.20rem;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -354,12 +355,12 @@ $screen-width: 37.5;
 	    position: absolute;
 	    top: 0;
 	    right: 0;
-	    width: 0.40rem;
-	    height:  0.40rem;
+	    width: 0.20rem;
+	    height:  0.20rem;
 		
 		>.icon{
 			color: #ffffff;
-			font-size: 0.40rem;
+			font-size: 0.20rem;
 		}
 	    
 	  }

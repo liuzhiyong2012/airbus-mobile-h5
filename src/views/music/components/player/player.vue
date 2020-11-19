@@ -759,10 +759,10 @@ $screen-width: 37.5;
   transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32);
   height: 1.00rem;
   line-height: 1.00rem;
-  padding-left: 0.30rem;
+  padding-left: 0.20rem;
   box-sizing: border-box;
   .icon-back{
-	  font-size: 0.40rem;
+	  font-size: 0.20rem;
   }
 }
 .header img {
@@ -785,20 +785,20 @@ $screen-width: 37.5;
 
 .title-ctn{
 	.title-sing-name{
-		margin-top: 0.70rem;
+		margin-top: 0.30rem;
 	   text-align: center;		
-		font-size:0.36rem;
+		font-size:0.18rem;
 		font-family:Helvetica-Bold,Helvetica;
 		font-weight:bold;
 		color:rgba(255,255,255,1);
-		line-height:0.43rem;
+		line-height:0.21rem;
 		// margin-top: 0.70rem;
-		margin-bottom: 0.24rem;
+		margin-bottom: 0.14rem;
 	}
 	
 	
 	.title-singer {
-	 font-size:0.23rem;
+	 font-size:0.12rem;
 	 font-family:Helvetica;
 	 color:rgba(255,255,255,1);
 	 line-height:0.28rem;
@@ -837,8 +837,8 @@ $screen-width: 37.5;
 .bottom-button-box {
 	
   width: 100%;
-  padding: 0 0.44rem;
-  padding-bottom: 0.84rem;
+  padding: 0 2.44rem;
+  padding-bottom: 0.42rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -851,9 +851,9 @@ $screen-width: 37.5;
   	&.play-ctn{
 		display: flex;
 		border-radius: 50%;
-		border:0.15rem solid #616161;
-		width: 0.96rem;
-		height: 0.96rem;
+		border:0.075rem solid #616161;
+		width: 0.48rem;
+		height: 0.48rem;
 		text-align: center;
 		align-items: center;
 		justify-content: center;
@@ -861,17 +861,17 @@ $screen-width: 37.5;
 		
   		>svg.icon{
 			&.play-btn{
-				width: 0.80rem;
-				height: 0.80rem;
+				width: 0.40rem;
+				height: 0.40rem;
 			}
 			
-  			width: 0.44rem;
-  			height: 0.44rem;
+  			width: 0.22rem;
+  			height: 0.22rem;
   		}
   	}
   	>.icon{
 		color:#ffffff;
-  		font-size: 0.44rem;
+  		font-size: 0.22rem;
   	}
   }
   
@@ -923,14 +923,14 @@ $screen-width: 37.5;
 	/* 播放进度条 */
 .time-box {
 	  margin: auto;
-  margin-left:0.52rem;
-  margin-right:0.52rem;
+  margin-left:1.8rem;
+  margin-right:1.8rem;
   
   .time-label{
 	  display: flex;
 	  justify-content: space-between;
 	  
-	  font-size:0.22rem;
+	  font-size:0.12rem;
 	  font-family:Helvetica;
 	  color:rgba(255,255,255,1);
 	  line-height:0.26rem;
@@ -946,7 +946,7 @@ $screen-width: 37.5;
 }
 
 .time {
-  height: 0.28rem;
+  height: 0.24rem;
   margin: auto;
   display: flex;
   justify-content: space-between;
