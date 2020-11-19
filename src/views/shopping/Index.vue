@@ -673,10 +673,11 @@ export default class ShoppingIndex extends Vue {
 					}
 				}
 				.price {
-					padding: 0.1rem 1.31rem 0.1rem 0.1rem;
+					padding: 0.1rem 0;
 					font-size: 0.18rem;
 					color: #001f5b;
 					font-weight: bold;
+					margin: 0 0.1rem;
 				}
 				.name {
 					padding: 0 0.1rem;
@@ -695,9 +696,10 @@ export default class ShoppingIndex extends Vue {
 					font-size: 0.12rem !important;
 					color: #999;
 					position: relative;
+					margin: 0 0.1rem;
 					.buy {
 						position: absolute;
-						right: 0.1rem;
+						right: 0rem;
 						bottom: 0.2rem;
 						width: 0.62rem;
 						height: 0.26rem;
