@@ -499,11 +499,6 @@ export default class ShoppingIndex extends Vue {
 		padding: 0rem 0.07rem 0.1rem 0.2rem;
 	}
 	
-	.van-tabs--line .van-tabs__wrap {
-		height: 0.50rem !important;
-		padding: 0 2.08rem;
-	}
-	
 	.van-stepper__input {
 	  width: 0.28rem !important;
 	  height: 0.28rem !important;
@@ -545,6 +540,7 @@ export default class ShoppingIndex extends Vue {
 	.van-search{
 		height: 0.4rem !important;
 		box-sizing: border-box !important;
+		padding-left: 0.2rem;
 	}
 	
 	.van-field{
@@ -614,6 +610,9 @@ export default class ShoppingIndex extends Vue {
 	.van-tabs__wrap--scrollable .van-tabs__nav {
 		padding-right: 1rem;
 	}
+	
+	
+	
 	.filter {
 		position: relative;
 		padding: 0.3rem;
@@ -659,7 +658,6 @@ export default class ShoppingIndex extends Vue {
 			width: 1.72rem;
 			height: 2.74rem;
 			border-radius: 0.04rem;
-			// margin-right: 0.12rem;
 			.goods {
 				width: 1.72rem;
 				height: 2.74rem;
@@ -693,7 +691,7 @@ export default class ShoppingIndex extends Vue {
 					font-size: 0.14rem;
 				}
 				.qty {
-					// padding: 0 0.2rem 0.3rem 0.2rem;
+					padding: 0 0 0.3rem 0;
 					font-size: 0.12rem !important;
 					color: #999;
 					position: relative;
@@ -713,7 +711,7 @@ export default class ShoppingIndex extends Vue {
 			}
 		}
 		:nth-child(even) {
-			padding: 0 0.3rem 0.3rem 0.13rem;
+			margin:0 0.14rem;
 		}
 	}
 	.filter-box {

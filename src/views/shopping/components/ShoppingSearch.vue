@@ -177,17 +177,10 @@ export default class ShoppingSearch extends Vue {
 			box-sizing: border-box !important;
 			padding-left: 0.2rem;
 		}
-		.van-icon-search {
-			width: 0.2rem !important;
-			height: 0.2rem !important;
+		.van-field{
+			font-size: .16rem !important;
 		}
-		.icon-size {
-			width: 0.2rem;
-			height: 0.2rem;
-		}
-		.van-cell__value{
-			font-size: 0.16rem;
-		}
+		
 		.no-list {
 		  align-items: center;
 		  line-height: 2rem;
