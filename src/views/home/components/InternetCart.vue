@@ -456,16 +456,16 @@ export default class InternetCart extends Vue {
                 .icon-right {
                     position: absolute;
                     right: -0.2rem;
-                    padding: 0.13rem 0.2rem 0.12rem 0;
+                    padding: 0.16rem 0.2rem;
                     width: 0.24rem;
                     height: 0.24rem;
                 }
                 .icon-right-1 {
                     position: absolute;
                     right: 0.2rem;
-                    padding: 0.1rem;
-                    width: 0.3rem;
-                    height: 0.3rem;
+                    padding: 0.18rem 0.02rem;
+                    width: 0.2rem;
+                    height: 0.2rem;
                 }
                 .icon-right-2 {
                     position: absolute;

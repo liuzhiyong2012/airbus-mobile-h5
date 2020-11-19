@@ -265,7 +265,7 @@ export default class InternetIndex extends Vue{
                     border-radius: 0.04rem;
                     .f1 {
                         display: flex;
-                        min-width: 1.3rem;
+                        min-width: 0.5rem;
                         padding: 0 0 0 0.1rem;
                         line-height: 0.6rem;
                         align-items: center;

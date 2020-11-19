@@ -298,6 +298,7 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: 0.06rem;
+                    height: 0.23rem;
                     .text {
                         font-size: 0.14rem;
                         color: rgba(46, 46, 46, 1);
@@ -307,7 +308,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-
                         i {
                             margin-right: 0.06rem;
                             :last-child {
@@ -332,9 +332,7 @@
                         }
                         .icon {
                             color: #000000;
-                            line-height: 0.13rem;
-                            width: 0.14rem;
-                            height: 0.13rem;
+                            font-size: 0.15rem;
                         }
                     }
                 }
