@@ -79,29 +79,29 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import AbusTitle from "../../components/AbusTitle.vue";
-import MeServer from "../../service/me";
-import ShoppingServer from "../../service/shopping";
-import { localStore } from "../../utils/data-management";
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import AbusTitle from '../../components/AbusTitle.vue';
+import MeServer from '../../service/me';
+import ShoppingServer from '../../service/shopping';
+import { localStore } from '../../utils/data-management';
 @Component({
-  name: "ShoppingCart",
+  name: 'ShoppingCart',
   components: {
     AbusTitle,
   },
 })
 export default class ShoppingCart extends Vue {
-  private address: string = "";
+  private address: string = '';
   private orderAmount: number = 0;
 
   private created() {
     this.postAddress();
   }
   private mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
     this.chengeStepper();
   }
@@ -132,14 +132,14 @@ export default class ShoppingCart extends Vue {
     return (this.orderAmount = amount);
   }
   private get seatName():string{
-		return localStore.get("seatName") || this.$store.state.login.voyageInfo.seatName;
+		return localStore.get('seatName') || this.$store.state.login.voyageInfo.seatName;
   }
   private get seatType():number{
-		return localStore.get("seatType") || this.$store.state.login.voyageInfo.seatType;
+		return localStore.get('seatType') || this.$store.state.login.voyageInfo.seatType;
 	}
   // 删除操作
   public delGoods(index: any) {
-    this.$store.commit("delShoppingCartItem", index);
+    this.$store.commit('delShoppingCartItem', index);
     this.chengeStepper();
   }
   public postAddress() {
@@ -160,10 +160,10 @@ export default class ShoppingCart extends Vue {
       };
       CartItems.push(items);
     });
-    if (this.address != "" && this.address!=null && cartList.length > 0) {
+    if (this.address != '' && this.address!=null && cartList.length > 0) {
       let data = {
-        Seat: this.seatName || "3D",
-        Remark: "",
+        Seat: this.seatName || '3D',
+        Remark: '',
         Items: CartItems,
         type: 1,
         SeatType: this.seatType || 2,
@@ -171,17 +171,17 @@ export default class ShoppingCart extends Vue {
       };
       ShoppingServer.postShoppingPlaceOrder(data).then((res: any) => {
         if (res.code == 200) {
-          this.$store.commit("clearShoppingCart");
-          if (localStorage.getItem("lang") == "en") {
-             this.$toast("Success");
+          this.$store.commit('clearShoppingCart');
+          if (localStorage.getItem('lang') == 'en') {
+             this.$toast('Success');
           } else {
-             this.$toast("下单成功!");
+             this.$toast('下单成功!');
           }
-          this.stepToPage("home");
+          this.stepToPage('home');
         }
       });
     }else{
-      this.$toast('Address or cart cannot be empty')
+      this.$toast('Address or cart cannot be empty');
     }
   }
   private stepToPage(name: string) {
@@ -401,13 +401,6 @@ export default class ShoppingCart extends Vue {
 			margin-top: 0.14rem;
 		}
 		
-		.van-notice-bar .van-notice-bar__left-icon {
-		  font-size: 0.16rem !important;
-		}
-		.van-notice-bar .van-notice-bar__right-icon{
-		  font-size: 0.16rem !important;
-		}
-		
 		.van-notice-bar__wrap{
 			font-size: 0.12rem;
 		}
@@ -458,15 +451,17 @@ export default class ShoppingCart extends Vue {
 		.cell-group-two {
 		  margin: 0.3rem 0 0 0;
 		  background: #fff;
+		  width: 5rem;
+		  margin: 0 auto;
 		  .cell-item {
 		    display: flex;
-		    padding: 0 0.3rem;
 		    line-height: 0.56rem;
 			width: 5rem;
 			height: 0.56rem;
 			margin: 0 auto;
 		    .title {
 		      font-size: 0.16rem;
+			  padding-left: 0.2rem;
 		      color: rgba(51, 51, 51, 1);
 		    }
 		    .f1 {
@@ -474,15 +469,15 @@ export default class ShoppingCart extends Vue {
 		      flex: 1;
 		      .icon-right {
 		        position: absolute;
-		        right: -0.3rem;
-		        padding: 0.18rem;
+		        right: 0.1rem;
+		        padding: 0.18rem 0;
 				width: 0.2rem;
 				height: 0.2rem;
 		      }
 		      .icon-right-1 {
 		        position: absolute;
-		        right: 0.1rem;
-		        padding: 0.18rem;
+		        right: 0.3rem;
+		        padding: 0.18rem 0;
 				font-size: 0.2rem;
 				width: 0.2rem;
 				height: 0.2rem;
@@ -503,10 +498,12 @@ export default class ShoppingCart extends Vue {
 		  }
 		}
 		.goods-card {
-		  margin: 0 0 1px 0;
-		  padding: 0.15rem;
+		  // margin: 0 0 1px 0;
+		  // padding: 0.15rem;
 		  background-color: #fff;
 		  font-size: 0.36rem;
+		  width: 5rem;
+		  height: 1.2rem;
 		  .van-card-thumb {
 		    margin-right: 0.3rem;
 		    width: 1.8rem;
