@@ -322,6 +322,7 @@
             }
             .icon {
               color: #000000;
+              font-size: 0.15rem;
             }
           }
         }
