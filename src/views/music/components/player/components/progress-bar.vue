@@ -103,8 +103,8 @@ $screen-width: 37.5;
 /* 进度线 */
 .bar-inner {
  position: relative;
-     top: 0.12rem;
-     height: 0.08rem;
+     top: 0.06rem;
+     height: 0.04rem;
 	 background:rgba(237,237,237,0.23);
 	 border-radius:4px;
 }
@@ -119,10 +119,10 @@ $screen-width: 37.5;
 
 .progress-btn-wrapper {
   position: absolute;
-  left: - 0.12rem;
-  top: -0.12rem;
-  width: 0.28rem;
-  height:  0.28rem;
+  left: - 0.06rem;
+  top: -0.06rem;
+  width: 0.14rem;
+  height:  0.14rem;
 }
 
 .progress-btn {

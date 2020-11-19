@@ -270,7 +270,7 @@ export default class Home extends Vue {
   }
 
   public clickShowService(){
-    this.showService = false;
+    this.showService = turn;
   }
   public stepToPage(pageType: any) {
     let routeMap: any = {
@@ -512,32 +512,33 @@ export default class Home extends Vue {
 		    overflow: inherit !important;
 		  }
 		  .popup-toast {
-		    padding: 0 0 0.01rem;
-		    width: 5.42rem;
+		    // padding: 0 0 0.01rem;
+		    width: 3.6rem;
+			height: 4rem;
 		    background-color: #fff;
 		    border-radius: 0.12rem;
 		    .title {
 		      width: 100%;
-		      height: 1.2rem;
+		      height: 0.58rem;
 		      background-color: #00205b;
 		      text-align: center;
-		      font-size: 0.36rem;
+		      font-size: 0.18rem;
 		      font-weight: bold;
 		      color: rgba(255, 255, 255, 1);
-		      line-height: 1.2rem;
+		      line-height: 0.58rem;
 		      border-radius: 0.12rem 0.12rem 0 0;
 		    }
 		    .service {
-		      padding: 0.3rem 0;
+		      padding: 0.10rem 0;
 		      height: auto;
-		      line-height: 0.42rem;
+		      line-height: 0.20rem;
 		    }
 		    .con {
 		      padding: 0.3rem;
 		      background-color: #fff;
-		      font-size: 0.28rem;
+		      font-size: 0.14rem;
 		      color: rgba(51, 51, 51, 1);
-		      line-height: 0.42rem;
+		      line-height: 0.21rem;
 		      word-break: normal;
 		      word-wrap: break-word;
 		      .txt {
@@ -549,23 +550,25 @@ export default class Home extends Vue {
 		    .btn {
 		      margin: 0 0.3rem;
 		      background-color: #00205b;
-		      font-size: 0.34rem;
+		      font-size: 0.17rem;
 		      font-weight: bold;
 		      color: rgba(255, 255, 255, 1);
-		      line-height: 0.74rem;
+		      line-height: 0.38rem;
 		      text-align: center;
 		      border-radius: 0.37rem;
+			  width: 2.5rem;
+			  margin: 0 auto;
 		    }
 		    .later {
-		      margin: 0.3rem 0;
-		      padding: 0 0.3rem;
-		      font-size: 0.26rem;
+		      padding: 0.18rem 0.3rem;
+		      font-size: 0.17rem;
 		      font-family: PingFangSC-Regular, PingFang SC;
 		      font-weight: 400;
 		      color: rgba(51, 51, 51, 1);
 		      background-color: #fff;
-		      line-height: 0.3rem;
-		      height: 0.5rem;
+		      line-height: 0.15rem;
+			  width: 2.5rem;
+			  margin: 0 auto;
 		    }
 		    .surplus {
 		      padding: 0 0.3rem;
