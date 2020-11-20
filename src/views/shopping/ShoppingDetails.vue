@@ -360,7 +360,7 @@ export default class ShoppingDetail extends Vue {
 				width: 100%;
 				left:0;
 				top:0;
-				
+				font-size: 0.2rem;
 			}
 			
 			.shopping-details {
@@ -378,8 +378,8 @@ export default class ShoppingDetail extends Vue {
 			  }
 			}
 			.m-box {
-			  margin: 0 0 0.2rem 0;
-			  padding: 0.1rem 0.3rem 0.4rem;
+			  // margin: 0 0 0.2rem 0;
+			  padding: 0.2rem;
 			  background-color: #fff;
 			
 			  .title {
@@ -396,9 +396,9 @@ export default class ShoppingDetail extends Vue {
 			  }
 			  .info-box {
 			    display: flex;
-			    padding: 0.1rem 0 0 0;
+			    padding: 0.2rem 0 0 0;
 			    // height: 0.58rem;
-			    line-height: 0.58rem;
+			    line-height: 0.28rem;
 			    .qty {
 			      font-size: 0.14rem;
 			      // color: rgba(96, 116, 153, 1);
@@ -456,11 +456,11 @@ export default class ShoppingDetail extends Vue {
 			  }
 			}
 			.details-box {
-			  margin: 0 0 0.2rem 0;
-			  padding: 0.3rem;
+			  // margin: 0 0 0.2rem 0;
+			  padding: 0.2rem;
 			  background-color: #fff;
 			  .top {
-			    padding: 0 0 0.2rem 0;
+			    padding: 0 0 0.1rem 0;
 			    font-size: 0.14rem;
 			    font-weight: bold;
 			    color: rgba(51, 51, 51, 1);
@@ -469,13 +469,13 @@ export default class ShoppingDetail extends Vue {
 			  .details {
 			    font-size: 0.135rem;
 			    color: rgba(51, 51, 51, 1);
-			    line-height: 0.36rem;
+			    line-height: 0.18rem;
 			  }
 			}
 			.footer-ctn {
 			  // position: fixed;
 			  width: 100%;
-			  // margin: 0.3rem 0 ;
+			  margin-top: 0.2rem;
 			  padding: 0 0.8rem;
 			  box-sizing: border-box;
 			  // bottom: 0.62rem;

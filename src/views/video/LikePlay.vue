@@ -967,14 +967,13 @@ export default class VideoPlay extends Vue {
     align-items: center;
     z-index: 99;
     .right-icon {
-      //width: 1rem;
       height: 0.3rem;
-      padding: 0.2rem 0.1rem 0;
+      padding: 0 0.1rem;
+      margin-top: 0.5rem;
     }
     .right-icon1 {
-      //width: 0.25rem;
       height: 0.25rem;
-      padding: 0.2rem 0.1rem 0;
+      padding: 0 0.1rem;
     }
     .text {
       width: 100%;

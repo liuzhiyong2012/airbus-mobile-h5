@@ -194,6 +194,7 @@
         .news-img {
             width: 5rem;
             margin: 0 auto;
+            padding-top: 0.14rem;
             .banner {
                 width: 100%;
             }
@@ -216,6 +217,8 @@
                     position: relative;
                     left: 0.2rem;
                     img {
+                        position: relative;
+                        bottom: 0.02rem;
                         width: 0.16rem;
                         height: 0.14rem;
                     }

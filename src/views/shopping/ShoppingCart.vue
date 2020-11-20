@@ -420,15 +420,6 @@ export default class ShoppingCart extends Vue {
 			margin: 0 auto;
 		}
 		
-		.van-card__thumb{
-			width: 0.9rem;
-			height: 0.9rem;
-		}
-		.van-image{
-			width: 0.9rem;
-			height: 0.9rem;
-		}
-		
 		.van-card__title{
 			font-size: 0.18rem;
 		}
@@ -437,7 +428,9 @@ export default class ShoppingCart extends Vue {
 			font-size: 22px;
 		}
 		
-		
+		.van-card__content{
+			padding: 0.2rem;
+		}
 		
 		.no-goods{
 		  display: flex;
@@ -449,10 +442,11 @@ export default class ShoppingCart extends Vue {
 		  color: #999;
 		}
 		.cell-group-two {
-		  margin: 0.3rem 0 0 0;
 		  background: #fff;
 		  width: 5rem;
 		  margin: 0 auto;
+		  margin-top: 0.1rem;
+		  margin-bottom: 0.16rem;
 		  .cell-item {
 		    display: flex;
 		    line-height: 0.56rem;
@@ -553,11 +547,11 @@ export default class ShoppingCart extends Vue {
 		  width: 500px;
 		  margin: 0 auto;
 		  .cell {
-		    margin: 0 0 0.3rem 0;
+		    margin: 0 0 0.4rem 0;
 		    display: flex;
 		    font-size: 0.18rem;
 		    color: rgba(155, 154, 170, 1);
-		    line-height: 0.36rem;
+		    line-height: 0.18rem;
 		    .cell-l {
 		    }
 		    .cell-r {
@@ -568,7 +562,7 @@ export default class ShoppingCart extends Vue {
 		      font-size: 0.18rem;
 		      font-weight: bold;
 		      color: rgba(46, 46, 46, 1);
-		      line-height: 0.42rem;
+		      line-height: 0.18rem;
 		    }
 		  }
 		}

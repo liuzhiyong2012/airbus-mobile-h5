@@ -211,22 +211,24 @@ export default class InternetIndex extends Vue{
                 background-color: #fff;
                 .header {
                     display: flex;
+                    height: 0.36rem;
                     .time {
                         flex: 1;
                         font-size: 0.2rem;
                         font-weight: bold;
                         color: rgba(51, 51, 51, 1);
-                        line-height: 0.5rem;
+                        line-height: 0.2rem;
                     }
                     .price {
                         font-size: 0.2rem;
                         font-weight: bold;
                         color: rgba(0, 32, 91, 1);
-                        line-height: 0.5rem;
+                        line-height: 0.2rem;
                     }
                 }
                 .con {
                     display: flex;
+                    height: 0.36rem;
                     .con-l {
                         flex: 1;
                         font-size: 0.12rem;

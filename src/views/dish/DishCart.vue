@@ -399,6 +399,7 @@ export default class DishCart extends Vue {
 			width: 100%;
 			top: 0;
 			left: 0;
+			font-size: 0.2rem;
 		}
 
 		.cart-ctn {
@@ -419,9 +420,8 @@ export default class DishCart extends Vue {
 					height: 1.2rem;
 					background: #ffffff;
 					box-sizing: border-box;
-					// padding: 0.3rem;
+					padding: 0.15rem 0.2rem;
 					display: flex;
-
 					.dish-img {
 						width: 0.9rem;
 						height: 0.9rem;
@@ -437,7 +437,7 @@ export default class DishCart extends Vue {
 						flex-direction: column;
 						justify-content: space-between;
 						flex: 1;
-						padding-left: 0.3rem;
+						padding-left: 0.15rem;
 						.dish-name {
 							font-size: 0.18rem;
 							font-family: Helvetica;
@@ -474,7 +474,7 @@ export default class DishCart extends Vue {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 0 0.15rem 0 0.18rem;
+				padding: 0 0.11rem 0 0.2rem;
 				height: 0.56rem;
 				background: rgba(255, 255, 255, 1);
 
@@ -496,7 +496,7 @@ export default class DishCart extends Vue {
 				height: 0.56rem;
 				display: flex;
 				justify-content: space-between;
-				padding: 0 0.15rem 0 0.18rem;
+				padding: 0 0.2rem;
 				background: #ffffff;
 				align-items: center;
 
@@ -526,8 +526,8 @@ export default class DishCart extends Vue {
 				padding-right: 0.15rem;
 				display: flex;
 				justify-content: flex-end;
-				padding-top: 0.2rem;
-				padding-bottom: 0.2rem;
+				padding-top: 0.16rem;
+				margin-bottom: 0.4rem;
 				font-size: 0.18rem;
 				font-family: Helvetica-Bold, Helvetica;
 				font-weight: bold;
@@ -555,7 +555,6 @@ export default class DishCart extends Vue {
 			height: 0.4rem;
 			margin: 0 auto;
 			.pay-btn {
-				margin: 0 0.15rem;
 				height: 0.4rem;
 				text-align: center;
 				line-height: 0.4rem;
