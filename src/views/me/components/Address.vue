@@ -121,6 +121,7 @@
             padding: 0.2rem;
             background-color: #fff;
             .van-field {
+                padding: 0.16rem 0.2rem;
                 border: 0.02rem solid #ccc;
                 border-radius: 0.05rem;
                 min-height: 2rem;

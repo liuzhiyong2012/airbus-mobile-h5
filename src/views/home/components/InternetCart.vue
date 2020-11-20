@@ -361,6 +361,7 @@ export default class InternetCart extends Vue {
     .internet-cart {
         min-height: 100vh;
         .cart {
+            margin-top: 0.14rem;
             position: relative;
             display: flex;
             padding: 0.4rem 0.5rem;

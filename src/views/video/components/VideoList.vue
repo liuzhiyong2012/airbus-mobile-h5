@@ -67,41 +67,89 @@ export default class VideoList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.cell-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  .cell-item {
-    width: 30%;
-    .video-box {
-      position: relative;
-      display: flex;
-      margin: 0.3rem 0 0;
-      border-radius: 0.1rem;
-      width: 100%;
-      height: 4rem;
-      background-color: #000;
-      align-items: center;
-      overflow: hidden;
-      .icon-p {
-        position: absolute;
-        right: 0.2rem;
-        bottom: 0.2rem;
-        z-index: 98;
-        opacity: 0.8;
-      }
-      img {
-        width: 100%;
-        border-radius: 0.1rem;
-        z-index: 97;
-      }
+    @import '../../../assets/style/index.scss';
+
+    @media  (orientation:portrait) {
+        .cell-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            .cell-item {
+                width: 30%;
+                .video-box {
+                    position: relative;
+                    display: flex;
+                    margin: 0.3rem 0 0;
+                    border-radius: 0.1rem;
+                    width: 100%;
+                    height: 4rem;
+                    background-color: #000;
+                    align-items: center;
+                    overflow: hidden;
+                    .icon-p {
+                        position: absolute;
+                        right: 0.2rem;
+                        bottom: 0.2rem;
+                        z-index: 98;
+                        opacity: 0.8;
+                    }
+                    img {
+                        width: 100%;
+                        border-radius: 0.1rem;
+                        z-index: 97;
+                    }
+                }
+            }
+        }
+        .no-video {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 3rem;
+        }
     }
-  }
-}
-.no-video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-}
+
+    @media  (orientation:landscape) {
+        .cell-group,
+        .van-list {
+            display: flex;
+            flex-wrap: wrap;
+            //justify-content: space-evenly;
+            .cell-item {
+                padding: 0 0rem 0 0.32rem;
+                width: 2rem;
+                .video-box {
+                    position: relative;
+                    display: flex;
+                    margin: 0.3rem 0 0;
+                    border-radius: 0.1rem;
+                    width: 100%;
+                    height: 3rem;
+                    background-color: #000;
+                    align-items: center;
+                    overflow: hidden;
+                    .icon-p {
+                        position: absolute;
+                        right: 0.2rem;
+                        bottom: 0.2rem;
+                        z-index: 98;
+                        opacity: 0.8;
+                    }
+                    img {
+                        width: 100%;
+                        border-radius: 0.1rem;
+                        z-index: 97;
+                    }
+                }
+            }
+
+        }
+        .no-video {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 3rem;
+            font-size: .16rem !important;
+        }
+    }
 </style>
