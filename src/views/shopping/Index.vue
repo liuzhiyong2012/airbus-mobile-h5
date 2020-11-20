@@ -513,6 +513,10 @@ export default class ShoppingIndex extends Vue {
 	  height: 0.28rem !important;
 	}
 	
+	.abustitle-main-ctn{
+		font-size: 0.2rem !important;
+	}
+	
 	.f1 {
 		position: relative;
 		/deep/ .van-tab {
@@ -522,6 +526,7 @@ export default class ShoppingIndex extends Vue {
 			font-size: 0.28rem !important;
 		}
 	}
+	
 	.shopping-recomend-item {
 		position: relative;
 		width: 100%;

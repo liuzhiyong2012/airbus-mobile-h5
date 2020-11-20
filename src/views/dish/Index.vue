@@ -281,6 +281,10 @@ export default class DishIndex extends Vue {
 			margin-bottom: 0.15rem;
 		}
 		
+		.abustitle-main-ctn{
+			font-size: 0.2rem !important;
+		}
+		
 		.dish-main-ctn {
 			.dish-recomend-item {
 				position: relative;
