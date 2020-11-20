@@ -270,7 +270,7 @@ export default class Home extends Vue {
   }
 
   public clickShowService(){
-    this.showService = turn;
+    this.showService = false;
   }
   public stepToPage(pageType: any) {
     let routeMap: any = {

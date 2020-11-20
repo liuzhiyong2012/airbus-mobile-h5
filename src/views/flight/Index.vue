@@ -240,7 +240,6 @@ export default class FlightIndex extends Vue {
   
   private beforeDestroy() {
     (this as any).$globalEvent.$off('updateFlightInfo', this.updateFlightHandler);
-	
     (this as any).$refs.infoContentCtn.removeEventListener('touchstart', this.touchStartHandle);
     (this as any).$refs.infoContentCtn.removeEventListener('touchmove', this.touchMoveHandle);
     (this as any).$refs.infoContentCtn.removeEventListener('touchend', this.touchEndHandle);
@@ -252,7 +251,8 @@ export default class FlightIndex extends Vue {
 	var startBottomDistance = 0;
 
     this.touchStartHandle = (event: any) => {
-		this.isAnimate = false;
+		return;
+	  this.isAnimate = false;
       var touch = event.touches[0];
       startY = touch.pageY;
       startX = touch.pageX;
@@ -260,6 +260,7 @@ export default class FlightIndex extends Vue {
     };
 
     this.touchMoveHandle = (event: any) => {
+		return;
 		this.isAnimate = false;
       var touch = event.touches[0];
       endY = startY - touch.pageY;
@@ -278,6 +279,7 @@ export default class FlightIndex extends Vue {
     };
 
     this.touchEndHandle = (event: any) => {
+		return;
 		this.isAnimate = true;
       //100是给定触上下方向摸起始的坐标差
       if (endY > 25) {
@@ -450,7 +452,8 @@ export default class FlightIndex extends Vue {
         backgroundColor: '#ccc',
         borderRadius: 5,
         x: 'center',
-        y: 'bottom',
+        // y: 'bottom',
+		 bottom:4,
         // padding: [5, 20, 15, 20],
         padding: [2, 20, 2, 20],
         data: ['Altitude m', 'Speed km/h'],
@@ -549,156 +552,323 @@ export default class FlightIndex extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.flight-main-ctn {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	@import '../../assets/style/index.scss';
+	
+	@media  (orientation:portrait) {
+		.flight-main-ctn {
+		  position: fixed;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		
+		  &.collapsed {
+		    .content-ctn {
+		      height: 4.4rem !important;
+		      .voyage-ctn {
+		        .top-ctn {
+		          margin-bottom: 0;
+		        }
+		        .bottom-ctn {
+		          display: none;
+		        }
+		      }
+		    }
+		  }
+		
+		  .flight-content-ctn {
+		    position: absolute;
+		    top: rpx(56);
+		    width: 100%;
+		    bottom: 0;
+		
+		    .map-ctn {
+		      position: absolute;
+		      width: 100%;
+		      height: 100%;
+		    }
+		
+		    .camera-ctn {
+		      position: absolute;
+		      width: 100%;
+		      height: 100%;
+		      background: black;
+		      z-index: 10;
+		      .camera-switch-ctn {
+		        position: absolute;
+		        width: 0.5rem;
+		        top: 0.44rem;
+		        right: 0.3rem;
+		        font-size: 0;
+		        line-height: 0;
+		        z-index: 100;
+		        text-align: center;
+		
+		        .camera-switch-item {
+		          margin-bottom: 0.2rem;
+		          height: 0.5rem;
+		
+		          > .icon {
+		            display: block;
+		            width: 100%;
+		            height: 100%;
+		          }
+		        }
+		      }
+		
+		      .camera-video-ctn {
+		        z-index: -100;
+		        width: 100%;
+		        height: 100%;
+		
+		        > video {
+		          :focus {
+		            overflow: hidden;
+		            border: none !important;
+		            box-shadow: none !important;
+		            outline: none;
+		          }
+		          :active {
+		            overflow: hidden;
+		            border: none !important;
+		            box-shadow: none !important;
+		            outline: none;
+		          }
+		          // object-fit: fill;
+		          outline: none;
+		          border: none;
+		          display: block;
+		          width: 100%;
+		          object-fit: cover;
+		          object-position: center center;
+		        }
+		
+		      }
+		    }
+		
+		    .content-ctn {
+		      position: absolute;
+		      padding: 0 0.3rem 0.5rem 0.3rem;
+		      width: 100%;
+		      height: 7.8rem;
+		      bottom: 0;
+		      z-index: 200;
+		      box-sizing: border-box;
+			  
+			  &.isAnimate{
+				  transition: all  linear 0.2s;
+				  
+			  }
+		
+		      .switch-ctn {
+		        width: 1.72rem;
+		        margin-left: auto;
+		        display: flex;
+		        justify-content: space-between;
+		        align-items: center;
+		        padding-bottom: 0.28rem;
+		        .switch-item {
+		          width: 0.76rem;
+		          height: 0.5rem;
+		          background: rgba(255, 255, 255, 1);
+		          border-radius: 0.26rem;
+		          text-align: center;
+		          display: flex;
+		          justify-content: center;
+		          align-items: center;
+		
+		          svg.icon {
+		            width: 0.42rem;
+		            height: 0.42rem;
+		          }
+		        }
+		      }
+		
+		      //实不相瞒
+		      .voyage-ctn {
+		        .top-ctn {
+		          width: 100%;
+		          height: 3.4rem;
+		          padding-bottom: 0.4rem;
+		        }
+		        .bottom-ctn {
+		          .chart-ctn {
+		            height: 3.1rem;
+		            background: rgba(255, 255, 255, 1);
+		            border-radius: 0.12rem;
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+	}
+	
+	@media  (orientation:landscape) {
+		.flight-main-ctn {
+		  position: fixed;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		
+		  &.collapsed {
+		    .content-ctn {
+		      height: 4.4rem !important;
+		      .voyage-ctn {
+		        .top-ctn {
+		          margin-bottom: 0;
+		        }
+		        .bottom-ctn {
+		          display: none;
+		        }
+		      }
+		    }
+		  }
+		
+		  .flight-content-ctn {
+		    position: absolute;
+		    top: rpx(56);
+		    width: 100%;
+		    bottom: 0;
+		
+		    .map-ctn {
+		      position: absolute;
+		      width: 100%;
+		      height: 100%;
+		    }
+		
+		    .camera-ctn {
+		      position: absolute;
+		      width: 100%;
+		      height: 100%;
+		      background: black;
+		      z-index: 10;
+		      .camera-switch-ctn {
+		        position: absolute;
+		        width: rpx(24);
+		        top:  rpx(20);
+		        right:rpx(20);
+		        font-size: 0;
+		        line-height: 0;
+		        z-index: 100;
+		        text-align: center;
+		
+		        .camera-switch-item {
+		          margin-bottom: rpx(12);
+		          height: rpx(24);
+		
+		          > .icon {
+		            display: block;
+		            width: 100%;
+		            height: 100%;
+		          }
+		        }
+		      }
+		
+		      .camera-video-ctn {
+		        z-index: -100;
+		        width: 100%;
+		        height: 100%;
+		
+		        > video {
+		          :focus {
+		            overflow: hidden;
+		            border: none !important;
+		            box-shadow: none !important;
+		            outline: none;
+		          }
+		          :active {
+		            overflow: hidden;
+		            border: none !important;
+		            box-shadow: none !important;
+		            outline: none;
+		          }
+		          // object-fit: fill;
+		          outline: none;
+		          border: none;
+		          display: block;
+		          width: 100%;
+		          object-fit: cover;
+		          object-position: center center;
+		        }
+		
+		      }
+		    }
+		
+		    .content-ctn {
+		      position: absolute;
+		      padding: rpx(44) rpx(20) rpx(20) rpx(20);
+		      width: 100%;
+		      height: rpx(256);
+		      bottom: 0;
+		      z-index: 200;
+		      box-sizing: border-box;
+			  
+			  &.isAnimate{
+				  transition: all  linear 0.2s;
+				  
+			  }
+		
+		      .switch-ctn {
+				  position: absolute;
+				  top:0;
+				  right: rpx(20);
+		        width: rpx(88);
+		        margin-left: auto;
+		        display: flex;
+		        justify-content: space-between;
+		        align-items: center;
+		        padding-bottom: rpx(20);
+		        .switch-item {
+		          width: rpx(38);
+		          height: rpx(24);
+		          background: rgba(255, 255, 255, 1);
+		          border-radius: rpx(12);
+		          text-align: center;
+		          display: flex;
+		          justify-content: center;
+		          align-items: center;
+		
+		          svg.icon {
+		            width: rpx(20);
+		            height: rpx(20);
+		          }
+		        }
+		      }
+		
+		     
+			  
+			  .voyage-ctn {
+			  		display: flex;
+			  		justify-content: space-between;
+					width: 100%;
+					height: 100%;
+			    .top-ctn {
+					height: 100%;
+			  		margin-right: rpx(20);
+					width: 50%;
+					box-sizing: border-box;
+					border-radius: rpx(4);
+					overflow: hidden;
+					border-right: rpx(10);
+			    }
+			    .bottom-ctn {
+			  		// flex: 1;
+					width: 50%;
+					border-left: rpx(10);
+			      .chart-ctn {
+			        height: 100%;
+			        background: rgba(255, 255, 255, 1);
+			        border-radius: rpx(4);
+					overflow: hidden;
+			      }
+			    }
+			  }
+		    }
+		  }
+		}
+	}
+	
 
-  &.collapsed {
-    .content-ctn {
-      height: 4.4rem !important;
-      .voyage-ctn {
-        .top-ctn {
-          margin-bottom: 0;
-        }
-        .bottom-ctn {
-          display: none;
-        }
-      }
-    }
-  }
-
-  .flight-content-ctn {
-    position: absolute;
-    top: 1rem;
-    width: 100%;
-    bottom: 0;
-
-    .map-ctn {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    .camera-ctn {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: 10;
-      .camera-switch-ctn {
-        position: absolute;
-        width: 0.5rem;
-        top: 0.44rem;
-        right: 0.3rem;
-        font-size: 0;
-        line-height: 0;
-        z-index: 100;
-        text-align: center;
-
-        .camera-switch-item {
-          margin-bottom: 0.2rem;
-          height: 0.5rem;
-
-          > .icon {
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
-        }
-      }
-
-      .camera-video-ctn {
-        // z-index: 10;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
-
-        > video {
-          :focus {
-            overflow: hidden;
-            border: none !important;
-            box-shadow: none !important;
-            outline: none;
-          }
-          :active {
-            overflow: hidden;
-            border: none !important;
-            box-shadow: none !important;
-            outline: none;
-          }
-          // object-fit: fill;
-          outline: none;
-          border: none;
-          display: block;
-          width: 100%;
-          object-fit: cover;
-          object-position: center center;
-        }
-
-        // .camera-video{
-        // 	width: 100%;
-        // 	height: 100%;
-        // }
-      }
-    }
-
-    .content-ctn {
-      position: absolute;
-      padding: 0 0.3rem 0.5rem 0.3rem;
-      width: 100%;
-      height: 7.8rem;
-      bottom: 0;
-      z-index: 200;
-      box-sizing: border-box;
-	  
-	  &.isAnimate{
-		  transition: all  linear 0.2s;
-		  
-	  }
-
-      .switch-ctn {
-        width: 1.72rem;
-        margin-left: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 0.28rem;
-        .switch-item {
-          width: 0.76rem;
-          height: 0.5rem;
-          background: rgba(255, 255, 255, 1);
-          border-radius: 0.26rem;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          svg.icon {
-            width: 0.42rem;
-            height: 0.42rem;
-          }
-        }
-      }
-
-      //实不相瞒
-      .voyage-ctn {
-        .top-ctn {
-          width: 100%;
-          height: 3.4rem;
-          padding-bottom: 0.4rem;
-        }
-        .bottom-ctn {
-          .chart-ctn {
-            height: 3.1rem;
-            background: rgba(255, 255, 255, 1);
-            border-radius: 0.12rem;
-          }
-        }
-      }
-    }
-  }
-}
 </style>
