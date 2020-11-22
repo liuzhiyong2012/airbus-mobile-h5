@@ -84,8 +84,7 @@ export default class HomeMusic extends Vue {
 	
 	@media  (orientation:portrait) {
 		.music-box {
-		  padding: 0 0.28rem;
-		  margin: 0 0.28rem;
+		 padding: 0 0.28rem !important;
 		  background-color: #fff;
 		  border-radius: 0.1rem;
 		  :last-child {

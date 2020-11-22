@@ -95,7 +95,7 @@ export default class VideoList extends Vue {
                     }
                     img {
                         width: 100%;
-                        border-radius: 0.1rem;
+                        // border-radius: 0.1rem;
                         z-index: 97;
                     }
                 }

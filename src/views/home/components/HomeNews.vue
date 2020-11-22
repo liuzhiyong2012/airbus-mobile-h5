@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script lang="ts">
@@ -101,64 +101,63 @@ export default class HomeNews extends Vue {
 	@media  (orientation:portrait) {
 		.news-box {
 		  background-color: #fff;
-		  padding: 0 0.28rem;
+		  padding: 0 0.28rem !important;
 		  margin: 0 0.28rem;
 		  border-radius: 0.1rem;
 		  :last-child {
 		    border-bottom: none;
 		  }
-		  
-		  .news-list {
+		}
+		.news-list {
+		  display: flex;
+		  padding: 0.28rem 0;
+		  border-bottom: 0.02rem solid #efefef;
+		  align-items: center;
+		  .news-l {
+		    width: 2.1rem;
+		    height: 1.38rem;
+		    border-radius: 0.12rem;
+		    overflow: hidden;
+		    .img {
+		      width: 100%;
+		      height: 100%;
+		    }
+		  }
+		  .f1 {
+		    flex: 1;
+		    margin: 0 0 0 0.16rem;
 		    display: flex;
-		    padding: 0.28rem 0;
-		    border-bottom: 0.02rem solid #efefef;
-		    align-items: center;
-		    .news-l {
-		      width: 2.1rem;
-		      height: 1.38rem;
-		      border-radius: 0.12rem;
-		      overflow: hidden;
-		      .img {
-		        width: 100%;
-		        height: 100%;
+		    flex-direction: column;
+		    align-content: space-around;
+		    height: 1.38rem;
+		    .name {
+		      flex: 3;
+		      font-size: 0.28rem;
+		      color: #666;
+		      line-height: 0.35rem;
+		      font-weight: 500;
+		      .line-two {
+		        height: 0.7rem;
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 2;
+		        -webkit-box-orient: vertical;
 		      }
 		    }
-		    .f1 {
+		    .details {
 		      flex: 1;
-		      margin: 0 0 0 0.16rem;
-		      display: flex;
-		      flex-direction: column;
-		      align-content: space-around;
-		      height: 1.38rem;
-		      .name {
-		        flex: 3;
-		        font-size: 0.28rem;
-		        color: #666;
-		        line-height: 0.35rem;
-		        font-weight: 500;
-		        .line-two {
-		          height: 0.7rem;
-		          text-overflow: -o-ellipsis-lastline;
-		          overflow: hidden;
-		          text-overflow: ellipsis;
-		          display: -webkit-box;
-		          -webkit-line-clamp: 2;
-		          -webkit-box-orient: vertical;
-		        }
-		      }
-		      .details {
-		        flex: 1;
-		        font-size: 0.24rem;
-		        color: #999;
-		        line-height: 0.4rem;
-		        .line-one {
-		          text-overflow: -o-ellipsis-lastline;
-		          overflow: hidden;
-		          text-overflow: ellipsis;
-		          display: -webkit-box;
-		          -webkit-line-clamp: 1;
-		          -webkit-box-orient: vertical;
-		        }
+		      font-size: 0.24rem;
+		      color: #999;
+		      line-height: 0.4rem;
+		      .line-one {
+		        text-overflow: -o-ellipsis-lastline;
+		        overflow: hidden;
+		        text-overflow: ellipsis;
+		        display: -webkit-box;
+		        -webkit-line-clamp: 1;
+		        -webkit-box-orient: vertical;
 		      }
 		    }
 		  }

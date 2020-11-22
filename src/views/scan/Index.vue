@@ -113,7 +113,7 @@
 	})
 	export default class ScanIndex extends Vue {
 		private bannerData: any = [];
-		private pageStatus: string = 'fileInput'; //'cameraInput','fileInput'
+		private pageStatus: string = 'cameraInput'; //'cameraInput','fileInput'
 		private html5Qrcode: any = null; //'cameraInput','fileInput'
 		private cameraErrorTxt: any = '';
 		private qrcodeWidth: number = 250;

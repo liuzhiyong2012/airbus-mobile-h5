@@ -163,33 +163,33 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import VideoService from "../../service/video";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import VideoService from '../../service/video';
 
 @Component({
-  name: "VideoPlay",
+  name: 'VideoPlay',
   components: {},
 })
 export default class VideoPlay extends Vue {
   private videoListOne: Array<any> = [];
   private videoListTwo: Array<any> = [];
   private adDataList: Array<any> = [];
-  private adData: any = "";
+  private adData: any = '';
   private adDataTime: number = 0;
   private isGetVideo: boolean = true;
   private isPlay: boolean = false;
   private isShowAd: boolean = false;
   // private isCommentShow: boolean = false;
-  private adShowTime: any = "";
+  private adShowTime: any = '';
   private current: any = 0;
   private videoListIndex: any = 0;
-  private Comment: string = "";
+  private Comment: string = '';
 
   private mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
     this.videoListIndex = this.$route.params.index;
     // console.log(this.videoListIndex);
@@ -222,6 +222,7 @@ export default class VideoPlay extends Vue {
   // }
   // 点击播放操作
   public playVideo(id: any) {
+	  debugger;
     this.isPlay = !this.isPlay;
     this.current = id;
     if (this.isPlay) {
@@ -237,7 +238,7 @@ export default class VideoPlay extends Vue {
   }
   // 切换操作
   public onChange(index: any) {
-    let video = document.querySelectorAll("video")[this.current];
+    let video = document.querySelectorAll('video')[this.current];
     video.currentTime = 0;
     video.pause();
     this.playVideoSwipe(index);
@@ -289,7 +290,7 @@ export default class VideoPlay extends Vue {
   // 点击跳转详情页
   private stepToDetail(item: any) {
     this.$router.push({
-      name: "shoppingDetails",
+      name: 'shoppingDetails',
       query: {
         shoppingInfo: item,
         id: item.Id
@@ -313,7 +314,7 @@ export default class VideoPlay extends Vue {
     if (this.videoListOne[index].isLike != null) {
       this.videoListOne[index].isLike = null;
     } else {
-      this.videoListOne[index].isLike = "1";
+      this.videoListOne[index].isLike = '1';
     }
     Vue.set(this.videoListOne, index, this.videoListOne[index]);
     if (this.videoListOne[index].isLike != null) {
@@ -332,10 +333,10 @@ export default class VideoPlay extends Vue {
   // 发送评论
   public sendComment(index: any, id: any) {
     if (!this.Comment) {
-      if (localStorage.getItem("lang") == "en") {
-        this.$toast("please input content!");
+      if (localStorage.getItem('lang') == 'en') {
+        this.$toast('please input content!');
       } else {
-        this.$toast("请输入评论！");
+        this.$toast('请输入评论！');
       }
       return;
     }
@@ -346,7 +347,7 @@ export default class VideoPlay extends Vue {
     };
     VideoService.postVideoComments(data).then((res: any) => {
       if (res.code == 200) {
-        this.Comment = "";
+        this.Comment = '';
         VideoService.getVideoCommentsList({
           videoId: id,
         }).then((res: any) => {
@@ -389,11 +390,11 @@ export default class VideoPlay extends Vue {
   }
   // 播放视频
   public isPlayVideoTrue(index: any) {
-    let video = document.querySelectorAll("video")[index];
+    let video = document.querySelectorAll('video')[index];
     video.play();
     this.isPlay = true;
     video.addEventListener(
-      "ended",
+      'ended',
       () => {
         this.isPlay = false;
         video.currentTime = 0;
@@ -403,19 +404,19 @@ export default class VideoPlay extends Vue {
   }
   // 暂停播放
   public isPlayVideoFalse(index: any) {
-    let video = document.querySelectorAll("video")[index];
+    let video = document.querySelectorAll('video')[index];
     video.pause();
     this.isPlay = false;
   }
   public stepToVideo() {
     // this.$router.go(-1);
     this.$router.push({
-      name: "video",
+      name: 'video',
     });
   }
   public stepComment(index: any, id: any) {
     this.$router.push({
-      name: "Comment",
+      name: 'Comment',
       params: {
         videoListIndex: index,
         videoId: id,

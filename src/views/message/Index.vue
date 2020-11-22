@@ -823,7 +823,7 @@ export default class messageIndex extends Vue {
 				}
 		      }
 		      .message-content {
-		        font-size: 0.3rem;
+		        font-size: rpx(16);
 		        font-family: Helvetica;
 		        color: rgba(38, 64, 115, 1);
 		        line-height: 0.4rem;

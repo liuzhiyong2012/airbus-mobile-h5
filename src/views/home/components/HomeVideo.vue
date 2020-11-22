@@ -27,10 +27,10 @@ import VideoService from '../../../service/video';
 Scroller.install(Vue);
 export default {
   components: {
-    Scroller
+    Scroller 
   },
   data() {
-    return {
+    return {  
       videoList: '',
       isHaveData: false,
       dishData: [
@@ -74,6 +74,7 @@ export default {
 	@import '../../../assets/style/index.scss';
 	
 	@media  (orientation:portrait) {
+	
 		.home-video-ctn{
 			.s-box {
 			  display: flex;
@@ -83,7 +84,7 @@ export default {
 			  margin: 0 0 0 0.28rem;
 			  border-radius: 0.1rem;
 			  width: 2.1rem;
-			  height: rpx(250);
+			  height: 3.72rem;
 			  background-color: #000;
 			  align-items: center;
 			  overflow: hidden;
@@ -97,7 +98,7 @@ export default {
 			  }
 			  img {
 			    width: 100%;
-			    border-radius: 0.1rem;
+			    // border-radius: 0.1rem;
 			    z-index: 96;
 			  }
 			}

@@ -166,6 +166,7 @@ export default class HomeFlight extends Vue {
 	
 	@media  (orientation:portrait) {
 		.homeflight-main-ctn {
+			
 		  .abus-block-title {
 		    .block-title-background {
 		      background-color: #fafafa00;
@@ -173,8 +174,8 @@ export default class HomeFlight extends Vue {
 		  }
 		
 		  .home-flight-box {
-		        margin: 0 0.2rem;
-		        padding: 0.2rem;
+		        margin: 0 0.2rem !important;
+		        padding: 0.2rem !important;
 		        background-color: #fff;
 		    height: 6.1rem;
 		    background: rgba(255, 255, 255, 1);
