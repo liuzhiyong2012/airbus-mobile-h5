@@ -790,12 +790,26 @@ export default class FlightIndex extends Vue {
 		            outline: none;
 		          }
 		          // object-fit: fill;
-		          outline: none;
+		        /*  outline: none;
 		          border: none;
 		          display: block;
 		          width: 100%;
 		          object-fit: cover;
-		          object-position: center center;
+		          object-position: center center; */
+				  
+				  outline: none;
+				      border: none;
+				      display: block;
+				      /* width: 100%; */
+				      object-position: center center;
+				      object-fit: cover !important;
+				      z-index: 999;
+				      width: 100%;
+				      max-height: 100%;
+				      object-position: center;
+				      display: block;
+				      margin: 0 auto;
+				      height: 100%;
 		        }
 		
 		      }

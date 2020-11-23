@@ -309,7 +309,7 @@ export default class DishDetail extends Vue {
 	@media  (orientation:landscape) {
 		.dishdetail-main-ctn {
 			position: relative;
-			padding-top: 0.14rem;
+			padding-top: rpx(70);
 			// padding-bottom: 2rem;
 		
 			.dish-title {
@@ -353,7 +353,7 @@ export default class DishDetail extends Vue {
 						font-size: 0.135rem;
 						color: rgba(34, 34, 34, 1);
 						line-height: 0.135rem;
-						margin-bottom: 0.47rem;
+						margin-bottom: rpx(40);
 					}
 					.order-item-ctn {
 						display: flex;
@@ -383,10 +383,10 @@ export default class DishDetail extends Vue {
 								font-size: 0.24rem;
 								font-weight: bold;
 								color: rgba(46, 46, 46, 1);
-								margin-right: 0.4rem;
+								margin-right: rpx(20);
 							}
 							.field-ctn {
-								margin-right: -0.12rem;
+								// margin-right: -0.12rem;
 							}
 						}
 					}
@@ -399,7 +399,7 @@ export default class DishDetail extends Vue {
 					padding: 0 0.2rem;
 					height: 0.56rem;
 					background: rgba(255, 255, 255, 1);
-					margin-top: 0.1rem;
+					margin-top: rpx(20);
 					> span {
 						&:nth-child(1) {
 							font-size: 0.16rem;
@@ -420,7 +420,7 @@ export default class DishDetail extends Vue {
 				// position: fixed;
 				width: 5rem;
 				margin: 0 auto;
-				padding: 0.4rem 0.3rem 0 0.3rem;
+				padding: rpx(30);
 				box-sizing: border-box;
 				bottom: 0.62rem;
 				display: flex;

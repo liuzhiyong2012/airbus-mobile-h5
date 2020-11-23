@@ -99,6 +99,15 @@ export default class ShoppingSearch extends Vue {
 	@import '../../../assets/style/index.scss';
 	
 	@media  (orientation:portrait) {
+		/* .van-search{
+			height: 0.4rem !important;
+			box-sizing: border-box !important;
+			padding-left: 0.2rem;
+		}
+		.van-field{
+			font-size: .16rem !important;
+		} */
+		
 		.no-list {
 		  align-items: center;
 		  line-height: 2rem;

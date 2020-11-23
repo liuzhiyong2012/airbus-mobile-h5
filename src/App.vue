@@ -287,6 +287,7 @@
 	  font-size: .32rem !important;
 	}
 	.van-picker-column__item{
+		font-size: rpx(16);
 	  height: 44PX  !important;
 	}
 	.van-uploader__upload-icon{
@@ -313,18 +314,22 @@
 	  font-size: .32rem !important;
 	}
 	.van-picker__cancel, .van-picker__confirm{
-	  font-size: .32rem !important;
+	  font-size: .18rem !important;
 	}
 	.van-field__left-icon .van-icon{
-	  width: .4rem !important;
-	  height: .4rem !important;
-	  font-size: .3rem !important;
+	  width: .2rem !important;
+	  height: .2rem !important;
+	  font-size: .16rem !important;
+	}
+	//商品搜索
+	.van-field__control{
+		font-size: 0.14rem;
 	}
 	.van-search__content{
 	  background-color: #fff !important;
 	}
 	.van-search{
-	  height: 1rem !important;
+	  height: rpx(40) !important;
 	  box-sizing: border-box !important;
 	}
 	.van-search .van-cell{
@@ -374,6 +379,33 @@
 	.discount {
 	  text-decoration: line-through;
 	}
+	
+	
+
+					
+			.van-stepper {
+				display: flex;
+				margin: 0 0 0 rpx(12);
+				background-color: #f2f4f7;
+				border-radius: 0.08rem;
+				// min-width: 1.75rem;
+				height: rpx(28);
+					
+				.van-stepper__minus {
+					width: rpx(28) !important;
+					height: rpx(28) !important;
+				}
+				.van-stepper__input {
+					width: rpx(28) !important;
+					height: rpx(28) !important;
+					font-size: rpx(14) !important;
+				}
+				.van-stepper__plus {
+					width: rpx(28) !important;
+					height: rpx(28) !important;
+				}
+			}
+	
 }
 
 

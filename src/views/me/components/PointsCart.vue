@@ -410,14 +410,9 @@ export default class ShoppingCart extends Vue {
 				}
 				.van-icon{
 					font-size: rpx(16) !important;
-				/* 	width: rpx(14);
-					height: rpx(14); */
 				}
 				}
-				/* /deep/ {
-					
-				} */
-			// }
+			
 			.field-ctn {
 				position: absolute;
 				right: rpx(20);

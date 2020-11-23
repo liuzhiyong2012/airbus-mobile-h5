@@ -7,7 +7,6 @@
 		</van-sticky>
 		<van-swipe :autoplay="3000">
 			<van-swipe-item class="dish-recomend-item" v-for="(item, index) in recomendList" :key="index" @click="stepToDetail(item)">
-				<!-- <div class="dish-recomend-img" :style="{ backgroundImage: `url(${item.BannerImgPath})` }"></div> -->
 				<img class="dish-recomend-img" v-lazy="item.BannerImgPath" />
 			</van-swipe-item>
 		</van-swipe>
@@ -289,10 +288,12 @@ export default class DishIndex extends Vue {
 			.dish-recomend-item {
 				position: relative;
 				width: 100%;
-				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				// height: 4rem;
 				.dish-recomend-img {
-					width: 100%;
-					height: 100%;
+					max-width: 100%;
 					background-position: center center;
 					background-repeat: no-repeat;
 					background-size: 100%;
@@ -301,7 +302,6 @@ export default class DishIndex extends Vue {
 			}
 			
 			.dishes-list {
-				// padding: 0.3rem;
 				width: 5.44rem;
 				margin: 0 auto;
 				&:after {
@@ -312,30 +312,43 @@ export default class DishIndex extends Vue {
 					height: 0px;
 				}
 				overflow: hidden;
+				padding-bottom: rpx(60);
 				.dishes-item {
+					margin-bottom: rpx(14);
+					&:nth-child(3n - 2) {
+						float: left;
+						margin-right: rpx(12);
+					}
+					&:nth-child(3n-1) {
+						float: left;
+						margin-right: rpx(12);
+					}
 					
-					&:nth-child(2n - 1) {
+					&:nth-child(3n) {
 						float: left;
 					}
-					&:nth-child(2n) {
+					/* &:nth-child(2n) {
 						float: right;
 					}
-		
+		 */
 					&:nth-child(1) {
 						margin-top: 0;
 					}
 					&:nth-child(2) {
 						margin-top: 0;
 					}
+					&:nth-child(3) {
+						margin-top: 0;
+					}
 					position: relative;
 					width: 1.72rem;
-					height: 2.74rem;
+					
 					background: rgba(255, 255, 255, 1);
 					border-radius: 0.08rem;
 					// margin-right: 0.14rem;
 					.img-ctn {
 						width: 1.72rem;
-						height: 1.56rem;
+						 height: rpx(92);  
 						background-repeat: no-repeat;
 						background-position: center;
 						background-size: contain;
@@ -372,12 +385,15 @@ export default class DishIndex extends Vue {
 							}
 						}
 						.name-ctn {
-							height: 0.36rem;
-							font-size: 0.14rem;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							height: rpx(18);
+							font-size: rpx(14);
 							font-family: Helvetica;
 							color: rgba(0, 0, 0, 1);
-							line-height: 0.34rem;
-							margin-bottom: 0.14rem;
+							line-height: rpx(18);
+							margin-bottom: rpx(8);
 						}
 						.bottom-ctn {
 							display: flex;

@@ -1,6 +1,5 @@
 <template>
   <div class="shopping-details-ctn">
-	  
     <abus-title class="abus-title-ctn" :title="$t('title')" backRouteName="shopping">
       <cart-icon @toCart="stepToCart()"></cart-icon>
     </abus-title>
@@ -353,6 +352,7 @@ export default class ShoppingDetail extends Vue {
 	@media  (orientation:landscape) {
 		
 		.shopping-details-ctn{
+			padding-top:rpx(70);
 			margin: 0 auto;
 			width: 5rem;
 			.abus-title-ctn{
@@ -368,19 +368,21 @@ export default class ShoppingDetail extends Vue {
 			}
 			.dish-img {
 			  // height: 6.3rem;
+			  margin-bottom: rpx(14);
 			  background-position: center;
 			  background-size: cover;
 			  background-repeat: no-repeat;
 			  // background-color: #7b98bc;
 			  img{
+				  display: block;
 			    width: 100%;
 			    height: 100%;
 			  }
 			}
 			.m-box {
-			  // margin: 0 0 0.2rem 0;
 			  padding: 0.2rem;
 			  background-color: #fff;
+			  margin-bottom: rpx(14);
 			
 			  .title {
 			    font-size: 0.22rem;
@@ -474,9 +476,9 @@ export default class ShoppingDetail extends Vue {
 			}
 			.footer-ctn {
 			  // position: fixed;
-			  width: 100%;
-			  margin-top: 0.2rem;
-			  padding: 0 0.8rem;
+			  // width: 100%;
+			  
+			  margin:rpx(30);
 			  box-sizing: border-box;
 			  // bottom: 0.62rem;
 			  display: flex;

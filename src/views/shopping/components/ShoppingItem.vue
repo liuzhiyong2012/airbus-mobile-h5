@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Scroller from "@nutui/nutui/dist/packages/scroller/scroller.js"; // 加载构建后的JS
-import "@nutui/nutui/dist/packages/scroller/scroller.css";
-import ShoppingService from "../../../service/shopping";
+import Vue from 'vue';
+import Scroller from '@nutui/nutui/dist/packages/scroller/scroller.js'; // 加载构建后的JS
+import '@nutui/nutui/dist/packages/scroller/scroller.css';
+import ShoppingService from '../../../service/shopping';
 Scroller.install(Vue);
 export default {
   components: {
@@ -55,35 +55,35 @@ export default {
   },
   created() {
     this.getShoppingList();
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   },
   methods: {
     getShoppingList() {
       var data = {
         type: '1'
-      }
+      };
       ShoppingService.getShoppingList(data).then((res) => {
         this.shoppingList = res.data.Dishes;
-        this.isHaveData = true
+        this.isHaveData = true;
       });
     },
     stepToDetail(item) {
       if (item.Stocking > 0) {
         this.$router.push({
-          name: "shoppingDetails",
+          name: 'shoppingDetails',
           query: {
             id: item.Id,
           },
         });
       } else {
-        if (localStorage.getItem("lang") == "en") {
-          this.$toast("Stockout!");
+        if (localStorage.getItem('lang') == 'en') {
+          this.$toast('Stockout!');
         } else {
-          this.$toast("暂时缺货");
+          this.$toast('暂时缺货');
         }
       }
     },
@@ -173,7 +173,7 @@ export default {
 		.s-box {
 		  float: left;
 		  margin-right: 0.13rem;
-		  border-radius: 0.08rem;
+		  // border-radius: 0.08rem;
 		  width: 0.98rem;
 		  height: 1.44rem;
 		  background-color: #FFFFFF;
