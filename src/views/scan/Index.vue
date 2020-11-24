@@ -20,7 +20,7 @@
 
 				</div>
 
-				<div v-show="!cameraErrorTxt" class="scan-animate-ctn" :style="{width:this.qrcodeWidth + 'px',height:this.qrcodeWidth + 'px'}">
+				<div v-show="cameraList&&cameraList.length>0" class="scan-animate-ctn" :style="{width:this.qrcodeWidth + 'px',height:this.qrcodeWidth + 'px'}">
 					<div class="line"></div>
 				</div>
 			</div>
@@ -132,7 +132,16 @@
 			height: window.innerHeight
 		};
 
-		private cameraList: Array < any > = [];
+		private cameraList: Array < any > = [
+			/* {
+				label:'hahah',
+				name:'hahah'
+			},
+			{
+				label:'hahah',
+				name:'hahah'
+			} */
+		];
         
 		private consoleTxt: any = '';
 
@@ -144,7 +153,12 @@
 
 		//this.html5Qrcode = new Html5Qrcode(this.__getScanRegionId(), this.verbose)
 		private created() {
-			this.qrcodeWidth = window.innerWidth * (300 / 440);
+			if(window.innerWidth > window.innerHeight){
+				this.qrcodeWidth = window.innerHeight * (300 / 440);
+			}else{
+				this.qrcodeWidth = window.innerWidth * (300 / 440);
+			}
+			
 			this.html5Qrcode = new QrcodeScaner.Html5Qrcode(this);
 			this.getCameraList();
 			
@@ -267,7 +281,7 @@
 		private getCameraList() {
 			QrcodeScaner.Html5Qrcode.getCameras()
 				.then((res: any) => {
-					this.cameraList = res;
+				this.cameraList = res;
 					if (this.cameraList && this.cameraList.length > 0) {
 						this.selectCamera(this.cameraList[0],0);
 					} else {
@@ -293,6 +307,8 @@
 				.catch(error => {
 					this.infoTxt = error;
 					this.cameraErrorTxt = error;
+					
+					//@test
 					this.cameraList = [];
 				});
 		}
@@ -679,15 +695,15 @@
 							.camera-item {
 								&.active{
 									    background: #ffffff;
-									    border: 0.04rem solid #00aec7;
+									    border: rpx(2) solid #00aec7;
 									    color: #00aec7;
 								}
 								
 								border-radius: 0.50rem;
 								margin: 0 0.3rem;
 								width: 2.0rem;
-								line-height: 0.80rem;
-								font-size: 0.32rem;
+								line-height: rpx(40);
+								font-size: rpx(20);
 								color: #ffffff;
 								text-align: center;
 								background: #00aec7;
@@ -697,6 +713,7 @@
 								box-sizing: border-box;
 								padding: 0 0.20rem;
 								margin-top:0.16rem;
+								   border: rpx(2) solid #00aec7;
 								
 							}
 						}

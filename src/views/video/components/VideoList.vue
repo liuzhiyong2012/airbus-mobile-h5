@@ -27,10 +27,10 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import VideoService from "../../../service/video";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import VideoService from '../../../service/video';
 @Component({
-  name: "VideoList",
+  name: 'VideoList',
   components: {},
 })
 export default class VideoList extends Vue {
@@ -38,17 +38,17 @@ export default class VideoList extends Vue {
   private isNoVideo: boolean = false;
   private created() {
     this.postVideoMyLike();
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
     } else {
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
     }
   }
   public postVideoMyLike() {
     VideoService.postVideoMyLike().then((res: any) => {
       if (res.code == 200) {
         this.videoList = res.data.video;
-        this.$store.commit("setMyLikeList", this.videoList);
+        this.$store.commit('setMyLikeList', this.videoList);
         if (res.data.video.length == 0) {
           this.isNoVideo = true;
         }
@@ -57,7 +57,7 @@ export default class VideoList extends Vue {
   }
   public stepToVideoPlay(index: any) {
     this.$router.push({
-      name: "likePlay",
+      name: 'likePlay',
       params: {
         index: index,
       },
@@ -137,7 +137,7 @@ export default class VideoList extends Vue {
                     }
                     img {
                         width: 100%;
-                        border-radius: 0.1rem;
+                        // border-radius: 0.1rem;
                         z-index: 97;
                     }
                 }

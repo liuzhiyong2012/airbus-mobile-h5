@@ -39,10 +39,10 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import VideoService from "../../../service/video";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import VideoService from '../../../service/video';
 @Component({
-  name: "VideoLists",
+  name: 'VideoLists',
   components: {},
 })
 export default class VideoList extends Vue {
@@ -67,7 +67,7 @@ export default class VideoList extends Vue {
           this.finished = true;
         }
         this.videoList = this.videoList.concat(res.data.Videos);
-        this.$store.commit("setVideoList", this.videoList);
+        this.$store.commit('setVideoList', this.videoList);
       } else {
         this.$toast(res.massege);
       }
@@ -80,7 +80,7 @@ export default class VideoList extends Vue {
   }
   public stepToVideoPlay(index: any) {
     this.$router.push({
-      name: "videoPlay",
+      name: 'videoPlay',
       params: {
         index: index,
         number: this.pageNumber,
@@ -120,7 +120,7 @@ export default class VideoList extends Vue {
                     }
                     img {
                         width: 100%;
-                        border-radius: 0.1rem;
+                        // border-radius: 0.1rem;
                         z-index: 97;
                     }
                 }
@@ -163,7 +163,7 @@ export default class VideoList extends Vue {
                     }
                     img {
                         width: 100%;
-                        border-radius: 0.1rem;
+                        // border-radius: 0.1rem;
                         z-index: 97;
                     }
                 }

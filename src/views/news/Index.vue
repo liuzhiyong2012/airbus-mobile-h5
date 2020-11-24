@@ -11,7 +11,7 @@
       </abus-title>
     </van-sticky>
 
-    <div class="abus-scroller-box">
+    <div class="abus-scroller-box new-banner-ctn">
       <banner :bannerData="bannerData" @stepTo="gotoNews($event)" />
     </div>
 
@@ -54,15 +54,15 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import Banner from "../../components/banner.vue";
-import NewsListItem from "./components/NewsListItem.vue";
-import NewsService from "../../service/news";
-import { localStore } from "../../utils/data-management";
-import AbusTitle from "../../components/AbusTitle.vue";
-import Tile from "ol/Tile";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Banner from '../../components/banner.vue';
+import NewsListItem from './components/NewsListItem.vue';
+import NewsService from '../../service/news';
+import { localStore } from '../../utils/data-management';
+import AbusTitle from '../../components/AbusTitle.vue';
+import Tile from 'ol/Tile';
 @Component({
-  name: "NewsList",
+  name: 'NewsList',
   components: {
     Banner,
     NewsListItem,
@@ -74,16 +74,16 @@ export default class NewsList extends Vue {
   private active: any = 0;
   private navTar: any = [
     {
-      Id: "-1",
-      Name: "所有",
+      Id: '-1',
+      Name: '所有',
       CreatedAt: false,
       Description: null,
       DisplayOrder: null,
       EName: 'All',
     },
     {
-      Id: "0",
-      Name: "收藏",
+      Id: '0',
+      Name: '收藏',
       CreatedAt: false,
       Description: null,
       DisplayOrder: null,
@@ -100,17 +100,17 @@ export default class NewsList extends Vue {
     // this.postNewsMyLike(); //收藏列表
   }
   private mounted() {
-    if (localStorage.getItem("lang") == "en") {
-      this.$i18n.locale = "en";
+    if (localStorage.getItem('lang') == 'en') {
+      this.$i18n.locale = 'en';
       this.navTar.forEach(item=>{
-        item.endName = item.EName
-      })
+        item.endName = item.EName;
+      });
     } else {
 	
-      this.$i18n.locale = "zh";
+      this.$i18n.locale = 'zh';
       this.navTar.forEach(item=>{
-        item.endName = item.Name
-      })
+        item.endName = item.Name;
+      });
     }
   }
   private destroyed() {}
@@ -147,16 +147,16 @@ export default class NewsList extends Vue {
         this.navTar = [...this.navTar, ...res.data];
       }
 
-      if (localStorage.getItem("lang") == "en") {
-        this.$i18n.locale = "en";
+      if (localStorage.getItem('lang') == 'en') {
+        this.$i18n.locale = 'en';
         this.navTar.forEach(item=>{
-          item.endName = item.EName
-        })
+          item.endName = item.EName;
+        });
       } else {
-        this.$i18n.locale = "zh";
+        this.$i18n.locale = 'zh';
         this.navTar.forEach(item=>{
-          item.endName = item.Name
-        })
+          item.endName = item.Name;
+        });
       }
     });
   }
@@ -164,16 +164,16 @@ export default class NewsList extends Vue {
   // 切换分类
   public changeTab(name: number, title: string) {
     this.newsListBackup = [];
-    if (title == "所有" || title == "All") {
+    if (title == '所有' || title == 'All') {
       this.newsListBackup = this.newsList;
-    } else if (title == "收藏" || title == "Collect") {
+    } else if (title == '收藏' || title == 'Collect') {
       this.newsList.forEach((item: any) => {
         if (item.isCollect == true) {
           this.newsListBackup.push(item);
         }
       });
     } else {
-      let i = "";
+      let i = '';
       this.navTar.forEach((item: any) => {
         if (item.endName == title) {
           i = item.Id;
@@ -197,13 +197,13 @@ export default class NewsList extends Vue {
 
   public gotoNews(item:any): void {
     // 先将详情存入store
-    if (localStore.get("newsDetails")) {
-      localStore.remove("newsDetails");
+    if (localStore.get('newsDetails')) {
+      localStore.remove('newsDetails');
     }
-    this.$store.dispatch("setNewsDetails", item);
+    this.$store.dispatch('setNewsDetails', item);
     //进入新闻详情
     this.$router.push({
-      name: "newsDetail",
+      name: 'newsDetail',
       query:{
         Id: item.Id
       }
@@ -254,45 +254,48 @@ export default class NewsList extends Vue {
     }
 
     @media  (orientation:landscape) {
-        .abus-scroller-box {
-            margin: 0.2rem auto;
-            padding: 0;
-            width: 5rem;
-            overflow: hidden;
-            height: 2.32rem;
-            background: #fff;
-            border-radius: 0rem!important;
-        }
-        .van-tabs{
-            width: 5rem;
-            margin: 0 auto;
-        }
-        .van-cell {
-            font-weight: 500;
-            padding-top: 0;
-            padding-bottom: 0;
-            span {
-                color: #2e2e2e;
-            }
-        }
-        .news-filter {
-            /deep/ .van-ellipsis {
-                font-size: 0.13rem;
-            }
-            /deep/ .van-dropdown-menu__bar {
-                height: 0.7rem;
-                box-shadow: 0 0 0 rgba(100, 101, 102, 0.08);
-            }
-            /deep/ .van-cell__title,
-            .van-cell__value {
-                font-size: 0.12rem;
-            }
-            .filter-btn {
-                color: linear-gradient(to right, #4bb0ff, #6149f6);
-            }
-        }
-        .news-list {
-            background: #fff;
-        }
+		.news{
+			.abus-scroller-box {
+			    margin: 0.2rem auto !important;
+			    padding: 0 !important;
+			    width: 5rem;
+			    overflow: hidden;
+			    height: 2.32rem;
+			    background: #fff;
+			    border-radius: 0rem!important;
+			}
+			.van-tabs{
+			    width: 5rem;
+			    margin: 0 auto;
+			}
+			.van-cell {
+			    font-weight: 500;
+			    padding-top: 0;
+			    padding-bottom: 0;
+			    span {
+			        color: #2e2e2e;
+			    }
+			}
+			.news-filter {
+			    /deep/ .van-ellipsis {
+			        font-size: 0.13rem;
+			    }
+			    /deep/ .van-dropdown-menu__bar {
+			        height: 0.7rem;
+			        box-shadow: 0 0 0 rgba(100, 101, 102, 0.08);
+			    }
+			    /deep/ .van-cell__title,
+			    .van-cell__value {
+			        font-size: 0.12rem;
+			    }
+			    .filter-btn {
+			        color: linear-gradient(to right, #4bb0ff, #6149f6);
+			    }
+			}
+			.news-list {
+			    background: #fff;
+			}
+		}
+        
     }
 </style>

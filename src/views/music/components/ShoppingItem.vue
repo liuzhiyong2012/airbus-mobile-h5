@@ -151,10 +151,13 @@ export default {
 	
 	@media  (orientation:landscape) {
 		.abus-scroller-box {
-			margin: 0;
-			padding:  0;
+			margin: 0 !important;
+			padding: rpx(20) !important;
+			border-radius: rpx(4);
 			border-radius: 0%;
 			box-shadow: none !important;
+			margin-bottom:rpx(14) !important;
+		
 		}
 		.nut-hor-scroll {
 			background-color: #fff !important;
@@ -168,14 +171,14 @@ export default {
 			float: left;
 			margin-right: rpx(20);
 			border-radius: 0.08rem;
-			width: 1.6rem;
-			margin-bottom:rpx(6) ;
+			width: rpx(100);
+			// margin-bottom:rpx(6) ;
 		
 			.img-box {
 				display: flex;
 				align-items: center;
-				width: 1.6rem;
-				height: 1.6rem;
+				width: rpx(100);
+				height: rpx(100);
 				text-align: center;
 				box-shadow: 0 0 0.08rem #efefef;
 				overflow: hidden;
@@ -183,21 +186,25 @@ export default {
 				font-size: 0;
 				line-height: 0;
 				.img {
+					display: block;
 					width: 100%;
 					overflow: hidden;
 					border-radius: rpx(4);
+					img{
+						display: block;
+					}
 				}
+				margin-bottom: rpx(8);
 			}
 			.name {
 				text-align: center;
-				font-size: rpx(18);
-				line-height: rpx(20);
+				font-size: rpx(14);
+				line-height: rpx(18);
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				width: 100%;
 				color: rgb(51, 51, 51);
-				
 			}
 			.price {
 				color: rgba(0, 31, 91, 1);

@@ -9,7 +9,9 @@
 		var deviceWidth = document.documentElement.clientWidth;
 		if(window.innerWidth >= window.innerHeight){
 			document.documentElement.style.fontSize = deviceWidth / 9.6 + 'px';
-			//document.documentElement.style.fontSize = 50 + 'px';
+			if(window.innerWidth > 1440){
+				document.documentElement.style.fontSize = 1440/ 9.6 + 'px';
+			}
 		}else{
 			
 			if (deviceWidth < 320) {
@@ -19,8 +21,6 @@
 			}
 			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
 		}
-		
-       
     };
 	
     if('addEventListener' in window){

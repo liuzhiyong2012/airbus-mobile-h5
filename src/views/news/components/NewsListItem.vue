@@ -47,40 +47,40 @@
 	}
 </i18n>
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { localStore } from "../../../utils/data-management";
-import NewsService from "../../../service/news";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { localStore } from '../../../utils/data-management';
+import NewsService from '../../../service/news';
 declare function require(type: string): string;
 
 @Component({
-  name: "NewsListItem",
+  name: 'NewsListItem',
   components: {},
 })
 export default class NewsListItem extends Vue {
   @Prop() private newsItem!: object;
 
-  @Watch("newsItem", { deep: true, immediate: true })
+  @Watch('newsItem', { deep: true, immediate: true })
   newsItemWatch(newVal: object, oldVal: object) {
     this.newsItem = newVal;
     this.recommedNewsItem = newVal;
   }
 
   private recommedNewsItem: any = this.newsItem;
-  private loveTrue = require("../images/love_true.png");
-  private loveFalse = require("../images/love_false.png");
+  private loveTrue = require('../images/love_true.png');
+  private loveFalse = require('../images/love_false.png');
 
   private created() {}
   private mounted() {}
 
   public goToDetail(item:any): void {
     // 先将详情存入store
-    if (localStore.get("newsDetails")) {
-      localStore.remove("newsDetails");
+    if (localStore.get('newsDetails')) {
+      localStore.remove('newsDetails');
     }
-    this.$store.dispatch("setNewsDetails", item);
+    this.$store.dispatch('setNewsDetails', item);
     //进入新闻详情
     this.$router.push({
-      name: "newsDetail",
+      name: 'newsDetail',
       query:{
         Id: item.Id
       }
@@ -215,18 +215,18 @@ export default class NewsListItem extends Vue {
   @media  (orientation:landscape) {
     .news-list-wrap {
       width: 5rem;
-      height: 1rem;
+      // height: 1rem;
       background: #fff;
       margin: 0 auto;
       border-radius: 0.1rem;
       .news-list-item {
         display: flex;
-        padding: 0.2rem;
+        padding:0 0.2rem;
         align-items: center;
         .item-img {
           width: 1.06rem;
           height: 0.7rem;
-          border-radius: 0.12rem;
+          border-radius: rpx(4);
           overflow: hidden;
           img {
             width: 100%;

@@ -520,7 +520,9 @@ export default class Login extends Vue {
 			  
 			  position: absolute;
 				bottom: rpx(130);
-				padding: 0 rpx(310);
+				width: rpx(335);
+				margin:auto;
+				max-width: 500px;
 				left: 0;
 				right: 0;
 		

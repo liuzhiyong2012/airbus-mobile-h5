@@ -451,10 +451,10 @@
 			
 			.content-ctn{
 				padding-top:rpx(70);
+				width: rpx(540);
+				margin:auto;
 				.content-top-ctn{
-					padding:rpx(20);
-					background:#ffffff;
-					
+					// padding:rpx(20);
 					
 					.music-recomend-ctn{
 						border-radius:8px;
@@ -474,9 +474,11 @@
 					}
 					
 					.function-ctn{
-						padding-top:0.20rem;
+						padding:0.20rem;
 						display: flex;
+						border-radius: rpx(4);
 						justify-content: space-around;
+						background: #ffffff;
 						.function-item{
 							&.favourites{
 								
@@ -532,20 +534,23 @@
 						.album-item-ctn{
 							
 							.album-item-ctn{
-								display: flex;
-								justify-content: space-between;
-								align-items: center;
-								flex-wrap: wrap;
+								overflow: hidden;
 								.album-item{
-									width:2.00rem;
+									float: left;
+									width:rpx(110);
+									margin-right: rpx(20);
+									
+									&:nth-child(4n){
+										margin-right: rpx(0);
+									}
 									.album-image{
 										box-sizing: border-box;
-										border:10px solid #e8cebb;
+										border:rpx(2) solid #e8cebb;
 										border-radius:rpx(4);
 										overflow: hidden;
 										width:100%;
-										height: 2.00rem;
-										margin-bottom: rpx(8);
+										height: rpx(110);
+										margin-bottom: rpx(4);
 										background-position:center;
 										background-repeat:no-repeat;
 										background-size: contain;
@@ -555,7 +560,7 @@
 										white-space: nowrap;
 										overflow: hidden;
 										text-overflow: ellipsis;
-										font-size:rpx(18);
+										font-size:rpx(14);
 										font-weight:bold;
 										color:rgba(46,46,46,1);
 										line-height:rpx(24);
