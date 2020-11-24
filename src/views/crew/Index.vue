@@ -97,6 +97,7 @@
           </div>
         </div>
         <div class="set-flex set-other">
+		  <span class="set-text-reset" @click="clickReset">{{ $t("ResetDatabase") }}</span>
           <span class="set-text1" @click="clickCancel">{{ $t("Cancel") }}</span>
           <span class="set-text1" @click="clickSubmit">{{ $t("Submit") }}</span>
         </div>
@@ -111,34 +112,39 @@
 			"newMessage": "你收到一条信息",
 			"Cancel":"取消",
 			"Submit":"提交",
+			"ResetDatabase":"重置数据库",
 			"Language":"语言",
 			"CloudAddress":"云端地址",
 			"demo":"演示",
 			"Setting":"设置",
 			"CloudAddressText":"请输入云端地址",
-      "toast1":"飞机航班已经切换!",
-      "toast2":"提交配置成功",
-      "toast3":"提交配置失败",
-      "toast4":"获取配置失败"
+            "toast1":"飞机航班已经切换!",
+            "toast2":"提交配置成功",
+            "toast3":"提交配置失败",
+            "toast4":"获取配置失败",
+			"resetDbSuccessTip":"重置数据库成功",
+			"resetDbFailTip":"重置数据库失败"
 		},
 		"en":{
 			"readBtn":"go",
 			"newMessage": "You got a new message",
 			"Cancel":"Cancel",
 			"Submit":"Submit",
+			"ResetDatabase":"Reset Database",
 			"Language":"Language",
 			"CloudAddress":"Cloud address",
 			"demo":"demo",
 			"Setting":"Setting",
 			"CloudAddressText":"Please enter cloud address",
-      "toast1":"Flight has been switched!",
-      "toast2":"Configuration submitted successfully",
-      "toast3":"Failed to submit configuration",
-      "toast4":"Failed to get configuration"
+            "toast1":"Flight has been switched!",
+            "toast2":"Configuration submitted successfully",
+            "toast3":"Failed to submit configuration",
+            "toast4":"Failed to get configuration",
+			"resetDbSuccessTip":"Database was reset successfully",
+			"resetDbFailTip":"Database was failed to reset"
 		}
 	}
 </i18n>
-
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import CrewTab from './components/CrewTab.vue';
@@ -225,26 +231,14 @@ export default class CrewLayoutCtn extends Vue {
       this.language = '简体中文';
     }
 
-    /* if(localStorage.getItem('checked') == 'true'){
-		this.checked = true;
-	}else {
-		this.checked = false;
-	} */
 
     SettingService.getSetting().then((res: any) => {
-      // debugger;
-      /* this.checked = true;
-		this.cloudLink = 'hell'; */
       if (res.code == '200') {
         this.runDemo = res.data.RunDemo;
         this.cloudLink = res.data.CloudLink;
       } else {
         this.$toast(this.$i18n.t('toast4'));
       }
-
-      /* RunDemo: "true", CloudLink: "http://kf.vpclub.cn/airbusife/"}
-		CloudLink: "http://kf.vpclub.cn/airbusife/"
-		RunDemo: "true" */
     });
   }
   private mounted() {
@@ -253,18 +247,11 @@ export default class CrewLayoutCtn extends Vue {
       THIS.socket && THIS.socket.close && THIS.socket.close();
       THIS.socket && THIS.socket.destroy && THIS.socket.destroy();
       THIS.socket = null;
-      //e = window.event||e;
-      //e.returnValue=('确定离开当前网站吗?');
     };
     window.addEventListener('beforeunload', this.unloadHandler);
     this.getFlightInfo();
     this.startTimer();
   }
-  // private provide() {
-  //   return {
-  //     reload: this.reload,
-  //   };
-  // }
 
   private reload() {
 	this.isRouterAlive = false; //先关闭，
@@ -301,12 +288,6 @@ export default class CrewLayoutCtn extends Vue {
 	  this.$i18n.locale = 'zh';
     }
 	
-    /* if(this.runDemo){
-		localStorage.setItem('runDemo', 'true');
-	}else{
-		localStorage.setItem('runDemo', 'false');
-	}
-	 */
     SettingService.setSetting({
       CloudLink: this.cloudLink,
       RunDemo: this.runDemo,
@@ -319,11 +300,26 @@ export default class CrewLayoutCtn extends Vue {
         this.$toast(this.$i18n.t('toast3'));
       }
     });
-    // this.reload();
+	
   }
   private clickCancel() {
     this.isShowSetting = false;
   }
+  
+  private clickReset() {
+    SettingService.resetDataBase({}).then((res: any) => {
+      if (res.code == '200') {
+       this.$toast(this.$i18n.t('resetDbSuccessTip'));
+	     this.reload();
+      } else {
+		   this.$toast(this.$i18n.t('resetDbFailTip'));
+      }
+    }).catch(()=>{
+		 this.$toast(this.$i18n.t('resetDbFailTip'));
+	});
+  }
+  
+  
   
   private getFlightInfo() {
     FlightService.getFlightInfo().then((res: any) => {
@@ -407,14 +403,6 @@ export default class CrewLayoutCtn extends Vue {
 			 this.messageContent.content = newMessageObj.notice.Title;
 		 }
         
-        /*if(newMessageObj.itemType == 'netFlow'){//流量
-						this.messageContent.itemName = newMessageObj.netFlow.Name;
-						this.messageContent.itemImgUrl = '';//Name
-						this.messageContent.content = newMessageObj.notice.Title;
-					}else if(newMessageObj.itemType == 'shopping'){//商品
-					}else if(newMessageObj.itemType == 'dish'){//菜品
-          }*/
-        // this.reload();
         this.showNotify();
         this.reload();
       }
@@ -737,6 +725,15 @@ export default class CrewLayoutCtn extends Vue {
           padding: 0.2rem;
           margin: 0.2rem 0.6rem 0 0;
         }
+		.set-text-reset{
+			float: left;
+			    padding: 0.2rem;
+			    margin: 0.2rem 1.7rem 0 0;
+			    border: 1px solid #ffffff;
+			    border-radius: 0.04rem;
+			    color: #ffffff;
+			    background: #e40a0a;
+		}
       }
       .set-other {
         justify-content: flex-end;

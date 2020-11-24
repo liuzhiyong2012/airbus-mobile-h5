@@ -201,7 +201,11 @@ export default class FlightIndex extends Vue {
 
   private mounted() {
 	 this.$nextTick(()=>{
-		 this.hideDistance = (this as any).$refs.infoContentCtn.clientHeight - (this as any).$refs.switchCtn.clientHeight - (this as any).$refs.topCtn.clientHeight;
+		 if(this.isOrientation()){
+            this.hideDistance = (this as any).$refs.infoContentCtn.clientHeight - (this as any).$refs.switchCtn.clientHeight;
+		 }else{
+			this.hideDistance = (this as any).$refs.infoContentCtn.clientHeight - (this as any).$refs.switchCtn.clientHeight - (this as any).$refs.topCtn.clientHeight;
+		 }
 	 });
 	  
     this.listenScroll();
@@ -229,7 +233,6 @@ export default class FlightIndex extends Vue {
 	}else{
 		this.renderCharts();
 	}
-    
   }
  
   private demoIndexChange(index){
@@ -243,15 +246,18 @@ export default class FlightIndex extends Vue {
     (this as any).$refs.infoContentCtn.removeEventListener('touchstart', this.touchStartHandle);
     (this as any).$refs.infoContentCtn.removeEventListener('touchmove', this.touchMoveHandle);
     (this as any).$refs.infoContentCtn.removeEventListener('touchend', this.touchEndHandle);
-	
   }
+  
+  private isOrientation() {
+      return window.innerWidth > window.innerHeight;
+  }
+  
 
   public listenScroll(): void {
     var startX: any, startY: any, endX: any, endY: any;
 	var startBottomDistance = 0;
 
     this.touchStartHandle = (event: any) => {
-		return;
 	  this.isAnimate = false;
       var touch = event.touches[0];
       startY = touch.pageY;
@@ -260,7 +266,6 @@ export default class FlightIndex extends Vue {
     };
 
     this.touchMoveHandle = (event: any) => {
-		return;
 		this.isAnimate = false;
       var touch = event.touches[0];
       endY = startY - touch.pageY;
@@ -272,6 +277,8 @@ export default class FlightIndex extends Vue {
 	  if(this.bottomDistance > 0){
 		  this.bottomDistance = 0;
 	  }
+	  
+	  
 	  if(this.bottomDistance < (- this.hideDistance)){
 		  this.bottomDistance = - this.hideDistance;
 	  }
@@ -279,19 +286,16 @@ export default class FlightIndex extends Vue {
     };
 
     this.touchEndHandle = (event: any) => {
-		return;
 		this.isAnimate = true;
       //100是给定触上下方向摸起始的坐标差
       if (endY > 25) {
-        console.log('向上滑动');
-       // this.isCollapsed = false; 
-	     this.bottomDistance = 0;
+        //向上滑动
+	    this.bottomDistance = 0;
       } else if (endY < -25) {
-		  console.log('向下滑动');
-		  this.bottomDistance = - this.hideDistance;
-		  
+		//向下滑动'
+		this.bottomDistance = - this.hideDistance;
       } else {
-		  this.bottomDistance = startBottomDistance;
+		this.bottomDistance = startBottomDistance;
         //啥也不干
         console.log('啥也不干');
       }

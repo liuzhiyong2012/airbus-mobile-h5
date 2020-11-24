@@ -21,13 +21,21 @@ export default class SettingService {
 	static setSetting(data: Object={}) {
 		/* RunDemo  RunDemo */
 		return request({
-			
 			url: '/v1/api/Setting/SaveSetting',  
 			method: 'POST',
 			data: data
 		});
-		
 	}
+	//重置数据库信息
+	static resetDataBase(data: Object={}) {
+		/* RunDemo  RunDemo */
+		return request({
+			url: '/v1/api/Setting/resetDataBase',  
+			method: 'POST',
+			data: data
+		});
+	}
+	
 	
 	
 	
