@@ -97,7 +97,9 @@
           </div>
         </div>
         <div class="set-flex set-other">
-		  <span class="set-text-reset" @click="clickReset">{{ $t("ResetDatabase") }}</span>
+			<van-button class="set-text-reset" loading-type="spinner" :loading="databaReseting" :loading-text="$t('resetDbing')" type="danger"  @click="clickReset">{{ $t("ResetDatabase") }}</van-button><br />
+			
+		  <!-- <span class="set-text-reset" @click="clickReset">{{ $t("ResetDatabase") }}</span> -->
           <span class="set-text1" @click="clickCancel">{{ $t("Cancel") }}</span>
           <span class="set-text1" @click="clickSubmit">{{ $t("Submit") }}</span>
         </div>
@@ -123,7 +125,8 @@
             "toast3":"提交配置失败",
             "toast4":"获取配置失败",
 			"resetDbSuccessTip":"重置数据库成功",
-			"resetDbFailTip":"重置数据库失败"
+			"resetDbFailTip":"重置数据库失败",
+			"resetDbing":"重置中，请稍后"
 		},
 		"en":{
 			"readBtn":"go",
@@ -135,6 +138,7 @@
 			"CloudAddress":"Cloud address",
 			"demo":"demo",
 			"Setting":"Setting",
+			"resetDbing":"Resetting...",
 			"CloudAddressText":"Please enter cloud address",
             "toast1":"Flight has been switched!",
             "toast2":"Configuration submitted successfully",
@@ -207,6 +211,8 @@ export default class CrewLayoutCtn extends Vue {
   private show: boolean = false;
   private isShowSetting: boolean = false;
   private isRouterAlive: boolean = true;
+  
+  private databaReseting: boolean = false;
 
   private timer: any = null;
   private sound: any;
@@ -279,7 +285,9 @@ export default class CrewLayoutCtn extends Vue {
     this.isLanguageShow = false;
   }
   private clickSubmit() {
-	  // debugger;
+	 if(this.databaReseting){
+		 return;
+	 }
     if (this.language == 'English') {
       localStorage.setItem('lang', 'en');
 	  this.$i18n.locale = 'en';
@@ -303,18 +311,26 @@ export default class CrewLayoutCtn extends Vue {
 	
   }
   private clickCancel() {
+	  if(this.databaReseting){
+	  		 return;
+	  }
     this.isShowSetting = false;
   }
   
   private clickReset() {
+	this.databaReseting = true;
     SettingService.resetDataBase({}).then((res: any) => {
+	
       if (res.code == '200') {
        this.$toast(this.$i18n.t('resetDbSuccessTip'));
-	     this.reload();
+			 this.isShowSetting = false;
+			 this.reload();
       } else {
 		   this.$toast(this.$i18n.t('resetDbFailTip'));
       }
+	  this.databaReseting = false;
     }).catch(()=>{
+		this.databaReseting = false;
 		 this.$toast(this.$i18n.t('resetDbFailTip'));
 	});
   }
@@ -728,11 +744,15 @@ export default class CrewLayoutCtn extends Vue {
 		.set-text-reset{
 			float: left;
 			    padding: 0.2rem;
-			    margin: 0.2rem 1.7rem 0 0;
+			    margin: 0.2rem auto 0 0.50rem;
 			    border: 1px solid #ffffff;
 			    border-radius: 0.04rem;
 			    color: #ffffff;
 			    background: #e40a0a;
+				
+				/deep/  .van-button__text{
+					font-size: 0.24rem;
+				}
 		}
       }
       .set-other {

@@ -213,8 +213,8 @@
 			}
 			.play-ctn{
 				position: absolute;
-				top:0.20rem;
-				right: 0.90rem;
+				top:0.12rem;
+				right: 0.70rem;
 				.icon{
 					line-height: 0.25rem;
 					font-size: 0.24rem;
@@ -223,11 +223,10 @@
 		
 			.play-ctn-close{
 				position: absolute;
-				top:0.16rem;
-				right: 0.30rem;  
+				top:0.08rem;
+				right: 0.20rem;  
 				.icon{
 					line-height: 0.25rem;
-					// font-size: 0.48rem;
 					font-size: 0.14rem;
 					background: #00205b;
 					border-radius: 50%;

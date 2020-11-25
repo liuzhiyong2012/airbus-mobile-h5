@@ -156,7 +156,7 @@
       "Next":"Next",
       "SMSVerification":"SMS verification",
       "VerificationCode":"Verification Code",
-      "VerificationCodeTips":"Enter Verification Code",
+      "VerificationCodeTips":"Verification Code",
       "SecurityProblem":"Security problem verification",
       "SecurityIssues":"security questions",
       "SecurityAnswer":"Security answer",
@@ -748,7 +748,7 @@ export default class ForgotPassword extends Vue {
 		              position: absolute;
 		              right: 0;
 		              top: 0;
-		              padding: 0;
+		              padding: 0 rpx(8);
 		              font-size: rpx(14);
 		               min-width: 1rem;
 		              color: #fff;
@@ -798,7 +798,7 @@ export default class ForgotPassword extends Vue {
 		                  border: none;
 		                }
 		                .flex1.add-line-h {
-		                  line-height: 1rem;
+		                  line-height: rpx(40);
 		                }
 		              }
 		              .collapse-item-main.no-pad {

@@ -313,7 +313,7 @@
 	.van-field__clear{
 	  font-size: .32rem !important;
 	}
-	.van-picker__cancel, .van-picker__confirm{
+	.van-picker__cancel, .van-picker__confirm,.van-picker__title{
 	  font-size: .18rem !important;
 	}
 	.van-field__left-icon .van-icon{

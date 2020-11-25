@@ -1161,8 +1161,8 @@ export default {
 	  background-size: 100% auto;
 	  position: relative;
 	  transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32);
-	  height: 1.00rem;
-	  line-height: 1.00rem;
+	  height: 0.56rem;
+	  line-height: 0.56rem;
 	  padding-left: 0.20rem;
 	  box-sizing: border-box;
 	  .icon-back{

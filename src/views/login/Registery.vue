@@ -378,6 +378,9 @@ export default class Register extends Vue {
         '我最喜欢的动物?',
       ];
     }
+	
+	//@test
+	 // this.$i18n.locale = 'en';
     this.getUserChangeData();
   }
   /**
@@ -812,8 +815,8 @@ export default class Register extends Vue {
 				      .title {
 				        // padding: 0.1rem 0 0;
 						font-size: rpx(14);
-						line-height: rpx(40);
-				        width: rpx(64);
+						line-height: rpx(20);
+				        width: rpx(70);
 				        color: #333;
 				      }
 				      .main-item-con {
